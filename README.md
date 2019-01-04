@@ -6,7 +6,11 @@ Instructions
 Daily Development Log
 
 1/3/19:
-Created Sheet java file and test spreadsheet
+
+Hilary: Created Sheet java file
+
+David: Created test spreadsheet
 
 1/4/19:
-Created Cell java file
+
+Hilary: Wrote generic Cell class
