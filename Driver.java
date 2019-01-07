@@ -8,10 +8,12 @@ public class Driver {
 
     cell2.setValue(6);
     System.out.println(cell2.getValue());
+    System.out.println(cell2);
 
     Cell<Integer> cell3 = new Cell<Integer>(11);
     System.out.println(cell3.getValue());
 
     System.out.println(cell2.getValue() + cell3.getValue());
+    System.out.println(cell2 + " " + cell3);
   }
 }

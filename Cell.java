@@ -5,6 +5,10 @@ public class Cell<T> {
     value = start;
   }
 
+  public String toString() {
+    return "" + getValue();
+  }
+
   public T getValue() {
     return value;
   }
