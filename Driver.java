@@ -1,5 +1,7 @@
 public class Driver {
   public static void main(String[] args) {
+    //Cell testing
+    /*
     Cell<String> cell1 = new Cell<String>("Hi");
     System.out.println(cell1.getValue());
 
@@ -15,5 +17,6 @@ public class Driver {
 
     System.out.println(cell2.getValue() + cell3.getValue());
     System.out.println(cell2 + " " + cell3);
+    */
   }
 }

@@ -12,7 +12,12 @@ public class Sheet {
     File csv = new File(filename);
     Scanner in = new Scanner(csv);
     while(in.hasNext()) {
-      
+
     }
+  }
+
+  //Returns the cell at the row and col given
+  public Cell get(int row, int col) {
+    return data.get(row).get(col);
   }
 }
