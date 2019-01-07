@@ -16,3 +16,7 @@ David: Created test spreadsheet
 Hilary: Wrote generic Cell class
 
 David: Working on Sheet constructor
+
+1/6/19:
+
+Hilary: Finished testing Cell class
