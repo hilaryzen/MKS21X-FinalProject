@@ -5,5 +5,13 @@ public class Driver {
 
     Cell<Integer> cell2 = new Cell<Integer>(5);
     System.out.println(cell2.getValue());
+
+    cell2.setValue(6);
+    System.out.println(cell2.getValue());
+
+    Cell<Integer> cell3 = new Cell<Integer>(11);
+    System.out.println(cell3.getValue());
+
+    System.out.println(cell2.getValue() + cell3.getValue());
   }
 }
