@@ -20,4 +20,13 @@ public class Sheet {
   public Cell get(int row, int col) {
     return data.get(row).get(col);
   }
+
+  //Returns String contains the contents of the row at the index given
+  public String getRow(int index) {
+    String ans = "";
+    for (int i = 0; i < data.get(index).size(); i++) {
+      ans = ans + data.get(index).get(i) + "  ";
+    }
+    return ans;
+  }
 }
