@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 
 public class Sheet {
-  private ArrayList<ArrayList<Cell>> data;
+  public ArrayList<ArrayList<Cell>> data;
   private int[] rows;
   private int[] cols;
 
@@ -16,7 +16,7 @@ public class Sheet {
       File csv = new File(filename);
       Scanner in = new Scanner(csv);
       while(in.hasNext()) {
-        String line = in.next();
+        String line = in.nextLine();
         lines.add(line);
       }
     } catch (FileNotFoundException e) {
@@ -25,13 +25,17 @@ public class Sheet {
       System.exit(1);
     }
 
+    //Loops through lines to add rows
     for (int i = 0; i < lines.size(); i++) {
       String[] entries = lines.get(i).split(",");
       data.add(new ArrayList<Cell>());
+      //Loops to add individual data cells
       for (int j = 0; j < entries.length; j++) {
-        Cell<String> newCell = new Cell(entries[j]);
+        Cell<String> newCell = new Cell<String>(entries[j]);
         data.get(i).add(newCell);
+        System.out.println(data.get(i).get(j));
       }
+      System.out.println(data.get(i));
     }
   }
 
