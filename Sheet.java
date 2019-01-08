@@ -10,29 +10,30 @@ public class Sheet {
   private int[] cols;
 
   public Sheet(String filename) {
-    ArrayList<ArrayList<Cell>> data = new ArrayList<ArrayList<Cell>>();
-    ArrayList<String> lines = new ArrayList<String>();
+    ArrayList<ArrayList<Cell>> data = new ArrayList<ArrayList<Cell>>(); //array
     try {
+
       File csv = new File(filename);
-      Scanner in = new Scanner(csv);
-      while(in.hasNext()) {
-        String line = in.next();
-        lines.add(line);
+      Scanner in = new Scanner(csv); //import value
+      int Row = 0; //counts index rows
+      while(in.hasNextLine()) {
+        data.add(new ArrayList<Cell>()); // initialize this row
+        String[] line = in.nextLine().split(",");
+        for (int x = 0; x < line.length; x++) {
+          //System.out.println(line[x]);
+          data.get(Row).add(new Cell(line[x])); //adds Cells at this Row
+        }
+        System.out.println(data.get(Row));
+        //System.out.println(this.get(0,0));
+        Row++;
       }
-    } catch (FileNotFoundException e) {
+    }
+    catch (FileNotFoundException e) {
       System.out.println("File not found");
       e.printStackTrace();
       System.exit(1);
     }
 
-    for (int i = 0; i < lines.size(); i++) {
-      String[] entries = lines.get(i).split(",");
-      data.add(new ArrayList<Cell>());
-      for (int j = 0; j < entries.length; j++) {
-        Cell<String> newCell = new Cell(entries[j]);
-        data.get(i).add(newCell);
-      }
-    }
   }
 
   //Returns the cell at the row and col given
