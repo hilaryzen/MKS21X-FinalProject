@@ -9,10 +9,13 @@ public class Sheet {
   private int[] cols;
 
   public Sheet(String filename) throws FileNotFoundException {
+    ArrayList<ArrayList<Cell>> data = new ArrayList<ArrayList<Cell>>();
+    int row = 0;
     File csv = new File(filename);
     Scanner in = new Scanner(csv);
     while(in.hasNext()) {
-
+      String line = in.next();
+      String[] entries = line.split(",");
     }
   }
 
