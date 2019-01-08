@@ -18,5 +18,17 @@ public class Driver {
     System.out.println(cell2.getValue() + cell3.getValue());
     System.out.println(cell2 + " " + cell3);
     */
+
+    String filename = "test.txt";
+    Sheet sheet1 = new Sheet(filename);
+    /*
+    try {
+      Sheet sheet1 = new Sheet(filename);
+    } catch (FileNotFoundException e) {
+      System.out.println("File not found");
+      e.printStackTrace();
+      System.exit(1);
+    }
+    */
   }
 }
