@@ -20,3 +20,7 @@ David: Working on Sheet constructor
 1/6/19:
 
 Hilary: Finished testing Cell class
+
+1/7/19:
+
+Hilary: Added to Sheet constructor but didn't finish
