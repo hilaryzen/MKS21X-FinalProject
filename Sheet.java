@@ -41,6 +41,7 @@ public class Sheet {
 
   //Returns the cell at the row and col given
   public Cell get(int row, int col) {
+    System.out.println(data.get(row).get(col));
     return data.get(row).get(col);
   }
 
