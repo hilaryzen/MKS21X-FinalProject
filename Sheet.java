@@ -16,6 +16,10 @@ public class Sheet {
     while(in.hasNext()) {
       String line = in.next();
       String[] entries = line.split(",");
+      data.add(new ArrayList<Cell>());
+      for (int i = 0; i < entries.length; i++) {
+        data.get(row).add(entries[i]);
+      }
     }
   }
 
