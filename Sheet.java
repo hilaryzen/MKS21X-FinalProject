@@ -11,23 +11,27 @@ public class Sheet {
 
   public Sheet(String filename) {
     ArrayList<ArrayList<Cell>> data = new ArrayList<ArrayList<Cell>>();
-    int row = 0;
+    ArrayList<String> lines = new ArrayList<String>();
     try {
       File csv = new File(filename);
       Scanner in = new Scanner(csv);
       while(in.hasNext()) {
         String line = in.next();
-        String[] entries = line.split(",");
-        data.add(new ArrayList<Cell>());
-        for (int i = 0; i < entries.length; i++) {
-          Cell<String> newCell = new Cell(entries[i]);
-          data.get(row).add(newCell);
-        }
+        lines.add(line);
       }
     } catch (FileNotFoundException e) {
       System.out.println("File not found");
       e.printStackTrace();
       System.exit(1);
+    }
+
+    for (int i = 0; i < lines.size(); i++) {
+      String[] entries = lines.get(i).split(",");
+      data.add(new ArrayList<Cell>());
+      for (int j = 0; j < entries.length; j++) {
+        Cell<String> newCell = new Cell(entries[j]);
+        data.get(i).add(newCell);
+      }
     }
   }
 
@@ -40,7 +44,7 @@ public class Sheet {
   public String getRow(int index) {
     String ans = "";
     for (int i = 0; i < data.get(index).size(); i++) {
-      ans = ans + data.get(index).get(i) + "  ";
+      ans = ans + data.get(index).get(i).getValue() + "  ";
     }
     return ans;
   }
