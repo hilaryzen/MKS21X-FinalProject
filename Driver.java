@@ -30,6 +30,14 @@ public class Driver {
       System.exit(1);
     }
     */
+
+    System.out.println(sheet1.get(0,0));
+    System.out.println(sheet1.get(3,3));
     System.out.println(sheet1.getRow(0));
+    System.out.println(sheet1.getRow(2));
+
+    System.out.println("  ");
+
+    System.out.println(sheet1.getTable());
   }
 }
