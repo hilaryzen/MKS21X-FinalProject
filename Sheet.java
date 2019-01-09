@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 
 public class Sheet {
-  public ArrayList<ArrayList<Cell>> data;
+  private ArrayList<ArrayList<Cell>> data;
   private int[] rows;
   private int[] cols;
 
@@ -37,11 +37,12 @@ public class Sheet {
       }
       System.out.println(data.get(i));
     }
+    System.out.println(data.get(0).get(0));
   }
 
   //Returns the cell at the row and col given
   public Cell get(int row, int col) {
-    System.out.println(data.get(row).get(col));
+    //System.out.println(data.get(row).get(col).getValue());
     return data.get(row).get(col);
   }
 
@@ -49,7 +50,16 @@ public class Sheet {
   public String getRow(int index) {
     String ans = "";
     for (int i = 0; i < data.get(index).size(); i++) {
-      ans = ans + data.get(index).get(i).getValue() + "  ";
+      ans = ans + data.get(index).get(i).getValue() + ", ";
+    }
+    return ans;
+  }
+
+  //Returns String containing the contents of the column at the given index
+  public String getCol(int index) {
+    String ans = "";
+    for (int i = 0; i < data.size(); i++) {
+      ans = ans + data.get(i).get(index).getValue() + ", ";
     }
     return ans;
   }
