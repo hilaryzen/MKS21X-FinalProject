@@ -42,6 +42,8 @@ public class Driver {
 
     System.out.println("  ");
 
+    System.out.println("Longest entry in column 2: " + sheet1.longestInCol(2));
+
     System.out.println(sheet1.getTable());
   }
 }

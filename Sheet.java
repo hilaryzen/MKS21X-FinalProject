@@ -55,6 +55,7 @@ public class Sheet {
   }
 
   //Returns String containing the contents of the column at the given index
+  //Does not work if not all rows are the same length
   public String getCol(int index) {
     String ans = get(0, index).toString();
     for (int i = 1; i < data.size(); i++) {
