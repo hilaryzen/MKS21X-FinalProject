@@ -20,11 +20,14 @@ public class Sheet {
         data.add(new ArrayList<Cell>()); // initialize this row
         String[] line = in.nextLine().split(",");
         for (int x = 0; x < line.length; x++) {
-          //System.out.println(line[x]);
-          data.get(Row).add(new Cell(line[x])); //adds Cells at this Row
+          String storage = line[x];
+          try {
+            data.get(Row).add(new Cell(Integer.parseInt(storage)));
+          }
+          catch(NumberFormatException e) {
+            data.get(Row).add(new Cell(storage));
+          }
         }
-        System.out.println(data.get(Row));
-        //System.out.println(this.get(0,0));
         Row++;
       }
     }
