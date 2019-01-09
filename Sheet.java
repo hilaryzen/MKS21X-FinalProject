@@ -57,14 +57,21 @@ public class Sheet {
   //Returns String containing the contents of the column at the given index
   public String getCol(int index) {
     String ans = get(0, index).toString();
-    for (int i = 0; i < data.size(); i++) {
+    for (int i = 1; i < data.size(); i++) {
       ans = ans + ", " + get(i, index).getValue();
     }
     return ans;
   }
 
-  private int longest(int index) {
+  public int longest(int index) {
     int longest = get(0, index).toString().length();
+    int length = 0;
+    for (int i = 1; i < data.size(); i++) {
+      length = get(i, index).toString().length();
+      if (length > longest) {
+        longest = length;
+      }
+    }
     return longest;
   }
 
