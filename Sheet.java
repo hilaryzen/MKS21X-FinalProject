@@ -63,7 +63,7 @@ public class Sheet {
     return ans;
   }
 
-  public int longest(int index) {
+  public int longestInCol(int index) {
     int longest = get(0, index).toString().length();
     int length = 0;
     for (int i = 1; i < data.size(); i++) {
