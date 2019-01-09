@@ -30,7 +30,8 @@ public class Driver {
       System.exit(1);
     }
     */
-    //System.out.println(sheet1.getRow(0));
+
     System.out.println(sheet1.get(0,0));
+    System.out.println(sheet1.getRow(0));
   }
 }

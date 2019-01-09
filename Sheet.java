@@ -5,12 +5,12 @@ import java.util.Scanner;
 
 
 public class Sheet {
-  private ArrayList<ArrayList<Cell>> data;
+  private ArrayList<ArrayList<Cell>> data = new ArrayList<ArrayList<Cell>>();
   private int[] rows;
   private int[] cols;
 
   public Sheet(String filename) {
-    ArrayList<ArrayList<Cell>> data = new ArrayList<ArrayList<Cell>>();
+    //ArrayList<ArrayList<Cell>> data = new ArrayList<ArrayList<Cell>>();
     ArrayList<String> lines = new ArrayList<String>();
     try {
       File csv = new File(filename);
@@ -33,11 +33,10 @@ public class Sheet {
       for (int j = 0; j < entries.length; j++) {
         Cell<String> newCell = new Cell<String>(entries[j]);
         data.get(i).add(newCell);
-        System.out.println(data.get(i).get(j));
+        //System.out.println(data.get(i).get(j));
       }
-      System.out.println(data.get(i));
+      //System.out.println(data.get(i));
     }
-    System.out.println(data.get(0).get(0));
   }
 
   //Returns the cell at the row and col given
@@ -48,9 +47,9 @@ public class Sheet {
 
   //Returns String contains the contents of the row at the index given
   public String getRow(int index) {
-    String ans = "";
-    for (int i = 0; i < data.get(index).size(); i++) {
-      ans = ans + data.get(index).get(i).getValue() + ", ";
+    String ans = data.get(index).get(0).toString();
+    for (int i = 1; i < data.get(index).size(); i++) {
+      ans = ans + ", " + data.get(index).get(i).getValue();
     }
     return ans;
   }
