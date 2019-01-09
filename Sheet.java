@@ -47,20 +47,25 @@ public class Sheet {
 
   //Returns String contains the contents of the row at the index given
   public String getRow(int index) {
-    String ans = data.get(index).get(0).toString();
+    String ans = get(index,0).toString();
     for (int i = 1; i < data.get(index).size(); i++) {
-      ans = ans + "\t" + data.get(index).get(i).getValue();
+      ans = ans + "\t" + get(index, i).toString();
     }
     return ans;
   }
 
   //Returns String containing the contents of the column at the given index
   public String getCol(int index) {
-    String ans = data.get(0).get(index).toString();
+    String ans = get(0, index).toString();
     for (int i = 0; i < data.size(); i++) {
-      ans = ans + ", " + data.get(i).get(index).getValue();
+      ans = ans + ", " + get(i, index).getValue();
     }
     return ans;
+  }
+
+  private int longest(int index) {
+    int longest = get(0, index).toString().length();
+    return longest;
   }
 
   //Returns String of the entire table
