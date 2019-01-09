@@ -49,7 +49,7 @@ public class Sheet {
   public String getRow(int index) {
     String ans = data.get(index).get(0).toString();
     for (int i = 1; i < data.get(index).size(); i++) {
-      ans = ans + ", " + data.get(index).get(i).getValue();
+      ans = ans + "\t" + data.get(index).get(i).getValue();
     }
     return ans;
   }
