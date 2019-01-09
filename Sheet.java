@@ -56,9 +56,18 @@ public class Sheet {
 
   //Returns String containing the contents of the column at the given index
   public String getCol(int index) {
+    String ans = data.get(0).get(index).toString();
+    for (int i = 0; i < data.size(); i++) {
+      ans = ans + ", " + data.get(i).get(index).getValue();
+    }
+    return ans;
+  }
+
+  //Returns String of the entire table
+  public String getTable() {
     String ans = "";
     for (int i = 0; i < data.size(); i++) {
-      ans = ans + data.get(i).get(index).getValue() + ", ";
+      ans = ans + getRow(i) + "\n";
     }
     return ans;
   }
