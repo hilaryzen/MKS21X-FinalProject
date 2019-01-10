@@ -50,7 +50,7 @@ public class Sheet {
     String ans = "";
     for (int i = 0; i < data.get(index).size(); i++) {
       String entry = get(index, i).toString();
-      int spaceLength = longestInCol(i);
+      int spaceLength = longestInCol(i) + 5;
       ans = ans + String.format("%-" + spaceLength + "." + spaceLength + "s", entry);
     }
     return ans;

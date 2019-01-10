@@ -35,15 +35,21 @@ public class Driver {
     System.out.println(sheet1.get(3,3));
     System.out.println(sheet1.getRow(0));
     System.out.println(sheet1.getRow(2));
-    //System.out.println(sheet1.getRow(5));
+    System.out.println(sheet1.getRow(5));
     System.out.println(sheet1.getCol(0));
     System.out.println(sheet1.getCol(2));
-    //System.out.println(sheet1.getCol(5));
+    System.out.println(sheet1.getCol(5));
 
     System.out.println("  ");
 
+    System.out.println("Longest entry in column 0: " + sheet1.longestInCol(0));
     System.out.println("Longest entry in column 2: " + sheet1.longestInCol(2));
 
     System.out.println(sheet1.getTable());
+
+    System.out.println("  ");
+
+    System.out.println(sheet1.set(1,0,"Daniel"));
+    System.out.println(sheet1.get(1,0));
   }
 }
