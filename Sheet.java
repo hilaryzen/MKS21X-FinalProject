@@ -20,11 +20,14 @@ public class Sheet {
         data.add(new ArrayList<Cell>()); // initialize this row
         String[] line = in.nextLine().split(",");
         for (int x = 0; x < line.length; x++) {
-          //System.out.println(line[x]);
-          data.get(Row).add(new Cell(line[x])); //adds Cells at this Row
+          String storage = line[x];
+          try {
+            data.get(Row).add(new Cell<Integer>(Integer.parseInt(storage)));
+          }
+          catch(NumberFormatException e) {
+            data.get(Row).add(new Cell<String>(storage));
+          }
         }
-        System.out.println(data.get(Row));
-        //System.out.println(this.get(0,0));
         Row++;
       }
     }
@@ -38,8 +41,24 @@ public class Sheet {
 
   //Returns the cell at the row and col given
   public Cell get(int row, int col) {
-    //System.out.println(data.get(row).get(col).getValue());
     return data.get(row).get(col);
+  }
+
+	//extracts usable String from cell
+	private String getString(int row, int col) {
+		Cell placeholder = this.get(row, col);
+		return "" + placeholder.getValue();
+	}
+
+	//extracts usable Integer from a cell
+	private Integer getInt(int row, int col) {
+		return Integer.parseInt(getString(row, col));
+	}
+
+  // adds the internal value of cells
+  // throws error if vales are Strings
+  public int findSum(int row1, int col1, int row2, int col2) {
+      return getInt(row1, col1) + getInt(row2,col2);
   }
 
   //Returns String contains the contents of the row at the index given
