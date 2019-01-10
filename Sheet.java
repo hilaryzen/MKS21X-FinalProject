@@ -86,4 +86,10 @@ public class Sheet {
     }
     return ans;
   }
+
+  public String set(int row, int col, String newValue) {
+    String old = get(row, col).toString();
+    get(row, col).setValue(newValue);
+    return old;
+  }
 }
