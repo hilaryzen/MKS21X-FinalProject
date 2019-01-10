@@ -22,10 +22,10 @@ public class Sheet {
         for (int x = 0; x < line.length; x++) {
           String storage = line[x];
           try {
-            data.get(Row).add(new Cell(Integer.parseInt(storage)));
+            data.get(Row).add(new Cell<Integer>(Integer.parseInt(storage)));
           }
           catch(NumberFormatException e) {
-            data.get(Row).add(new Cell(storage));
+            data.get(Row).add(new Cell<String>(storage));
           }
         }
         Row++;
@@ -43,18 +43,23 @@ public class Sheet {
   public Cell get(int row, int col) {
     return data.get(row).get(col);
   }
-	
+
 	//extracts usable String from cell
-	public String getString(int row, int col) {
+	private String getString(int row, int col) {
 		Cell placeholder = this.get(row, col);
 		return "" + placeholder.getValue();
 	}
-	
-	//extracts usable Integer from a cell 
-	public Integer getInt(int row, int col) {
+
+	//extracts usable Integer from a cell
+	private Integer getInt(int row, int col) {
 		return Integer.parseInt(getString(row, col));
 	}
-	
+
+  // adds the internal value of cells
+  public int findSum(int row1, int col1, int row2, int col2) {
+      return getInt(row1, col2) + getInt(row2,col2);
+  }
+
   //Returns String contains the contents of the row at the index given
   public String getRow(int index) {
     String ans = get(index,0).toString();
