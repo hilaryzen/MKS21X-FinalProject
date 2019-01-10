@@ -44,14 +44,17 @@ public class Sheet {
 
   //Returns String contains the contents of the row at the index given
   public String getRow(int index) {
-    String ans = get(index,0).toString();
-    for (int i = 1; i < data.get(index).size(); i++) {
-      ans = ans + "\t" + get(index, i).toString();
+    String ans = "";
+    for (int i = 0; i < data.get(index).size(); i++) {
+      String entry = get(index, i).toString();
+      int spaceLength = longestInCol(i);
+      ans = ans + String.format("%-" + spaceLength + "." + spaceLength + "s", entry);
     }
     return ans;
   }
 
   //Returns String containing the contents of the column at the given index
+  //Does not work if not all rows are the same length
   public String getCol(int index) {
     String ans = get(0, index).toString();
     for (int i = 1; i < data.size(); i++) {
@@ -60,7 +63,7 @@ public class Sheet {
     return ans;
   }
 
-  public int longest(int index) {
+  public int longestInCol(int index) {
     int longest = get(0, index).toString().length();
     int length = 0;
     for (int i = 1; i < data.size(); i++) {
@@ -79,5 +82,11 @@ public class Sheet {
       ans = ans + getRow(i) + "\n";
     }
     return ans;
+  }
+
+  public String set(int row, int col, String newValue) {
+    String old = get(row, col).toString();
+    get(row, col).setValue(newValue);
+    return old;
   }
 }

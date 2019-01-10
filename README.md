@@ -28,3 +28,7 @@ Hilary: Added to Sheet constructor but didn't finish
 1/8/19:
 
 Hilary: Fixed Sheet constructor, added methods to print columns and the entire table
+
+1/9/19:
+
+Hilary: Wrote longestInCol, worked on the spacing for printing the table
