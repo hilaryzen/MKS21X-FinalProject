@@ -5,44 +5,60 @@ import java.util.Scanner;
 
 
 public class Sheet {
-  private ArrayList<ArrayList<Cell>> data = new ArrayList<ArrayList<Cell>>();
+  private ArrayList<ArrayList<Cell>> data = new ArrayList<ArrayList<Cell>>(); //array
   private int[] rows;
   private int[] cols;
 
   public Sheet(String filename) {
-    //ArrayList<ArrayList<Cell>> data = new ArrayList<ArrayList<Cell>>();
-    ArrayList<String> lines = new ArrayList<String>();
+
     try {
+
       File csv = new File(filename);
-      Scanner in = new Scanner(csv);
-      while(in.hasNext()) {
-        String line = in.nextLine();
-        lines.add(line);
+      Scanner in = new Scanner(csv); //import value
+      int Row = 0; //counts index rows
+      while(in.hasNextLine()) {
+        data.add(new ArrayList<Cell>()); // initialize this row
+        String[] line = in.nextLine().split(",");
+        for (int x = 0; x < line.length; x++) {
+          String storage = line[x];
+          try {
+            data.get(Row).add(new Cell<Integer>(Integer.parseInt(storage)));
+          }
+          catch(NumberFormatException e) {
+            data.get(Row).add(new Cell<String>(storage));
+          }
+        }
+        Row++;
       }
-    } catch (FileNotFoundException e) {
+    }
+    catch (FileNotFoundException e) {
       System.out.println("File not found");
       e.printStackTrace();
       System.exit(1);
     }
 
-    //Loops through lines to add rows
-    for (int i = 0; i < lines.size(); i++) {
-      String[] entries = lines.get(i).split(",");
-      data.add(new ArrayList<Cell>());
-      //Loops to add individual data cells
-      for (int j = 0; j < entries.length; j++) {
-        Cell<String> newCell = new Cell<String>(entries[j]);
-        data.get(i).add(newCell);
-        //System.out.println(data.get(i).get(j));
-      }
-      //System.out.println(data.get(i));
-    }
   }
 
   //Returns the cell at the row and col given
   public Cell get(int row, int col) {
-    //System.out.println(data.get(row).get(col).getValue());
     return data.get(row).get(col);
+  }
+
+	//extracts usable String from cell
+	private String getString(int row, int col) {
+		Cell placeholder = this.get(row, col);
+		return "" + placeholder.getValue();
+	}
+
+	//extracts usable Integer from a cell
+	private Integer getInt(int row, int col) {
+		return Integer.parseInt(getString(row, col));
+	}
+
+  // adds the internal value of cells
+  // throws error if vales are Strings
+  public int findSum(int row1, int col1, int row2, int col2) {
+      return getInt(row1, col1) + getInt(row2,col2);
   }
 
   //Returns String contains the contents of the row at the index given

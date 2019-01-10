@@ -31,6 +31,7 @@ public class Driver {
     }
     */
 
+		/*
     System.out.println(sheet1.get(0,0));
     System.out.println(sheet1.get(3,3));
     System.out.println(sheet1.getRow(0));
@@ -44,12 +45,15 @@ public class Driver {
 
     System.out.println("Longest entry in column 0: " + sheet1.longestInCol(0));
     System.out.println("Longest entry in column 2: " + sheet1.longestInCol(2));
+    */
 
     System.out.println(sheet1.getTable());
 
-    System.out.println("  ");
-
-    System.out.println(sheet1.set(1,0,"Daniel"));
-    System.out.println(sheet1.get(1,0));
+		//testing if Integers are stored seperate from Strings
+		System.out.println(sheet1.get(1,2));
+    System.out.println(sheet1.get(2,2));
+		System.out.println(sheet1.findSum(1,2,2,2)); //should print 95 not 923
+		System.out.println(sheet1.findSum(1,0,2,0)); //should throw error
+    System.out.println(sheet1.findSum(1,0,1,2)); //should throw error
   }
 }
