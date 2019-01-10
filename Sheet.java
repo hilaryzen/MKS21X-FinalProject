@@ -56,8 +56,9 @@ public class Sheet {
 	}
 
   // adds the internal value of cells
+  // throws error if vales are Strings
   public int findSum(int row1, int col1, int row2, int col2) {
-      return getInt(row1, col2) + getInt(row2,col2);
+      return getInt(row1, col1) + getInt(row2,col2);
   }
 
   //Returns String contains the contents of the row at the index given
