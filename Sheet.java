@@ -47,9 +47,11 @@ public class Sheet {
 
   //Returns String contains the contents of the row at the index given
   public String getRow(int index) {
-    String ans = get(index,0).toString();
-    for (int i = 1; i < data.get(index).size(); i++) {
-      ans = ans + "\t" + get(index, i).toString();
+    String ans = "";
+    for (int i = 0; i < data.get(index).size(); i++) {
+      String entry = get(index, i).toString();
+      int spaceLength = longestInCol(i);
+      ans = ans + String.format("%-" + spaceLength + "." + spaceLength + "s", entry);
     }
     return ans;
   }
