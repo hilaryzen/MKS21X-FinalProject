@@ -41,10 +41,20 @@ public class Sheet {
 
   //Returns the cell at the row and col given
   public Cell get(int row, int col) {
-    //System.out.println(data.get(row).get(col).getValue());
     return data.get(row).get(col);
   }
-
+	
+	//extracts usable String from cell
+	public String getString(int row, int col) {
+		Cell placeholder = this.get(row, col);
+		return "" + placeholder.getValue();
+	}
+	
+	//extracts usable Integer from a cell 
+	public Integer getInt(int row, int col) {
+		return Integer.parseInt(getString(row, col));
+	}
+	
   //Returns String contains the contents of the row at the index given
   public String getRow(int index) {
     String ans = get(index,0).toString();

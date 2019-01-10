@@ -30,14 +30,22 @@ public class Driver {
       System.exit(1);
     }
     */
-
+		
+		/*
     System.out.println(sheet1.get(0,0));
     System.out.println(sheet1.get(3,3));
     System.out.println(sheet1.getRow(0));
     System.out.println(sheet1.getRow(2));
-
+		*/
+		
     System.out.println("  ");
 
     System.out.println(sheet1.getTable());
+		
+		//testing if Integers are stored seperate from Strings
+		//System.out.println(sheet1.get(1,2));
+    //System.out.println(sheet1.get(2,2));
+		System.out.println(sheet1.get(1,2).getValue() + sheet1.get(2,2)); //should print 95 not 923
+		//System.out.println(sheet1.get(1,0) + sheet1.get(1,2)); //should print "Danya92"
   }
 }

@@ -28,3 +28,7 @@ Hilary: Added to Sheet constructor but didn't finish
 1/8/19:
 
 Hilary: Fixed Sheet constructor, added methods to print columns and the entire table
+
+1/9/19:
+
+David: Working on constructor for proper String and Integer Cells; working on Adding Cells
