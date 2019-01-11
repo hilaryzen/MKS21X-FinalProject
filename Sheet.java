@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class Sheet {
   private ArrayList<ArrayList<Cell>> data = new ArrayList<ArrayList<Cell>>(); //array
-  private int[] rows;
-  private int[] cols;
+  private ArrayList<Integer> rows = new ArrayList<Integer>();
+  private ArrayList<Integer> cols = new ArrayList<Integer>();
 
   public Sheet(String filename) {
 
@@ -36,6 +36,9 @@ public class Sheet {
       e.printStackTrace();
       System.exit(1);
     }
+
+    rows.add(0);
+    cols.add(0);
 
   }
 
