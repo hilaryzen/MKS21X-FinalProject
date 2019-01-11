@@ -38,6 +38,7 @@ public class Driver {
     System.out.println("Longest entry in column 2: " + sheet1.longestInCol(2));
     */
 
+    System.out.println(sheet1.get());
     System.out.println(sheet1);
 
 		//testing if Integers are stored seperate from Strings

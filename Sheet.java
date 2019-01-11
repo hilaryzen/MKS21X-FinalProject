@@ -47,6 +47,14 @@ public class Sheet {
     return data.get(row).get(col);
   }
 
+  public String get() {
+    String selected = "";
+    for (int i = 0; i < rows.size(); i++) {
+      selected = selected + get(rows.get(0), cols.get(0)) + "\n";
+    }
+    return selected;
+  }
+
 	//extracts usable String from cell
 	private String getString(int row, int col) {
 		Cell placeholder = this.get(row, col);
