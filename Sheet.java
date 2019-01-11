@@ -95,7 +95,7 @@ public class Sheet {
   }
 
   //Returns String of the entire table
-  public String getTable() {
+  public String toString() {
     String ans = "";
     for (int i = 0; i < data.size(); i++) {
       ans = ans + getRow(i) + "\n";
@@ -107,5 +107,11 @@ public class Sheet {
     String old = get(row, col).toString();
     get(row, col).setValue(newValue);
     return old;
+  }
+
+  public void setRow(int row, String newValue) {
+    for (int i = 0; i < data.get(row).size(); i++) {
+      get(row, i).setValue(newValue);
+    }
   }
 }
