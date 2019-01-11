@@ -59,5 +59,7 @@ public class Driver {
     System.out.println(" ");
     System.out.println("Jumping to cell in row 1 col 2: " + sheet1.jumpTo(1,2));
     System.out.println(sheet1.get());
+    System.out.println("Adding cell in row 1 col 3: " + sheet1.select(1,3));
+    System.out.println(sheet1.get());
   }
 }

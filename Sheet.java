@@ -54,7 +54,7 @@ public class Sheet {
   public String get() {
     String selected = "";
     for (int i = 0; i < rows.size(); i++) {
-      selected = selected + get(rows.get(0), cols.get(0)) + "\n";
+      selected = selected + get(rows.get(i), cols.get(i)) + "\n";
     }
     return selected;
   }
@@ -124,6 +124,13 @@ public class Sheet {
     rows.clear();
     rows.add(row);
     cols.clear();
+    cols.add(col);
+    return true;
+  }
+
+  //Adds given cell to list of selected cells
+  public boolean select(int row, int col) {
+    rows.add(row);
     cols.add(col);
     return true;
   }
