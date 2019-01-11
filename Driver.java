@@ -50,6 +50,7 @@ public class Driver {
     System.out.println(" ");
     sheet1.setRow(1, "Hi");
     sheet1.setCol(3, "Hi");
+    sheet1.setAll("hi");
     System.out.println(sheet1);
   }
 }

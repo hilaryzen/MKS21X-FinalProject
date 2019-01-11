@@ -66,7 +66,7 @@ public class Sheet {
     String ans = "";
     for (int i = 0; i < data.get(index).size(); i++) {
       String entry = get(index, i).toString();
-      int spaceLength = longestInCol(i) + 5;
+      int spaceLength = longestInCol(i) + 1;
       ans = ans + String.format("%-" + spaceLength + "." + spaceLength + "s", entry);
     }
     return ans;
@@ -118,6 +118,12 @@ public class Sheet {
   public void setCol(int col, String newValue) {
     for (int i = 1; i < data.size(); i++) {
       get(i, col).setValue(newValue);
+    }
+  }
+
+  public void setAll(String newValue) {
+    for (int i = 1; i < data.size(); i++) {
+      setRow(i, newValue);
     }
   }
 }
