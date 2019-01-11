@@ -114,4 +114,10 @@ public class Sheet {
       get(row, i).setValue(newValue);
     }
   }
+
+  public void setCol(int col, String newValue) {
+    for (int i = 1; i < data.size(); i++) {
+      get(i, col).setValue(newValue);
+    }
+  }
 }

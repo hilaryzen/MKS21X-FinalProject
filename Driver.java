@@ -49,6 +49,7 @@ public class Driver {
 
     System.out.println(" ");
     sheet1.setRow(1, "Hi");
+    sheet1.setCol(3, "Hi");
     System.out.println(sheet1);
   }
 }
