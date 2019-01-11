@@ -48,10 +48,16 @@ public class Driver {
 		//System.out.println(sheet1.findSum(1,0,2,0)); //should throw error
     //System.out.println(sheet1.findSum(1,0,1,2)); //should throw error
 
+    /*
     System.out.println(" ");
     sheet1.setRow(1, "Hi");
     sheet1.setCol(3, "Hi");
     sheet1.setAll("hi");
     System.out.println(sheet1);
+    */
+
+    System.out.println(" ");
+    System.out.println("Jumping to cell in row 1 col 2: " + sheet1.jumpTo(1,2));
+    System.out.println(sheet1.get());
   }
 }

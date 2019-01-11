@@ -119,6 +119,15 @@ public class Sheet {
     return ans;
   }
 
+  //Deselects all current cells and selects only the given cell
+  public boolean jumpTo(int row, int col) {
+    rows.clear();
+    rows.add(row);
+    cols.clear();
+    cols.add(col);
+    return true;
+  }
+
   //Changes value of the cell at the coordinates given
   public String set(int row, int col, String newValue) {
     String old = get(row, col).toString();
