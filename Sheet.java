@@ -6,7 +6,9 @@ import java.util.Scanner;
 
 public class Sheet {
   private ArrayList<ArrayList<Cell>> data = new ArrayList<ArrayList<Cell>>(); //array
+  //Stores all the row values of the cells selected by the user
   private ArrayList<Integer> rows = new ArrayList<Integer>();
+  //Stores all the col values of the cells selected
   private ArrayList<Integer> cols = new ArrayList<Integer>();
 
   public Sheet(String filename) {
@@ -37,6 +39,7 @@ public class Sheet {
       System.exit(1);
     }
 
+    //Automatically selects the first cell
     rows.add(0);
     cols.add(0);
 
@@ -47,6 +50,7 @@ public class Sheet {
     return data.get(row).get(col);
   }
 
+  //Returns a String listing the values of all the selected cells
   public String get() {
     String selected = "";
     for (int i = 0; i < rows.size(); i++) {
@@ -93,6 +97,7 @@ public class Sheet {
     return ans;
   }
 
+  //Finds the length of the longest entry in a col
   public int longestInCol(int index) {
     int longest = get(0, index).toString().length();
     int length = 0;
@@ -114,24 +119,35 @@ public class Sheet {
     return ans;
   }
 
+  //Changes value of the cell at the coordinates given
   public String set(int row, int col, String newValue) {
     String old = get(row, col).toString();
     get(row, col).setValue(newValue);
     return old;
   }
 
+  //Changes value of all the cells selected to the new value given
+  public void set(String newValue) {
+    for (int i = 0; i < rows.size(); i++) {
+      set(rows.get(i), cols.get(i), newValue);
+    }
+  }
+
+  //Changes value of all cells in the row given to the same new value
   public void setRow(int row, String newValue) {
     for (int i = 0; i < data.get(row).size(); i++) {
-      get(row, i).setValue(newValue);
+      set(row, i, newValue);
     }
   }
 
+  //Changes value of all cells in the col given to the same new value
   public void setCol(int col, String newValue) {
     for (int i = 1; i < data.size(); i++) {
-      get(i, col).setValue(newValue);
+      set(i, col, newValue);
     }
   }
 
+  //Changes value of all cells in the sheet to the same new value
   public void setAll(String newValue) {
     for (int i = 1; i < data.size(); i++) {
       setRow(i, newValue);
