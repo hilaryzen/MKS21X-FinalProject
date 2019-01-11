@@ -38,6 +38,6 @@ David: Working on constructor for proper String and Integer Cells; working on Ad
 
 1/10/19:
 
-Hilary: Wrote methods to change values in the sheet
+Hilary: Wrote methods to change values in the sheet, added way to track selected cells
 
 David: wrote findSum; merged alternateConstructor and master
