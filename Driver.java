@@ -21,16 +21,8 @@ public class Driver {
 
     String filename = "test.txt";
     Sheet sheet1 = new Sheet(filename);
-    /*
-    try {
-      Sheet sheet1 = new Sheet(filename);
-    } catch (FileNotFoundException e) {
-      System.out.println("File not found");
-      e.printStackTrace();
-      System.exit(1);
-    }
-    */
 
+		/*
     System.out.println(sheet1.get(0,0));
     System.out.println(sheet1.get(3,3));
     System.out.println(sheet1.getRow(0));
@@ -38,12 +30,36 @@ public class Driver {
     System.out.println(sheet1.getRow(5));
     System.out.println(sheet1.getCol(0));
     System.out.println(sheet1.getCol(2));
-    //System.out.println(sheet1.getCol(5));
+    System.out.println(sheet1.getCol(5));
 
     System.out.println("  ");
 
+    System.out.println("Longest entry in column 0: " + sheet1.longestInCol(0));
     System.out.println("Longest entry in column 2: " + sheet1.longestInCol(2));
+    */
 
-    System.out.println(sheet1.getTable());
+    System.out.println(sheet1.get());
+    System.out.println(sheet1);
+
+		//testing if Integers are stored seperate from Strings
+		System.out.println(sheet1.get(1,2));
+    System.out.println(sheet1.get(2,2));
+		System.out.println(sheet1.findSum(1,2,2,2)); //should print 95 not 923
+		//System.out.println(sheet1.findSum(1,0,2,0)); //should throw error
+    //System.out.println(sheet1.findSum(1,0,1,2)); //should throw error
+
+    /*
+    System.out.println(" ");
+    sheet1.setRow(1, "Hi");
+    sheet1.setCol(3, "Hi");
+    sheet1.setAll("hi");
+    System.out.println(sheet1);
+    */
+
+    System.out.println(" ");
+    System.out.println("Jumping to cell in row 1 col 2: " + sheet1.jumpTo(1,2));
+    System.out.println(sheet1.get());
+    System.out.println("Adding cell in row 1 col 3: " + sheet1.select(1,3));
+    System.out.println(sheet1.get());
   }
 }
