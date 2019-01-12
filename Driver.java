@@ -19,7 +19,7 @@ public class Driver {
     System.out.println(cell2 + " " + cell3);
     */
 
-    String filename = "test.txt";
+    String filename = "TestCSV.csv";
     Sheet sheet1 = new Sheet(filename);
 
 		/*
@@ -42,9 +42,9 @@ public class Driver {
     System.out.println(sheet1);
 
 		//testing if Integers are stored seperate from Strings
-		System.out.println(sheet1.get(1,2));
-    System.out.println(sheet1.get(2,2));
-		System.out.println(sheet1.findSum(1,2,2,2)); //should print 95 not 923
+		System.out.println(sheet1.getCell(2,2));
+    System.out.println(sheet1.getCell(3,2));
+		System.out.println(sheet1.findSum(2,2,3,2)); //should print 95 not 923
 		//System.out.println(sheet1.findSum(1,0,2,0)); //should throw error
     //System.out.println(sheet1.findSum(1,0,1,2)); //should throw error
 
@@ -61,5 +61,6 @@ public class Driver {
     System.out.println(sheet1.get());
     System.out.println("Adding cell in row 1 col 3: " + sheet1.select(1,3));
     System.out.println(sheet1.get());
+		
   }
 }

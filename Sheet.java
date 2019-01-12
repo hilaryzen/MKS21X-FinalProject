@@ -12,9 +12,7 @@ public class Sheet {
   private ArrayList<Integer> cols = new ArrayList<Integer>();
 
   public Sheet(String filename) {
-
     try {
-
       File csv = new File(filename);
       Scanner in = new Scanner(csv); //import value
       int Row = 0; //counts index rows
@@ -46,7 +44,7 @@ public class Sheet {
   }
 
   //Returns the cell at the row and col given
-  public Cell get(int row, int col) {
+  public Cell getCell(int row, int col) {
     return data.get(row).get(col);
   }
 
@@ -54,14 +52,14 @@ public class Sheet {
   public String get() {
     String selected = "";
     for (int i = 0; i < rows.size(); i++) {
-      selected = selected + get(rows.get(i), cols.get(i)) + "\n";
+      selected += getCell(rows.get(i), cols.get(i)) + "\n";
     }
     return selected;
   }
 
 	//extracts usable String from cell
 	private String getString(int row, int col) {
-		Cell placeholder = this.get(row, col);
+		Cell placeholder = this.getCell(row, col);
 		return "" + placeholder.getValue();
 	}
 
@@ -80,7 +78,7 @@ public class Sheet {
   public String getRow(int index) {
     String ans = "";
     for (int i = 0; i < data.get(index).size(); i++) {
-      String entry = get(index, i).toString();
+      String entry = getString(index, i);
       int spaceLength = longestInCol(i) + 1;
       ans = ans + String.format("%-" + spaceLength + "." + spaceLength + "s", entry);
     }
@@ -90,19 +88,19 @@ public class Sheet {
   //Returns String containing the contents of the column at the given index
   //Does not work if not all rows are the same length
   public String getCol(int index) {
-    String ans = get(0, index).toString();
-    for (int i = 1; i < data.size(); i++) {
-      ans = ans + ", " + get(i, index).getValue();
+    String ans = "";
+    for (int i = 0; i < data.size(); i++) {
+      ans += getString(i, index) + ", " ;
     }
     return ans;
   }
 
   //Finds the length of the longest entry in a col
   public int longestInCol(int index) {
-    int longest = get(0, index).toString().length();
+    int longest = getString(0, index).length();
     int length = 0;
     for (int i = 1; i < data.size(); i++) {
-      length = get(i, index).toString().length();
+      length = getString(i, index).length();
       if (length > longest) {
         longest = length;
       }
@@ -137,8 +135,8 @@ public class Sheet {
 
   //Changes value of the cell at the coordinates given
   public String set(int row, int col, String newValue) {
-    String old = get(row, col).toString();
-    get(row, col).setValue(newValue);
+    String old = getString(row, col);
+    getCell(row, col).setValue(newValue);
     return old;
   }
 
