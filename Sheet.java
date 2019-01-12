@@ -43,6 +43,11 @@ public class Sheet {
 
   }
 
+  //Returns the number of rows in the sheet
+  public int rows() {
+    return data.size();
+  }
+
   //Returns the cell at the row and col given
   public Cell getCell(int row, int col) {
     return data.get(row).get(col);
@@ -165,6 +170,18 @@ public class Sheet {
   public void setAll(String newValue) {
     for (int i = 1; i < data.size(); i++) {
       setRow(i, newValue);
+    }
+  }
+
+  public void addRow(String[] values) {
+    data.add(new ArrayList<Cell>());
+    for (int i = 0; i < values.length; i++) {
+      try {
+        data.get(rows()).add(new Cell<Integer>(Integer.parseInt(values[i])));
+      }
+      catch(NumberFormatException e) {
+        data.get(rows()).add(new Cell<String>(values[i]));
+      }
     }
   }
 }
