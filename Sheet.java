@@ -242,9 +242,23 @@ public class Sheet {
     }
   }
 
+  //Overwrites old file to save changes
   public void save() {
     try {
       FileWriter filewriter = new FileWriter(originalFile);
+      filewriter.write(toString());
+      filewriter.close();
+    } catch (IOException e) {
+      System.out.println("File could not be saved");
+      e.printStackTrace();
+      System.exit(1);
+    }
+  }
+
+  //Changes new sheet in file given by user
+  public void save(String filename) {
+    try {
+      FileWriter filewriter = new FileWriter(filename);
       filewriter.write(toString());
       filewriter.close();
     } catch (IOException e) {
