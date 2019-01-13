@@ -64,9 +64,12 @@ public class Driver {
 		
     System.out.println(" ");
 
-    String[] newRow = new String[] {"Ann", "444555", "100", "1958", "6", "70"};
-    System.out.println(newRow.length);
-    sheet1.addRow(newRow);
+    String[] newRow1 = new String[] {"Ann", "444555", "100", "1958", "6", "70"};
+    sheet1.addRow(newRow1);
+    System.out.println(sheet1);
+
+    String[] newRow2 = new String[] {"Ethan", "800000", "16", "2011", "7", "62"};
+    sheet1.addRow(3, newRow2);
     System.out.println(sheet1);
   }
 }
