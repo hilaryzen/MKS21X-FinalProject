@@ -86,5 +86,7 @@ public class Driver {
     sheet1.removeCol(4);
     System.out.println(sheet1);
     System.out.println(sheet1.getTable());
+
+    sheet1.save();
   }
 }

@@ -259,7 +259,7 @@ public class Sheet {
   public void save() {
     try {
       FileWriter filewriter = new FileWriter(originalFile);
-      filewriter.write(toString());
+      filewriter.write(getTable());
       filewriter.close();
     } catch (IOException e) {
       System.out.println("File could not be saved");
@@ -272,7 +272,7 @@ public class Sheet {
   public void save(String filename) {
     try {
       FileWriter filewriter = new FileWriter(filename);
-      filewriter.write(toString());
+      filewriter.write(getTable());
       filewriter.close();
     } catch (IOException e) {
       System.out.println("File could not be saved");
