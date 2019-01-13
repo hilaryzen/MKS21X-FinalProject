@@ -196,4 +196,14 @@ public class Sheet {
       }
     }
   }
+
+  public void addCol(String[] values) {
+    for (int i = 0; i < rows(); i++) {
+      try {
+        data.get(i).add(new Cell<Integer>(Integer.parseInt(values[i])));
+      } catch (NumberFormatException e) {
+        data.get(i).add(new Cell<String>(values[i]));
+      }
+    }
+  }
 }
