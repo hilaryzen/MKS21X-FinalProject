@@ -173,8 +173,11 @@ public class Sheet {
     }
   }
 
+  //Takes array of values and creates new row at the bottom of the sheet
   public void addRow(String[] values) {
+    //Initializing new row
     data.add(new ArrayList<Cell>());
+    //Looping through values to add them to cells
     for (int i = 0; i < values.length; i++) {
       try {
         data.get(rows() - 1).add(new Cell<Integer>(Integer.parseInt(values[i])));
@@ -185,6 +188,7 @@ public class Sheet {
     }
   }
 
+  //Inserts row of values at given index
   public void addRow(int index, String[] values) {
     data.add(index, new ArrayList<Cell>());
     for (int i = 0; i < values.length; i++) {
@@ -197,7 +201,9 @@ public class Sheet {
     }
   }
 
+  //Adds array of values as a new column at the very right
   public void addCol(String[] values) {
+    //Loops through rows to add a new cell to each one
     for (int i = 0; i < rows(); i++) {
       try {
         data.get(i).add(new Cell<Integer>(Integer.parseInt(values[i])));
@@ -207,6 +213,7 @@ public class Sheet {
     }
   }
 
+  //Adds a new column of values at the given index
   public void addCol(int index, String[] values) {
     for (int i = 0; i < rows(); i++) {
       try {
@@ -217,11 +224,14 @@ public class Sheet {
     }
   }
 
+  //Deletes the row at the given index
   public void removeRow(int index) {
     data.remove(index);
   }
 
+  //Deletes the column at the given index
   public void removeCol(int index) {
+    //Loops through rows to delete specified cell
     for (int i = 0; i < rows(); i++) {
       data.get(i).remove(index);
     }
