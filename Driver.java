@@ -66,11 +66,11 @@ public class Driver {
 
     String[] newRow1 = new String[] {"Ann", "444555", "100", "1958", "6", "70"};
     sheet1.addRow(newRow1);
-    System.out.println(sheet1);
+    //System.out.println(sheet1);
 
     String[] newRow2 = new String[] {"Ethan", "800000", "16", "2011", "7", "62"};
     sheet1.addRow(3, newRow2);
-    System.out.println(sheet1);
+    //System.out.println(sheet1);
 
     String[] newCol1 = new String[] {"Weight", "120", "153", "160", "120", "245", "134", "147"};
     sheet1.addCol(newCol1);
