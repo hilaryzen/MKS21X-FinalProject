@@ -79,5 +79,8 @@ public class Driver {
     String[] newCol2 = new String[] {"Surname", "Smith", "Lee", "Black", "Chen", "Doe", "Green", "Gold"};
     sheet1.addCol(1, newCol2);
     System.out.println(sheet1);
+
+    sheet1.removeRow(5);
+    System.out.println(sheet1);
   }
 }

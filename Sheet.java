@@ -216,4 +216,8 @@ public class Sheet {
       }
     }
   }
+
+  public void removeRow(int index) {
+    data.remove(index);
+  }
 }
