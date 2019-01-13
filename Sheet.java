@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,9 +12,12 @@ public class Sheet {
   private ArrayList<Integer> rows = new ArrayList<Integer>();
   //Stores all the col values of the cells selected
   private ArrayList<Integer> cols = new ArrayList<Integer>();
+  //Stores filename for saving
+  private String originalFile = "";
 
   public Sheet(String filename) {
     try {
+      originalFile = filename;
       File csv = new File(filename);
       Scanner in = new Scanner(csv); //import value
       int Row = 0; //counts index rows
@@ -138,7 +143,7 @@ public class Sheet {
     return true;
   }
 
-  //Changes value of the cell at the coordinates given
+  //Changes value of the cell at the coordinates given, returns old value
   public String set(int row, int col, String newValue) {
     String old = getString(row, col);
     getCell(row, col).setValue(newValue);
@@ -234,6 +239,18 @@ public class Sheet {
     //Loops through rows to delete specified cell
     for (int i = 0; i < rows(); i++) {
       data.get(i).remove(index);
+    }
+  }
+
+  public void save() {
+    try {
+      FileWriter filewriter = new FileWriter(originalFile);
+      filewriter.write(toString());
+      filewriter.close();
+    } catch (IOException e) {
+      System.out.println("File could not be saved");
+      e.printStackTrace();
+      System.exit(1);
     }
   }
 }
