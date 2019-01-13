@@ -242,6 +242,19 @@ public class Sheet {
     }
   }
 
+  //Returns a string of the table in CSV format
+  public String getTable() {
+    String ans = "";
+    for (int i = 0; i < rows(); i++) {
+      ans += getString(i,0);
+      for (int j = 1; j < data.get(i).size(); j++) {
+        ans = ans + "," + getString(i,j);
+      }
+      ans += "\n";
+    }
+    return ans;
+  }
+
   //Overwrites old file to save changes
   public void save() {
     try {
