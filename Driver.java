@@ -81,6 +81,9 @@ public class Driver {
     System.out.println(sheet1);
 
     sheet1.removeRow(5);
+    //System.out.println(sheet1);
+
+    sheet1.removeCol(4);
     System.out.println(sheet1);
   }
 }

@@ -220,4 +220,10 @@ public class Sheet {
   public void removeRow(int index) {
     data.remove(index);
   }
+
+  public void removeCol(int index) {
+    for (int i = 0; i < rows(); i++) {
+      data.get(i).remove(index);
+    }
+  }
 }
