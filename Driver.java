@@ -62,5 +62,11 @@ public class Driver {
     System.out.println("Adding cell in row 1 col 3: " + sheet1.select(1,3));
     System.out.println(sheet1.get());
 		
+    System.out.println(" ");
+
+    String[] newRow = new String[] {"Ann", "444555", "100", "1958", "6", "70"};
+    System.out.println(newRow.length);
+    sheet1.addRow(newRow);
+    System.out.println(sheet1);
   }
 }

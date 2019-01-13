@@ -84,7 +84,7 @@ public class Sheet {
     String ans = "";
     for (int i = 0; i < data.get(index).size(); i++) {
       String entry = getString(index, i);
-      int spaceLength = longestInCol(i) + 1;
+      int spaceLength = longestInCol(i) + 3;
       ans = ans + String.format("%-" + spaceLength + "." + spaceLength + "s", entry);
     }
     return ans;
@@ -177,10 +177,10 @@ public class Sheet {
     data.add(new ArrayList<Cell>());
     for (int i = 0; i < values.length; i++) {
       try {
-        data.get(rows()).add(new Cell<Integer>(Integer.parseInt(values[i])));
+        data.get(rows() - 1).add(new Cell<Integer>(Integer.parseInt(values[i])));
       }
       catch(NumberFormatException e) {
-        data.get(rows()).add(new Cell<String>(values[i]));
+        data.get(rows() - 1).add(new Cell<String>(values[i]));
       }
     }
   }
