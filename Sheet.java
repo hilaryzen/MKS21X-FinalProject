@@ -311,6 +311,13 @@ public class Sheet {
 			}
 			catch (IndexOutOfBoundsException e) {}
 		}
+	
+	public int findUserR() {
+		return cursor.getURow();
+	}
+	 public int findUserC() {
+		 return cursor.getUCol();
+	 }
 	/// navigation commands ^^^ end
 	
 	// used to track movement of the selection

@@ -118,7 +118,7 @@ public class MenuDemo {
       //DO GAME STUFF HERE
       putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
       putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
-      highlight(file.selectedRow(),file.selectedCol(),terminal,file);
+      highlight(file.getUserR(),file.getUserC(),terminal,file);
         
     }
 
