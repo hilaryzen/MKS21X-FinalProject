@@ -45,20 +45,24 @@ public class MenuDemo {
   }
 
   public static void highlight(int row, int col, Terminal t, Sheet sheet) {
-    int r = row + 2;
+		int r = row + 2;
     int c = 0;
     String data = sheet.getString(row,col);
     int spaceLength = sheet.longestInCol(col) + 3;
     String entry = String.format("%-" + spaceLength + "." + spaceLength + "s", data);
-    for (int i = 0; i < col; i++) {
-      c = c + sheet.longestInCol(i) + 3;
+    
+		for (int i = 0; i < col; i++) {
+      c += sheet.longestInCol(i) + 3;
     }
     t.moveCursor(c,r);
+		
     t.applyBackgroundColor(Terminal.Color.YELLOW);
     t.applyForegroundColor(Terminal.Color.BLACK);
-    for (int j = 0; j < spaceLength; j++) {
+    
+		for (int j = 0; j < spaceLength; j++) {
       t.putCharacter(entry.charAt(j));
     }
+		
   }
 
   public static void main(String[] args) {
@@ -67,7 +71,7 @@ public class MenuDemo {
 		terminal.enterPrivateMode();
     TerminalSize size = terminal.getTerminalSize();
     terminal.setCursorVisible(false);
-
+		
     boolean running = true;
 		
 		if (args.length < 1) {
@@ -80,16 +84,13 @@ public class MenuDemo {
     int row = 0;
     int col = 0;
 		
-		Screen window = new Screen(terminal);
-		window.startScreen();
-		
     while(running){
-      Key key = window.readInput();
+      Key key = terminal.readInput();
       if (key != null)
       {
         //YOU CAN PUT DIFFERENT SETS OF BUTTONS FOR DIFFERENT MODES!!!
         if (key.getKind() == Key.Kind.Escape) {
-          window.stopScreen();
+          terminal.exitPrivateMode();
           running = false;
         } 
 				else if (key.getKind() == Key.Kind.ArrowDown) {
@@ -112,15 +113,17 @@ public class MenuDemo {
           t.applyForegroundColor(Terminal.Color.BLACK);
         }
       }
-
-      terminal.applySGR(Terminal.SGR.ENTER_BOLD);
+			
+			/*
       terminal.applySGR(Terminal.SGR.RESET_ALL);
-
+      terminal.applySGR(Terminal.SGR.ENTER_BOLD);
+			*/
+			
       //DO GAME STUFF HERE
       putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
       putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
       highlight(file.getUserR(),file.getUserC(),terminal,file);
-        
+      
     }
 
     
