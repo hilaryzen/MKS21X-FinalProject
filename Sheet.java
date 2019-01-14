@@ -285,40 +285,20 @@ public class Sheet {
 
 	/// navigation commands vvv start 
 	public void up() {
-			try{
-				cursor.jumpTo(cursor.getURow() - 1, cursor.getUCol());
-			}
-			catch (IndexOutOfBoundsException e) {
-				cursor.jumpTo(cursor.getURow(), cursor.getUCol());
-			}
-		}
+		cursor.jumpTo(cursor.getURow() - 1, cursor.getUCol());
+	}
 		
 	public void down() {
-			try{
-				cursor.jumpTo(cursor.getURow() + 1, cursor.getUCol());
-			}
-			catch (IndexOutOfBoundsException e) {
-				cursor.jumpTo(cursor.getURow(), cursor.getUCol());
-			}
-		}
+		cursor.jumpTo(cursor.getURow() + 1, cursor.getUCol());
+	}
 		
 	public void left() {
-			try{
-				cursor.jumpTo(cursor.getURow(), cursor.getUCol() - 1);
-			}
-			catch (IndexOutOfBoundsException e) {
-				cursor.jumpTo(cursor.getURow(), cursor.getUCol());
-			}
-		}
+		cursor.jumpTo(cursor.getURow(), cursor.getUCol() - 1);
+	}
 		
 	public void right() {
-			try{
-				cursor.jumpTo(cursor.getURow(), cursor.getUCol() + 1);
-			}
-			catch (IndexOutOfBoundsException e) {
-				cursor.jumpTo(cursor.getURow(), cursor.getUCol());
-			}
-		}
+		cursor.jumpTo(cursor.getURow(), cursor.getUCol() + 1);
+	}
 	
 	public int getUserR() {
 		return cursor.getURow();
@@ -344,8 +324,7 @@ public class Sheet {
 		
 		// general update command
 		public void jumpTo(int y, int x) {
-			if (x < 0 || x > (colLim - 1) || y < 0 || y > (rowLim -1 )) throw new IndexOutOfBoundsException();
-			else{
+			if (!(x < 0 || x > (colLim - 1) || y < 0 || y > (rowLim -1 ))){
 				uCol = x;
 				uRow = y;
 			}
