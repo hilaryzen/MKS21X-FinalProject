@@ -46,10 +46,11 @@ public class MenuDemo {
   public static void highlight(int row, int col, Terminal t, Sheet sheet) {
     int r = row + 2;
     int c = 0;
+    String data = sheet.getString(row,col);
     int spaceLength = sheet.longestInCol(col) + 3;
-    String entry = String.format("%-" + spaceLength + "." + spaceLength + "s", sheet.getString(row,col));
+    String entry = String.format("%-" + spaceLength + "." + spaceLength + "s", data);
     for (int i = 0; i < col; i++) {
-      c += sheet.longestInCol(i);
+      c = c + sheet.longestInCol(i) + 3;
     }
     t.moveCursor(c,r);
     t.applyBackgroundColor(Terminal.Color.YELLOW);
@@ -89,7 +90,15 @@ public class MenuDemo {
         } else if (key.getKind() == Key.Kind.ArrowDown) {
           row += 1;
           file.jumpTo(row,col);
-          highlight(row, col, terminal, file);
+        } else if (key.getKind() == Key.Kind.ArrowUp) {
+          row -= 1;
+          file.jumpTo(row,col);
+        } else if (key.getKind() == Key.Kind.ArrowLeft) {
+          col -= 1;
+          file.jumpTo(row,col);
+        } else if (key.getKind() == Key.Kind.ArrowRight) {
+          col += 1;
+          file.jumpTo(row,col);
         }
 /*
         //for all modes
