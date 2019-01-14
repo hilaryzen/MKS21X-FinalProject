@@ -344,7 +344,7 @@ public class Sheet {
 		
 		// general update command
 		public void jumpTo(int y, int x) {
-			if (x < 0 || x > colLim|| y < 0 || y > rowLim) throw new IndexOutOfBoundsException();
+			if (x < 0 || x > (colLim - 1) || y < 0 || y > (rowLim -1 )) throw new IndexOutOfBoundsException();
 			else{
 				uCol = x;
 				uRow = y;
