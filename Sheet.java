@@ -288,28 +288,36 @@ public class Sheet {
 			try{
 				cursor.jumpTo(cursor.getURow() - 1, cursor.getUCol());
 			}
-			catch (IndexOutOfBoundsException e) {}
+			catch (IndexOutOfBoundsException e) {
+				cursor.jumpTo(cursor.getURow(), cursor.getUCol()):
+			}
 		}
 		
 	public void down() {
 			try{
 				cursor.jumpTo(cursor.getURow() + 1, cursor.getUCol());
 			}
-			catch (IndexOutOfBoundsException e) {}
+			catch (IndexOutOfBoundsException e) {
+				cursor.jumpTo(cursor.getURow(), cursor.getUCol()):
+			}
 		}
 		
 	public void left() {
 			try{
 				cursor.jumpTo(cursor.getURow(), cursor.getUCol() - 1);
 			}
-			catch (IndexOutOfBoundsException e) {}
+			catch (IndexOutOfBoundsException e) {
+				cursor.jumpTo(cursor.getURow(), cursor.getUCol()):
+			}
 		}
 		
 	public void right() {
 			try{
 				cursor.jumpTo(cursor.getURow(), cursor.getUCol() + 1);
 			}
-			catch (IndexOutOfBoundsException e) {}
+			catch (IndexOutOfBoundsException e) {
+				cursor.jumpTo(cursor.getURow(), cursor.getUCol()):
+			}
 		}
 	
 	public int getUserR() {
