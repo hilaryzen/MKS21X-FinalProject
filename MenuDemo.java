@@ -50,7 +50,7 @@ public class MenuDemo {
     int spaceLength = sheet.longestInCol(col) + 3;
     String entry = String.format("%-" + spaceLength + "." + spaceLength + "s", data);
     for (int i = 0; i < col; i++) {
-      c += sheet.longestInCol(i);
+      c = c + sheet.longestInCol(i) + 3;
     }
     t.moveCursor(c,r);
     t.applyBackgroundColor(Terminal.Color.YELLOW);
