@@ -113,12 +113,16 @@ public class MenuDemo {
         } else {
           Terminal t = terminal;
           char newChar = key.getCharacter();
+          /*
           int r = findR(row);
           int c = findC(col, file) + writing;
           t.moveCursor(c,r);
           t.applyBackgroundColor(Terminal.Color.YELLOW);
           t.applyForegroundColor(Terminal.Color.BLACK);
           t.putCharacter(newChar);
+          */
+          String data = file.getString(row,col);
+          file.getCell(row,col).setValue(data.substring(0,writing) + newChar + data.substring(writing + 1, data.length()));
           writing++;
         }
 /*
