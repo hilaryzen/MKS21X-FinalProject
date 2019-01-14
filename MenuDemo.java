@@ -67,6 +67,12 @@ public class MenuDemo {
     TerminalSize size = terminal.getTerminalSize();
     terminal.setCursorVisible(false);
 
+    boolean running = true;
+    int mode = 0;
+    //long lastTime =  System.currentTimeMillis();
+    //long currentTime = lastTime;
+    //long timer = 0;
+		
 		if (args.length < 1) {
 			System.out.println("Incorrec format. Use: java -cp lanterna.jar:. MenuDemo <file.csv>");
 			System.exit(0);
@@ -77,10 +83,6 @@ public class MenuDemo {
     int row = 0;
     int col = 0;
 
-		terminal.clearScreen();
-		terminal.enterPrivateMode();
-
-		
     while(running){
       Key key = terminal.readInput();
       if (key != null)
