@@ -110,6 +110,10 @@ public class MenuDemo {
         } else if (key.getKind() == Key.Kind.ArrowRight) {
           col += 1;
           file.jumpTo(row,col);
+        } else if (key.getKind() == Key.Kind.Enter) {
+          row += 1;
+          writing = 0;
+          file.jumpTo(row,col);
         } else {
           Terminal t = terminal;
           char newChar = key.getCharacter();
