@@ -89,6 +89,15 @@ public class MenuDemo {
         } else if (key.getKind() == Key.Kind.ArrowDown) {
           row += 1;
           file.jumpTo(row,col);
+        } else if (key.getKind() == Key.Kind.ArrowUp) {
+          row -= 1;
+          file.jumpTo(row,col);
+        } else if (key.getKind() == Key.Kind.ArrowLeft) {
+          col -= 1;
+          file.jumpTo(row,col);
+        } else if (key.getKind() == Key.Kind.ArrowRight) {
+          col += 1;
+          file.jumpTo(row,col);
         }
 /*
         //for all modes
