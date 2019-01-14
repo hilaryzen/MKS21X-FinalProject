@@ -31,7 +31,7 @@ public class MenuDemo {
   }
 
   public static void putString(int r, int c,Terminal t,
-        String s, Terminal.Color forg, Terminal.Color back ){
+    String s, Terminal.Color forg, Terminal.Color back ){
     t.moveCursor(r,c);
     t.applyBackgroundColor(forg);
     t.applyForegroundColor(Terminal.Color.BLACK);
@@ -54,6 +54,7 @@ public class MenuDemo {
     }
     t.moveCursor(c,r);
     t.applyBackgroundColor(Terminal.Color.YELLOW);
+    t.applyForegroundColor(Terminal.Color.BLACK);
     for (int j = 0; j < spaceLength; j++) {
       t.putCharacter(entry.charAt(j));
     }
@@ -87,18 +88,18 @@ public class MenuDemo {
         if (key.getKind() == Key.Kind.Escape) {
           terminal.exitPrivateMode();
           running = false;
-        } else if (key.getKind() == Key.Kind.ArrowDown) {
-          row += 1;
-          file.jumpTo(row,col);
-        } else if (key.getKind() == Key.Kind.ArrowUp) {
-          row -= 1;
-          file.jumpTo(row,col);
-        } else if (key.getKind() == Key.Kind.ArrowLeft) {
-          col -= 1;
-          file.jumpTo(row,col);
-        } else if (key.getKind() == Key.Kind.ArrowRight) {
-          col += 1;
-          file.jumpTo(row,col);
+        } 
+				else if (key.getKind() == Key.Kind.ArrowDown) {
+          file.down();
+        } 
+				else if (key.getKind() == Key.Kind.ArrowUp) {
+          file.up();
+				} 
+				else if (key.getKind() == Key.Kind.ArrowLeft) {
+          file.left();
+				} 
+				else if (key.getKind() == Key.Kind.ArrowRight) {
+          file.right();
         }
 /*
         //for all modes

@@ -14,7 +14,8 @@ public class Sheet {
   private ArrayList<Integer> cols = new ArrayList<Integer>();
   //Stores filename for saving
   private String originalFile = "";
-
+	private user cursor;
+	
   public Sheet(String filename) {
     try {
       originalFile = filename;
@@ -45,7 +46,8 @@ public class Sheet {
     //Automatically selects the first cell
     rows.add(0);
     cols.add(0);
-
+		
+		cursor = new user(data.size(), data.get(0).size());
   }
 
   //Returns the number of rows in the sheet
@@ -135,15 +137,7 @@ public class Sheet {
     return ans;
   }
 
-  //Deselects all current cells and selects only the given cell
-  public boolean jumpTo(int row, int col) {
-    rows.clear();
-    rows.add(row);
-    cols.clear();
-    cols.add(col);
-    return true;
-  }
-
+ 
   //Adds given cell to list of selected cells
   public boolean select(int row, int col) {
     rows.add(row);
@@ -289,56 +283,96 @@ public class Sheet {
     }
   }
 
+	/// navigation commands vvv start 
+	public void up() {
+			try{
+				cursor.jumpTo(cursor.getURow() + 1, cursor.getUCol());
+			}
+			catch (IndexOutOfBoundsException e) {}
+		}
+		
+	public void down() {
+			try{
+				cursor.jumpTo(cursor.getURow() - 1, cursor.getUCol());
+			}
+			catch (IndexOutOfBoundsException e) {}
+		}
+		
+	public void left() {
+			try{
+				cursor.jumpTo(cursor.getURow(), cursor.getUCol() - 1);
+			}
+			catch (IndexOutOfBoundsException e) {}
+		}
+		
+	public void right() {
+			try{
+				cursor.jumpTo(cursor.getURow(), cursor.getUCol() - 1);
+			}
+			catch (IndexOutOfBoundsException e) {}
+		}
+	/// navigation commands ^^^ end
+	
+	// used to track movement of the selection
 	private class user{
-		private int xcor; // column
-		private int ycor; // row
-		private int xlim; // column edge; data.size()
-		private int ylim; // row edge; data.get(x).size()
+		private int uCol; // column
+		private int uRow; // row
+		private int colLim; // column edge; data.size()
+		private int rowLim; // row edge; data.get(x).size()
 		
 		public user(int x, int y) {
-			xcor = 0;
-			ycor = 0;
-			xlim = x; // see value above
-			ylim = y; // see value above
+			uCol = 0;
+			uRow = 0;
+			colLim = x; 
+			rowLim = y;
 		}
 		
-		/// navigation commands vvv start 
-		public void up() {
-			if (ycor > 0) ycor--; //moves up if not at edge
+		// general update command
+		public void jumpTo(int y, int x) {
+			if (x < 0 || x > colLim|| y < 0 || y > rowLim) throw new IndexOutOfBoundsException();
+			else{
+				uCol = x;
+				uRow = y;
+			}
 		}
-		
-		public void down() {
-			if (ycor < ylim) ycor++; // moves down if not edge
-		}
-		
-		public void left() {
-			if (xcor > 0) xcor--; // moves left if not edge
-		}
-		
-		public void right() {
-			if (xcor < xlim) xcor++; // moves right if not edge
-		}
-		/// navigation commands ^^^ end
 		
 		/// update commands vvv start
 		// set right edge
 		// returns old edge
 		// use when addColl or removeCol is used
-		public int setXlim(int x) {
-			int old = xlim;
-			xlim = x;
+		public int setColLim(int x) {
+			int old = colLim;
+			colLim = x;
 			return old;
 		}
 		
 		//set bottom edge
 		//returns old bottom
 		//use when addRow or removeRow is used
-		public int setYlim(int y) {
-			int old = ylim;
-			ylim = y;
+		public int setRowLim(int y) {
+			int old = rowLim;
+			rowLim = y;
 			return old;
 		}
 		/// update commands ^^^ end
+		
+		/// location commands vvv
+		public int getUCol() {
+			return uCol;
+		}
+		
+		public int getURow() {
+			return uRow;
+		}
+		
+		public int getColLim() {
+			return colLim;
+		}
+		
+		public int getRowLim() {
+			return rowLim;
+		}
+		/// location comands ^^^
 	}
 	
 }
