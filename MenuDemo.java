@@ -63,18 +63,19 @@ public class MenuDemo {
 
     boolean running = true;
     int mode = 0;
-    long lastTime =  System.currentTimeMillis();
-    long currentTime = lastTime;
-    long timer = 0;
+    //long lastTime =  System.currentTimeMillis();
+    //long currentTime = lastTime;
+    //long timer = 0;
 
     String filename = args[0];
     Sheet file = new Sheet(filename);
+    int row = 0;
+    int col = 0;
 
     while(running){
       Key key = terminal.readInput();
-      if (key != null)
+      while (key != null)
       {
-
         //YOU CAN PUT DIFFERENT SETS OF BUTTONS FOR DIFFERENT MODES!!!
 
         //only for the game mode.
@@ -82,6 +83,9 @@ public class MenuDemo {
           if (key.getKind() == Key.Kind.Escape) {
             terminal.exitPrivateMode();
             running = false;
+          } else if (key.getKind() == Key.Kind.ArrowDown) {
+            row += 1;
+            highlight(row, col, terminal, file);
           }
         }
 
@@ -90,8 +94,6 @@ public class MenuDemo {
           mode++;
           mode%=2;//2 modes
           terminal.clearScreen();
-          lastTime = System.currentTimeMillis();
-          currentTime = System.currentTimeMillis();
         }
       }
 
@@ -101,12 +103,8 @@ public class MenuDemo {
 
 
       if(mode==0){
-        lastTime = currentTime;
-        currentTime = System.currentTimeMillis();
-        timer += (currentTime -lastTime);//add the amount of time since the last frame.
         //DO GAME STUFF HERE
         putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
-        //putString(3,5,terminal, "Time: "+timer,Terminal.Color.WHITE,Terminal.Color.RED);
         putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
         highlight(0,0,terminal,file);
         
