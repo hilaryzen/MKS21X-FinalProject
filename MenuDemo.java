@@ -46,8 +46,9 @@ public class MenuDemo {
   public static void highlight(int row, int col, Terminal t, Sheet sheet) {
     int r = row + 2;
     int c = 0;
+    String data = sheet.getString(row,col);
     int spaceLength = sheet.longestInCol(col) + 3;
-    String entry = String.format("%-" + spaceLength + "." + spaceLength + "s", sheet.getString(row,col));
+    String entry = String.format("%-" + spaceLength + "." + spaceLength + "s", data);
     for (int i = 0; i < col; i++) {
       c += sheet.longestInCol(i);
     }
