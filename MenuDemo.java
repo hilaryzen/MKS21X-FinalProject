@@ -44,20 +44,29 @@ public class MenuDemo {
   }
 
   public static void highlight(int row, int col, Terminal t, Sheet sheet) {
-    int r = row + 2;
-    int c = 0;
+    int r = findR(row);
+    int c = findC(col, sheet);
     String data = sheet.getString(row,col);
     int spaceLength = sheet.longestInCol(col) + 3;
     String entry = String.format("%-" + spaceLength + "." + spaceLength + "s", data);
-    for (int i = 0; i < col; i++) {
-      c = c + sheet.longestInCol(i) + 3;
-    }
     t.moveCursor(c,r);
     t.applyBackgroundColor(Terminal.Color.YELLOW);
-    t.applyForegroundCol(Terminal.Color.BLACK);
+    t.applyForegroundColor(Terminal.Color.BLACK);
     for (int j = 0; j < spaceLength; j++) {
       t.putCharacter(entry.charAt(j));
     }
+  }
+
+  public static int findR(int row) {
+    return row + 2;
+  }
+
+  public static int findC(int col, Sheet sheet) {
+    int c = 0;
+    for (int i = 0; i < col; i++) {
+      c = c + sheet.longestInCol(i) + 3;
+    }
+    return c;
   }
 
   public static void main(String[] args) {
@@ -100,6 +109,8 @@ public class MenuDemo {
         } else if (key.getKind() == Key.Kind.ArrowRight) {
           col += 1;
           file.jumpTo(row,col);
+        } else {
+          int r = row + 2;
         }
 /*
         //for all modes
