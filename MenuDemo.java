@@ -87,6 +87,7 @@ public class MenuDemo {
     Sheet file = new Sheet(filename);
     int row = 0;
     int col = 0;
+    int writing = 0;
 
     while(running){
       Key key = terminal.readInput();
@@ -110,7 +111,15 @@ public class MenuDemo {
           col += 1;
           file.jumpTo(row,col);
         } else {
-          int r = row + 2;
+          Terminal t = terminal;
+          char newChar = key.getCharacter();
+          int r = findR(row);
+          int c = findC(col, file) + writing;
+          t.moveCursor(c,r);
+          t.applyBackgroundColor(Terminal.Color.YELLOW);
+          t.applyForegroundColor(Terminal.Color.BLACK);
+          t.putCharacter(newChar);
+          writing++;
         }
 /*
         //for all modes
