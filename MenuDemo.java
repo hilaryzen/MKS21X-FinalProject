@@ -12,6 +12,7 @@ import com.googlecode.lanterna.input.InputDecoder;
 import com.googlecode.lanterna.input.InputProvider;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
+import com.googlecode.lanterna.screen.Screen;
 
 //For Windows
 //javac -cp "lanterna.jar;." MenuDemo.java
@@ -78,17 +79,17 @@ public class MenuDemo {
     Sheet file = new Sheet(filename);
     int row = 0;
     int col = 0;
-		terminal.clearScreen();
-
+		
+		Screen window = new Screen(terminal);
+		window.startScreen();
 		
     while(running){
-      Key key = terminal.readInput();
+      Key key = window.readInput();
       if (key != null)
       {
         //YOU CAN PUT DIFFERENT SETS OF BUTTONS FOR DIFFERENT MODES!!!
-
         if (key.getKind() == Key.Kind.Escape) {
-          terminal.exitPrivateMode();
+          window.stopScreen();
           running = false;
         } 
 				else if (key.getKind() == Key.Kind.ArrowDown) {
