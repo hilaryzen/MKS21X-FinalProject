@@ -96,6 +96,7 @@ public class MenuDemo {
         //YOU CAN PUT DIFFERENT SETS OF BUTTONS FOR DIFFERENT MODES!!!
 
         if (key.getKind() == Key.Kind.Escape) {
+          file.save();
           terminal.exitPrivateMode();
           running = false;
         } else if (key.getKind() == Key.Kind.ArrowDown) {
