@@ -89,7 +89,6 @@ public class MenuDemo {
         } else if (key.getKind() == Key.Kind.ArrowDown) {
           row += 1;
           file.jumpTo(row,col);
-          highlight(row, col, terminal, file);
         }
 /*
         //for all modes
