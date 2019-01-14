@@ -13,8 +13,13 @@ import com.googlecode.lanterna.input.InputProvider;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
 
+//For Windows
 //javac -cp "lanterna.jar;." MenuDemo.java
 //java -cp "lanterna.jar;." MenuDemo TestCSV.csv
+
+//For school
+//javac -cp lanterna.jar:. MenuDemo.java
+//java -cp lanterna.jar:. MenuDemo TestCSV.csv
 
 public class MenuDemo {
 
@@ -74,28 +79,26 @@ public class MenuDemo {
 
     while(running){
       Key key = terminal.readInput();
-      while (key != null)
+      if (key != null)
       {
         //YOU CAN PUT DIFFERENT SETS OF BUTTONS FOR DIFFERENT MODES!!!
 
-        //only for the game mode.
-        if(mode == 0){
-          if (key.getKind() == Key.Kind.Escape) {
-            terminal.exitPrivateMode();
-            running = false;
-          } else if (key.getKind() == Key.Kind.ArrowDown) {
-            row += 1;
-            file.jumpTo(row,col);
-            //highlight(row, col, terminal, file);
-          }
+        if (key.getKind() == Key.Kind.Escape) {
+          terminal.exitPrivateMode();
+          running = false;
+        } else if (key.getKind() == Key.Kind.ArrowDown) {
+          row += 1;
+          file.jumpTo(row,col);
+          highlight(row, col, terminal, file);
         }
-
+/*
         //for all modes
         if (key.getCharacter() == ' ') {
           mode++;
           mode%=2;//2 modes
           terminal.clearScreen();
         }
+        */
       }
 
       terminal.applySGR(Terminal.SGR.ENTER_BOLD);
