@@ -286,14 +286,14 @@ public class Sheet {
 	/// navigation commands vvv start 
 	public void up() {
 			try{
-				cursor.jumpTo(cursor.getURow() + 1, cursor.getUCol());
+				cursor.jumpTo(cursor.getURow() - 1, cursor.getUCol());
 			}
 			catch (IndexOutOfBoundsException e) {}
 		}
 		
 	public void down() {
 			try{
-				cursor.jumpTo(cursor.getURow() - 1, cursor.getUCol());
+				cursor.jumpTo(cursor.getURow() + 1, cursor.getUCol());
 			}
 			catch (IndexOutOfBoundsException e) {}
 		}
@@ -307,7 +307,7 @@ public class Sheet {
 		
 	public void right() {
 			try{
-				cursor.jumpTo(cursor.getURow(), cursor.getUCol() - 1);
+				cursor.jumpTo(cursor.getURow(), cursor.getUCol() + 1);
 			}
 			catch (IndexOutOfBoundsException e) {}
 		}
