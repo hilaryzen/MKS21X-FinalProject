@@ -54,6 +54,7 @@ public class MenuDemo {
     }
     t.moveCursor(c,r);
     t.applyBackgroundColor(Terminal.Color.YELLOW);
+    t.applyForegroundCol(Terminal.Color.BLACK);
     for (int j = 0; j < spaceLength; j++) {
       t.putCharacter(entry.charAt(j));
     }
