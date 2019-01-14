@@ -48,4 +48,4 @@ Hilary: Wrote addRow, addCol, removeRow, and removeCol methods
 
 1/13/19:
 
-Hilary: Wrote save methods, created MenuDemo.java and worked on displaying sheet and highlighting cells
+Hilary: Wrote save methods, created MenuDemo.java and worked on displaying sheet, highlighting cells, editing the table, and saving it in the terminal
