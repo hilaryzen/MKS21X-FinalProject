@@ -289,7 +289,7 @@ public class Sheet {
 				cursor.jumpTo(cursor.getURow() - 1, cursor.getUCol());
 			}
 			catch (IndexOutOfBoundsException e) {
-				cursor.jumpTo(cursor.getURow(), cursor.getUCol()):
+				cursor.jumpTo(cursor.getURow(), cursor.getUCol());
 			}
 		}
 		
@@ -298,7 +298,7 @@ public class Sheet {
 				cursor.jumpTo(cursor.getURow() + 1, cursor.getUCol());
 			}
 			catch (IndexOutOfBoundsException e) {
-				cursor.jumpTo(cursor.getURow(), cursor.getUCol()):
+				cursor.jumpTo(cursor.getURow(), cursor.getUCol());
 			}
 		}
 		
@@ -307,7 +307,7 @@ public class Sheet {
 				cursor.jumpTo(cursor.getURow(), cursor.getUCol() - 1);
 			}
 			catch (IndexOutOfBoundsException e) {
-				cursor.jumpTo(cursor.getURow(), cursor.getUCol()):
+				cursor.jumpTo(cursor.getURow(), cursor.getUCol());
 			}
 		}
 		
@@ -316,7 +316,7 @@ public class Sheet {
 				cursor.jumpTo(cursor.getURow(), cursor.getUCol() + 1);
 			}
 			catch (IndexOutOfBoundsException e) {
-				cursor.jumpTo(cursor.getURow(), cursor.getUCol()):
+				cursor.jumpTo(cursor.getURow(), cursor.getUCol());
 			}
 		}
 	
