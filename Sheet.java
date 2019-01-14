@@ -288,4 +288,56 @@ public class Sheet {
       System.exit(1);
     }
   }
+
+	private class user{
+		private int xcor; // column
+		private int ycor; // row
+		private int xlim; // column edge; data.size()
+		private int ylim; // row edge; data.get(x).size()
+		
+		public user(int x, int y) {
+			xcor = 0;
+			ycor = 0;
+			xlim = x; // see value above
+			ylim = y; // see value above
+		}
+		
+		/// navigation commands vvv start 
+		public void up() {
+			if (ycor > 0) ycor--; //moves up if not at edge
+		}
+		
+		public void down() {
+			if (ycor < ylim) ycor++; // moves down if not edge
+		}
+		
+		public void left() {
+			if (xcor > 0) xcor--; // moves left if not edge
+		}
+		
+		public void right() {
+			if (xcor < xlim) xcor++; // moves right if not edge
+		}
+		/// navigation commands ^^^ end
+		
+		/// update commands vvv start
+		// set right edge
+		// returns old edge
+		// use when addColl or removeCol is used
+		public int setXlim(int x) {
+			int old = xlim;
+			xlim = x;
+			return old;
+		}
+		
+		//set bottom edge
+		//returns old bottom
+		//use when addRow or removeRow is used
+		public int setYlim(int y) {
+			int old = ylim;
+			ylim = y;
+			return old;
+		}
+		/// update commands ^^^ end
+	}
 }
