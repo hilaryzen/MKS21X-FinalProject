@@ -102,15 +102,19 @@ public class MenuDemo {
           running = false;
         } else if (key.getKind() == Key.Kind.ArrowDown) {
           row += 1;
+          writing = 0;
           file.jumpTo(row,col);
         } else if (key.getKind() == Key.Kind.ArrowUp) {
           row -= 1;
+          writing = 0;
           file.jumpTo(row,col);
         } else if (key.getKind() == Key.Kind.ArrowLeft) {
           col -= 1;
+          writing = 0;
           file.jumpTo(row,col);
         } else if (key.getKind() == Key.Kind.ArrowRight) {
           col += 1;
+          writing = 0;
           file.jumpTo(row,col);
         } else if (key.getKind() == Key.Kind.Enter) {
           //Moves down one row and ends writing mode
