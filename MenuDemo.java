@@ -38,6 +38,21 @@ public class MenuDemo {
     t.applyForegroundColor(Terminal.Color.DEFAULT);
   }
 
+  public static void highlight(int row, int col, Terminal t, Sheet sheet) {
+    int r = row + 2;
+    int c = 0;
+    int spaceLength = sheet.longestInCol(col) + 3;
+    String entry = String.format("%-" + spaceLength + "." + spaceLength + "s", sheet.getString(row,col));
+    for (int i = 0; i < col; i++) {
+      c += sheet.longestInCol(i);
+    }
+    t.moveCursor(c,r);
+    t.applyBackgroundColor(Terminal.Color.YELLOW);
+    for (int j = 0; j < spaceLength; j++) {
+      t.putCharacter(entry.charAt(j));
+    }
+  }
+
   public static void main(String[] args) {
 
     Terminal terminal = TerminalFacade.createTextTerminal();
@@ -81,7 +96,7 @@ public class MenuDemo {
       }
 
       terminal.applySGR(Terminal.SGR.ENTER_BOLD);
-      putString(1,1,terminal, "This is mode "+mode,Terminal.Color.WHITE,Terminal.Color.RED);
+      //putString(1,1,terminal, "This is mode "+mode,Terminal.Color.WHITE,Terminal.Color.RED);
       terminal.applySGR(Terminal.SGR.RESET_ALL);
 
 
@@ -90,9 +105,10 @@ public class MenuDemo {
         currentTime = System.currentTimeMillis();
         timer += (currentTime -lastTime);//add the amount of time since the last frame.
         //DO GAME STUFF HERE
-        putString(1,3,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
+        putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
         //putString(3,5,terminal, "Time: "+timer,Terminal.Color.WHITE,Terminal.Color.RED);
-        putString(0,5,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
+        putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
+        highlight(0,0,terminal,file);
         
 
       }else{

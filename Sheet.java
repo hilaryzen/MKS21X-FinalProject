@@ -68,7 +68,7 @@ public class Sheet {
   }
 
 	//extracts usable String from cell
-	private String getString(int row, int col) {
+	public String getString(int row, int col) {
 		Cell placeholder = this.getCell(row, col);
 		return "" + placeholder.getValue();
 	}
