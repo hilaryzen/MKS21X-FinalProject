@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,9 +12,12 @@ public class Sheet {
   private ArrayList<Integer> rows = new ArrayList<Integer>();
   //Stores all the col values of the cells selected
   private ArrayList<Integer> cols = new ArrayList<Integer>();
+  //Stores filename for saving
+  private String originalFile = "";
 
   public Sheet(String filename) {
     try {
+      originalFile = filename;
       File csv = new File(filename);
       Scanner in = new Scanner(csv); //import value
       int Row = 0; //counts index rows
@@ -43,6 +48,19 @@ public class Sheet {
 
   }
 
+  //Returns the number of rows in the sheet
+  public int rows() {
+    return data.size();
+  }
+
+  public int selectedRow() {
+    return rows.get(0);
+  }
+
+  public int selectedCol() {
+    return cols.get(0);
+  }
+
   //Returns the cell at the row and col given
   public Cell getCell(int row, int col) {
     return data.get(row).get(col);
@@ -58,7 +76,7 @@ public class Sheet {
   }
 
 	//extracts usable String from cell
-	private String getString(int row, int col) {
+	public String getString(int row, int col) {
 		Cell placeholder = this.getCell(row, col);
 		return "" + placeholder.getValue();
 	}
@@ -79,7 +97,7 @@ public class Sheet {
     String ans = "";
     for (int i = 0; i < data.get(index).size(); i++) {
       String entry = getString(index, i);
-      int spaceLength = longestInCol(i) + 1;
+      int spaceLength = longestInCol(i) + 3;
       ans = ans + String.format("%-" + spaceLength + "." + spaceLength + "s", entry);
     }
     return ans;
@@ -133,7 +151,7 @@ public class Sheet {
     return true;
   }
 
-  //Changes value of the cell at the coordinates given
+  //Changes value of the cell at the coordinates given, returns old value
   public String set(int row, int col, String newValue) {
     String old = getString(row, col);
     getCell(row, col).setValue(newValue);
@@ -165,6 +183,109 @@ public class Sheet {
   public void setAll(String newValue) {
     for (int i = 1; i < data.size(); i++) {
       setRow(i, newValue);
+    }
+  }
+
+  //Takes array of values and creates new row at the bottom of the sheet
+  public void addRow(String[] values) {
+    //Initializing new row
+    data.add(new ArrayList<Cell>());
+    //Looping through values to add them to cells
+    for (int i = 0; i < values.length; i++) {
+      try {
+        data.get(rows() - 1).add(new Cell<Integer>(Integer.parseInt(values[i])));
+      }
+      catch(NumberFormatException e) {
+        data.get(rows() - 1).add(new Cell<String>(values[i]));
+      }
+    }
+  }
+
+  //Inserts row of values at given index
+  public void addRow(int index, String[] values) {
+    data.add(index, new ArrayList<Cell>());
+    for (int i = 0; i < values.length; i++) {
+      try {
+        data.get(index).add(new Cell<Integer>(Integer.parseInt(values[i])));
+      }
+      catch(NumberFormatException e) {
+        data.get(index).add(new Cell<String>(values[i]));
+      }
+    }
+  }
+
+  //Adds array of values as a new column at the very right
+  public void addCol(String[] values) {
+    //Loops through rows to add a new cell to each one
+    for (int i = 0; i < rows(); i++) {
+      try {
+        data.get(i).add(new Cell<Integer>(Integer.parseInt(values[i])));
+      } catch (NumberFormatException e) {
+        data.get(i).add(new Cell<String>(values[i]));
+      }
+    }
+  }
+
+  //Adds a new column of values at the given index
+  public void addCol(int index, String[] values) {
+    for (int i = 0; i < rows(); i++) {
+      try {
+        data.get(i).add(index, new Cell<Integer>(Integer.parseInt(values[i])));
+      } catch (NumberFormatException e) {
+        data.get(i).add(index, new Cell<String>(values[i]));
+      }
+    }
+  }
+
+  //Deletes the row at the given index
+  public void removeRow(int index) {
+    data.remove(index);
+  }
+
+  //Deletes the column at the given index
+  public void removeCol(int index) {
+    //Loops through rows to delete specified cell
+    for (int i = 0; i < rows(); i++) {
+      data.get(i).remove(index);
+    }
+  }
+
+  //Returns a string of the table in CSV format
+  public String getTable() {
+    String ans = "";
+    for (int i = 0; i < rows(); i++) {
+      ans += getString(i,0);
+      for (int j = 1; j < data.get(i).size(); j++) {
+        ans = ans + "," + getString(i,j);
+      }
+      ans += "\n";
+    }
+    return ans;
+  }
+
+  //Overwrites old file to save changes
+  public void save() {
+    try {
+      FileWriter filewriter = new FileWriter(originalFile);
+      filewriter.write(getTable());
+      filewriter.close();
+    } catch (IOException e) {
+      System.out.println("File could not be saved");
+      e.printStackTrace();
+      System.exit(1);
+    }
+  }
+
+  //Changes new sheet in file given by user
+  public void save(String filename) {
+    try {
+      FileWriter filewriter = new FileWriter(filename);
+      filewriter.write(getTable());
+      filewriter.close();
+    } catch (IOException e) {
+      System.out.println("File could not be saved");
+      e.printStackTrace();
+      System.exit(1);
     }
   }
 }

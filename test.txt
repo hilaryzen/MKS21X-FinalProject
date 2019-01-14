@@ -1,6 +1,0 @@
-﻿Name,OSIS,Age,Year of Death,Seat,Height
-Danya,111111,92,0,1,60
-Christine,222333,3,1918,2,72
-Imgolfr,122345,64,2002,3,70
-Farquhar,947568,1000,600,4,68
-Ben,100000,17,1997,5,62
