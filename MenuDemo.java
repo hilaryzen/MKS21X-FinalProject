@@ -55,6 +55,8 @@ public class MenuDemo {
     for (int j = 0; j < spaceLength; j++) {
       t.putCharacter(entry.charAt(j));
     }
+    t.applyBackgroundColor(Terminal.Color.DEFAULT);
+    t.applyForegroundColor(Terminal.Color.DEFAULT);
   }
 
   public static int findR(int row) {
@@ -137,9 +139,9 @@ public class MenuDemo {
       putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
       putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
       highlight(file.selectedRow(),file.selectedCol(),terminal,file);
-        
+
     }
 
-    
+
   }
 }
