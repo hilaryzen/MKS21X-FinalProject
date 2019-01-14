@@ -63,15 +63,11 @@ public class MenuDemo {
   public static void main(String[] args) {
 		
     Terminal terminal = TerminalFacade.createTextTerminal();
-    
+		terminal.enterPrivateMode();
     TerminalSize size = terminal.getTerminalSize();
     terminal.setCursorVisible(false);
 
     boolean running = true;
-    int mode = 0;
-    //long lastTime =  System.currentTimeMillis();
-    //long currentTime = lastTime;
-    //long timer = 0;
 		
 		if (args.length < 1) {
 			System.out.println("Incorrec format. Use: java -cp lanterna.jar:. MenuDemo <file.csv>");
@@ -82,7 +78,9 @@ public class MenuDemo {
     Sheet file = new Sheet(filename);
     int row = 0;
     int col = 0;
+		terminal.clearScreen();
 
+		
     while(running){
       Key key = terminal.readInput();
       if (key != null)
