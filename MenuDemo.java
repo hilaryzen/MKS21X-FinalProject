@@ -96,6 +96,7 @@ public class MenuDemo {
         //YOU CAN PUT DIFFERENT SETS OF BUTTONS FOR DIFFERENT MODES!!!
 
         if (key.getKind() == Key.Kind.Escape) {
+          //Saves data to the same file before closing the terminal
           file.save();
           terminal.exitPrivateMode();
           running = false;
@@ -112,32 +113,20 @@ public class MenuDemo {
           col += 1;
           file.jumpTo(row,col);
         } else if (key.getKind() == Key.Kind.Enter) {
+          //Moves down one row and ends writing mode
           row += 1;
           writing = 0;
           file.jumpTo(row,col);
         } else {
+          //Takes char that user enters
           Terminal t = terminal;
           char newChar = key.getCharacter();
-          /*
-          int r = findR(row);
-          int c = findC(col, file) + writing;
-          t.moveCursor(c,r);
-          t.applyBackgroundColor(Terminal.Color.YELLOW);
-          t.applyForegroundColor(Terminal.Color.BLACK);
-          t.putCharacter(newChar);
-          */
+          //Changes text of cell
           String data = file.getString(row,col);
-          file.getCell(row,col).setValue(data.substring(0,writing) + newChar + data.substring(writing + 1, data.length()));
+          //file.getCell(row,col).setValue(data.substring(0,writing) + newChar + data.substring(writing + 1, data.length()));
+          file.getCell(row,col).setValue(data.substring(0,writing) + newChar);
           writing++;
         }
-/*
-        //for all modes
-        if (key.getCharacter() == ' ') {
-          mode++;
-          mode%=2;//2 modes
-          terminal.clearScreen();
-        }
-        */
       }
 
       terminal.applySGR(Terminal.SGR.ENTER_BOLD);

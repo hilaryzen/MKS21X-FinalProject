@@ -53,10 +53,12 @@ public class Sheet {
     return data.size();
   }
 
+  //Returns first selected row
   public int selectedRow() {
     return rows.get(0);
   }
 
+  //Returns first selected col
   public int selectedCol() {
     return cols.get(0);
   }
