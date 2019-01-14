@@ -312,10 +312,10 @@ public class Sheet {
 			catch (IndexOutOfBoundsException e) {}
 		}
 	
-	public int findUserR() {
+	public int getUserR() {
 		return cursor.getURow();
 	}
-	 public int findUserC() {
+	 public int getUserC() {
 		 return cursor.getUCol();
 	 }
 	/// navigation commands ^^^ end
