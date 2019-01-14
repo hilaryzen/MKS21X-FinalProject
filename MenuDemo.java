@@ -14,7 +14,7 @@ import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
 
 //javac -cp "lanterna.jar;." MenuDemo.java
-//java -cp "lanterna.jar;." MenuDemo
+//java -cp "lanterna.jar;." MenuDemo TestCSV.csv
 
 public class MenuDemo {
 
@@ -53,6 +53,7 @@ public class MenuDemo {
     long timer = 0;
 
     String filename = args[0];
+    Sheet file = new Sheet(filename);
 
     while(running){
       Key key = terminal.readInput();
@@ -91,6 +92,8 @@ public class MenuDemo {
         //DO GAME STUFF HERE
         putString(1,3,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
         //putString(3,5,terminal, "Time: "+timer,Terminal.Color.WHITE,Terminal.Color.RED);
+        putString(0,5,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
+        
 
       }else{
 
