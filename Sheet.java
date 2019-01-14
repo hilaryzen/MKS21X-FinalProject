@@ -53,6 +53,14 @@ public class Sheet {
     return data.size();
   }
 
+  public int selectedRow() {
+    return rows.get(0);
+  }
+
+  public int selectedCol() {
+    return cols.get(0);
+  }
+
   //Returns the cell at the row and col given
   public Cell getCell(int row, int col) {
     return data.get(row).get(col);

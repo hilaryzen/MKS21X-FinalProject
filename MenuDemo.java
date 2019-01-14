@@ -85,7 +85,8 @@ public class MenuDemo {
             running = false;
           } else if (key.getKind() == Key.Kind.ArrowDown) {
             row += 1;
-            highlight(row, col, terminal, file);
+            file.jumpTo(row,col);
+            //highlight(row, col, terminal, file);
           }
         }
 
@@ -101,22 +102,11 @@ public class MenuDemo {
       //putString(1,1,terminal, "This is mode "+mode,Terminal.Color.WHITE,Terminal.Color.RED);
       terminal.applySGR(Terminal.SGR.RESET_ALL);
 
-
-      if(mode==0){
-        //DO GAME STUFF HERE
-        putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
-        putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
-        highlight(0,0,terminal,file);
+      //DO GAME STUFF HERE
+      putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
+      putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
+      highlight(file.selectedRow(),file.selectedCol(),terminal,file);
         
-
-      }else{
-
-        terminal.applySGR(Terminal.SGR.ENTER_BOLD,Terminal.SGR.ENTER_BLINK);
-        putString(1,3,terminal, "Not game, just a pause!",Terminal.Color.RED,Terminal.Color.WHITE);
-        terminal.applySGR(Terminal.SGR.RESET_ALL);
-
-      }
-
     }
 
     
