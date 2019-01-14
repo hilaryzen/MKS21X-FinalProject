@@ -41,3 +41,11 @@ David: Working on constructor for proper String and Integer Cells; working on Ad
 Hilary: Wrote methods to change values in the sheet, added way to track selected cells
 
 David: wrote findSum; merged alternateConstructor and master
+
+1/12/19:
+
+Hilary: Wrote addRow, addCol, removeRow, and removeCol methods
+
+1/13/19:
+
+Hilary: Wrote save methods
