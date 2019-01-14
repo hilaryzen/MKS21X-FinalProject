@@ -61,9 +61,10 @@ public class MenuDemo {
   }
 
   public static void main(String[] args) {
-
+		
     Terminal terminal = TerminalFacade.createTextTerminal();
-    terminal.enterPrivateMode();
+    terminal.clearScreen();
+		terminal.enterPrivateMode();
 
     TerminalSize size = terminal.getTerminalSize();
     terminal.setCursorVisible(false);
@@ -73,7 +74,12 @@ public class MenuDemo {
     //long lastTime =  System.currentTimeMillis();
     //long currentTime = lastTime;
     //long timer = 0;
-
+		
+		if (args.length < 1) {
+			System.out.println("Incorrec format. Use: java -cp lanterna.jar:. MenuDemo <file.csv>");
+			System.exit(0);
+		}	
+		
     String filename = args[0];
     Sheet file = new Sheet(filename);
     int row = 0;
@@ -101,18 +107,16 @@ public class MenuDemo {
 				else if (key.getKind() == Key.Kind.ArrowRight) {
           file.right();
         }
-/*
-        //for all modes
-        if (key.getCharacter() == ' ') {
-          mode++;
-          mode%=2;//2 modes
-          terminal.clearScreen();
+				else if (key.getCharacter() == 'w'){ // w for write
+          Terminal t = terminal;
+					t.enterPrivateMode();
+					t.clearScreen();
+          t.applyBackgroundColor(Terminal.Color.YELLOW);
+          t.applyForegroundColor(Terminal.Color.BLACK);
         }
-        */
       }
 
       terminal.applySGR(Terminal.SGR.ENTER_BOLD);
-      //putString(1,1,terminal, "This is mode "+mode,Terminal.Color.WHITE,Terminal.Color.RED);
       terminal.applySGR(Terminal.SGR.RESET_ALL);
 
       //DO GAME STUFF HERE
