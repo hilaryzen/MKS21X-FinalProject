@@ -110,9 +110,13 @@ public class MenuDemo {
           terminal.exitPrivateMode();
           running = false;
         } else if (key.getKind() == Key.Kind.ArrowDown) {
-          row = (row + 1) % file.rows();
+          if (key.isCtrlPressed()) {
+            file.addRow(row + 1);
+          } else {
+            row = (row + 1) % file.rows();
+            file.jumpTo(row,col);
+          }
           writing = 0;
-          file.jumpTo(row,col);
         } else if (key.getKind() == Key.Kind.ArrowUp) {
           row = (row - 1) % file.rows();
           writing = 0;

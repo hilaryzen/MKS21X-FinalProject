@@ -205,8 +205,11 @@ public class Sheet {
   }
 
   //Adds empty row
-  public void addRow() {
-    data.add(new ArrayList<Cell>());
+  public void addRow(int index) {
+    data.add(index, new ArrayList<Cell>());
+    for (int i = 0; i < cols(); i++) {
+      data.get(index).add(new Cell<String>(" "));
+    }
   }
 
   //Takes array of values and creates new row at the bottom of the sheet
