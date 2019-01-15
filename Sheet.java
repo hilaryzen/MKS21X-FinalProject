@@ -53,6 +53,17 @@ public class Sheet {
     return data.size();
   }
 
+  //Returns the max number in cols in a row
+  public int cols() {
+    int max = data.get(0).size();
+    for (int i = 1; i < rows(); i++) {
+      if (data.get(i).size() > max) {
+        max = data.get(i).size();
+      }
+    }
+    return max;
+  }
+
   //Returns first selected row
   public int selectedRow() {
     return rows.get(0);
