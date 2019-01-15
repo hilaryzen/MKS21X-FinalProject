@@ -65,13 +65,13 @@ public class Sheet {
   }
 
   //Returns first selected row
-  public int selectedRow() {
-    return rows.get(0);
+  public ArrayList<Integer> selectedRow() {
+    return rows;
   }
 
   //Returns first selected col
-  public int selectedCol() {
-    return cols.get(0);
+  public ArrayList<Integer> selectedCol() {
+    return cols;
   }
 
   //Returns the cell at the row and col given

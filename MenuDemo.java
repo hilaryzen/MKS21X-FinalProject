@@ -12,6 +12,7 @@ import com.googlecode.lanterna.input.InputDecoder;
 import com.googlecode.lanterna.input.InputProvider;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
+import java.util.ArrayList;
 
 //For Windows
 //javac -cp "lanterna.jar;." MenuDemo.java
@@ -59,9 +60,9 @@ public class MenuDemo {
     t.applyForegroundColor(Terminal.Color.DEFAULT);
   }
 
-  public static void highlightAll(int[] rows, int[] cols, Terminal t, Sheet sheet) {
-    for (int i = 0; i < rows.length; i++) {
-      highlight(rows[i], cols[i], t, sheet);
+  public static void highlightAll(ArrayList<Integer> rows, ArrayList<Integer> cols, Terminal t, Sheet sheet) {
+    for (int i = 0; i < rows.size(); i++) {
+      highlight(rows.get(i), cols.get(i), t, sheet);
     }
   }
 
@@ -148,7 +149,7 @@ public class MenuDemo {
       //DO GAME STUFF HERE
       putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
       putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
-      highlight(file.selectedRow(),file.selectedCol(),terminal,file);
+      highlightAll(file.selectedRow(),file.selectedCol(),terminal,file);
         
     }
 
