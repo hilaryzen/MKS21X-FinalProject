@@ -93,5 +93,8 @@ public class Driver {
     sheet1.addRow(3, newRow);
     System.out.println(sheet1.cols()); //should return 8
     sheet1.save();
+
+    sheet1.removeRow(0);
+    sheet1.save();
   }
 }

@@ -55,6 +55,8 @@ public class MenuDemo {
     for (int j = 0; j < spaceLength; j++) {
       t.putCharacter(entry.charAt(j));
     }
+    t.applyBackgroundColor(Terminal.Color.DEFAULT);
+    t.applyForegroundColor(Terminal.Color.DEFAULT);
   }
 
   public static void highlightAll(int[] rows, int[] cols, Terminal t, Sheet sheet) {
