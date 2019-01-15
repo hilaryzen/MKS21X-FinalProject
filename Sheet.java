@@ -76,6 +76,11 @@ public class Sheet {
 
   //Returns the cell at the row and col given
   public Cell getCell(int row, int col) {
+    /*
+    if (data.get(row).get(col) == null) {
+      return new Cell<String>(" ");
+    }
+    */
     return data.get(row).get(col);
   }
 

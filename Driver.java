@@ -39,6 +39,7 @@ public class Driver {
     */
 
     System.out.println(sheet1.get());
+    System.out.println(sheet1.getCell(100, 200));
     System.out.println(sheet1);
 
 		//testing if Integers are stored seperate from Strings
