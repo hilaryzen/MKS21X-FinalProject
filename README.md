@@ -53,3 +53,7 @@ Hilary: Wrote save methods, created MenuDemo.java and worked on displaying sheet
 1/14/19:
 
 Hilary: Fixed bugs in the terminal display, wrote cols and highlightAll methods
+
+1/15/19:
+
+Hilary: Created selecting branch to work on selecting multiple cells
