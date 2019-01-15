@@ -199,6 +199,11 @@ public class Sheet {
     }
   }
 
+  //Adds empty row
+  public void addRow() {
+    data.add(new ArrayList<Cell>());
+  }
+
   //Takes array of values and creates new row at the bottom of the sheet
   public void addRow(String[] values) {
     //Initializing new row
@@ -225,6 +230,11 @@ public class Sheet {
         data.get(index).add(new Cell<String>(values[i]));
       }
     }
+  }
+
+  //Adds empty col
+  public void addCol() {
+
   }
 
   //Adds array of values as a new column at the very right
