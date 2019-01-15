@@ -19,7 +19,7 @@ public class Driver {
     System.out.println(cell2 + " " + cell3);
     */
 
-    String filename = "TestCSV.csv";
+    String filename = "NewTestCSV.csv";
     Sheet sheet1 = new Sheet(filename);
 
 		/*
@@ -42,9 +42,9 @@ public class Driver {
     System.out.println(sheet1);
 
 		//testing if Integers are stored seperate from Strings
-		System.out.println(sheet1.getCell(2,2));
-    System.out.println(sheet1.getCell(3,2));
-		System.out.println(sheet1.findSum(2,2,3,2)); //should print 95 not 923
+		//System.out.println(sheet1.getCell(2,2));
+    //System.out.println(sheet1.getCell(3,2));
+		//System.out.println(sheet1.findSum(2,2,3,2)); //should print 95 not 923
 		//System.out.println(sheet1.findSum(1,0,2,0)); //should throw error
     //System.out.println(sheet1.findSum(1,0,1,2)); //should throw error
 
@@ -56,6 +56,7 @@ public class Driver {
     System.out.println(sheet1);
     */
 
+    /*
     System.out.println(" ");
     System.out.println("Jumping to cell in row 1 col 2: " + sheet1.jumpTo(1,2));
     System.out.println(sheet1.get());
@@ -86,8 +87,11 @@ public class Driver {
     sheet1.removeCol(4);
     System.out.println(sheet1);
     System.out.println(sheet1.getTable());
+    */
 
+    String[] newRow = new String[] {"Maria", "White", "987654", "50", "8", "69", "150", "2"};
+    sheet1.addRow(3, newRow);
+    System.out.println(sheet1.cols()); //should return 8
     sheet1.save();
-    sheet1.save("NewTestCSV.csv");
   }
 }
