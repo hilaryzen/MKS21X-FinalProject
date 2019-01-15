@@ -111,12 +111,15 @@ public class MenuDemo {
           running = false;
         } else if (key.getKind() == Key.Kind.ArrowDown) {
           if (key.isCtrlPressed()) {
-            file.addRow(row + 1);
+            writing = 0;
+            row += 1;
+            file.addRow(row);
+            file.jumpTo(row,col);
           } else {
             row = (row + 1) % file.rows();
+            writing = 0;
             file.jumpTo(row,col);
           }
-          writing = 0;
         } else if (key.getKind() == Key.Kind.ArrowUp) {
           row = (row - 1) % file.rows();
           writing = 0;
