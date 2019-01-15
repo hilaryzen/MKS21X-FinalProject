@@ -57,6 +57,12 @@ public class MenuDemo {
     }
   }
 
+  public static void highlightAll(int[] rows, int[] cols, Terminal t, Sheet sheet) {
+    for (int i = 0; i < rows.length; i++) {
+      highlight(rows[i], cols[i], t, sheet);
+    }
+  }
+
   public static int findR(int row) {
     return row + 2;
   }
@@ -118,7 +124,7 @@ public class MenuDemo {
           file.jumpTo(row,col);
         } else if (key.getKind() == Key.Kind.Enter) {
           //Moves down one row and ends writing mode
-          row += 1;
+          row = (row + 1) % file.rows();
           writing = 0;
           file.jumpTo(row,col);
         } else {
