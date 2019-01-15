@@ -110,11 +110,11 @@ public class MenuDemo {
           terminal.exitPrivateMode();
           running = false;
         } else if (key.getKind() == Key.Kind.ArrowDown) {
-          if (key.isCtrlPressed()) {
+          if (key.isAltPressed()) {
             writing = 0;
             row += 1;
-            file.addRow(row);
-            file.jumpTo(row,col);
+            //file.addRow(row);
+            file.select(row,col);
           } else {
             row = (row + 1) % file.rows();
             writing = 0;
@@ -137,6 +137,9 @@ public class MenuDemo {
           row = (row + 1) % file.rows();
           writing = 0;
           file.jumpTo(row,col);
+        } else if (key.getKind() == Key.Kind.Insert) {
+          writing = 0;
+          file.addRow(row + 1);
         } else {
           //Takes char that user enters
           Terminal t = terminal;
@@ -157,9 +160,9 @@ public class MenuDemo {
       putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
       putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
       highlightAll(file.selectedRow(),file.selectedCol(),terminal,file);
-        
+
     }
 
-    
+
   }
 }
