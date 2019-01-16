@@ -68,11 +68,12 @@ public class MenuDemo {
   public static void main(String[] args) {
 
     Terminal terminal = TerminalFacade.createTextTerminal();
-		terminal.enterPrivateMode();
+		//terminal.enterPrivateMode();
     TerminalSize size = terminal.getTerminalSize();
     terminal.setCursorVisible(false);
 
     boolean running = true;
+<<<<<<< HEAD
     long timer = 0;
 
 		if (args.length < 1) {
@@ -81,14 +82,33 @@ public class MenuDemo {
       running = false;
 		}
 
+=======
+		long timer = 0; 
+		
+		// catches no CSV provided 
+		if (args.length < 1) {
+			System.out.println("Incorrect format. Use: java -cp lanterna.jar:. MenuDemo <file.csv>");
+			running = false; //stops it from running
+			System.exit(1); //exits program
+		}	
+		
+		//imports file when given
+>>>>>>> 5a79aca514bd4a034b9a9d652758651b11b6a916
     String filename = args[0];
     Sheet file = new Sheet(filename);
     int row = 0;
     int col = 0;
+<<<<<<< HEAD
 
     Screen screen = new Screen(terminal); //creates new screen
 
 
+=======
+		
+		Screen screen = new Screen(terminal); // initialize screen
+		screen.startScreen(); // puts terminal in private; updates screen
+		
+>>>>>>> 5a79aca514bd4a034b9a9d652758651b11b6a916
     while(running){
       screen.refresh();
       Key key = terminal.readInput();
@@ -96,8 +116,13 @@ public class MenuDemo {
       {
         //YOU CAN PUT DIFFERENT SETS OF BUTTONS FOR DIFFERENT MODES!!!
         if (key.getKind() == Key.Kind.Escape) {
+<<<<<<< HEAD
           terminal.exitPrivateMode();
           screen.stopScreen();
+=======
+					screen.stopScreen();
+					//terminal.exitPrivateMode();
+>>>>>>> 5a79aca514bd4a034b9a9d652758651b11b6a916
           running = false;
           terminal.applySGR(Terminal.SGR.RESET_ALL);
         }
@@ -113,6 +138,7 @@ public class MenuDemo {
 				else if (key.getKind() == Key.Kind.ArrowRight) {
           file.right();
         }
+				/*
 				else if (key.getCharacter() == 'w'){ // w for write
           Terminal t = terminal;
 					t.enterPrivateMode();
@@ -120,6 +146,7 @@ public class MenuDemo {
           //t.applyBackgroundColor(Terminal.Color.YELLOW);
           //t.applyForegroundColor(Terminal.Color.BLACK);
         }
+				*/
       }
 
 			/*
@@ -128,6 +155,7 @@ public class MenuDemo {
 			*/
 
       //DO GAME STUFF HERE
+<<<<<<< HEAD
       if (timer % 500 == 0) {  
         putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
         putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
@@ -135,6 +163,16 @@ public class MenuDemo {
       }
       timer++;
 
+=======
+      while (timer % 500 == 0) { // should update terminal and screen after every 1/2 second
+				putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
+				putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
+				highlight(file.getUserR(),file.getUserC(),terminal,file);
+				screen.refresh();
+			}
+      
+			timer++;
+>>>>>>> 5a79aca514bd4a034b9a9d652758651b11b6a916
     }
 
 
