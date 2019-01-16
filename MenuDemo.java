@@ -74,6 +74,9 @@ public class MenuDemo {
 
     boolean running = true;
 		long timer = 0; 
+
+ Screen screen = new Screen(terminal); // initialize screen
+                screen.startScreen(); // puts terminal in private; updates screen
 		
 		// catches no CSV provided 
 		if (args.length < 1) {
@@ -89,8 +92,6 @@ public class MenuDemo {
     int col = 0;
 
 		
-		Screen screen = new Screen(terminal); // initialize screen
-		screen.startScreen(); // puts terminal in private; updates screen
 		
     while(running){
       screen.refresh();
