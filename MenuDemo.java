@@ -68,21 +68,28 @@ public class MenuDemo {
   public static void main(String[] args) {
 		
     Terminal terminal = TerminalFacade.createTextTerminal();
-		terminal.enterPrivateMode();
+		//terminal.enterPrivateMode();
     TerminalSize size = terminal.getTerminalSize();
     terminal.setCursorVisible(false);
 		
     boolean running = true;
+		long timer = 0; 
 		
+		// catches no CSV provided 
 		if (args.length < 1) {
-			System.out.println("Incorrec format. Use: java -cp lanterna.jar:. MenuDemo <file.csv>");
-			System.exit(0);
+			System.out.println("Incorrect format. Use: java -cp lanterna.jar:. MenuDemo <file.csv>");
+			running = false; //stops it from running
+			System.exit(1); //exits program
 		}	
 		
+		//imports file when given
     String filename = args[0];
     Sheet file = new Sheet(filename);
     int row = 0;
     int col = 0;
+		
+		Screen screen = new Screen(terminal); // initialize screen
+		screen.startScreen(); // puts terminal in private; updates screen
 		
     while(running){
       Key key = terminal.readInput();
@@ -90,7 +97,8 @@ public class MenuDemo {
       {
         //YOU CAN PUT DIFFERENT SETS OF BUTTONS FOR DIFFERENT MODES!!!
         if (key.getKind() == Key.Kind.Escape) {
-          terminal.exitPrivateMode();
+					screen.stopScreen();
+					//terminal.exitPrivateMode();
           running = false;
         } 
 				else if (key.getKind() == Key.Kind.ArrowDown) {
@@ -105,6 +113,7 @@ public class MenuDemo {
 				else if (key.getKind() == Key.Kind.ArrowRight) {
           file.right();
         }
+				/*
 				else if (key.getCharacter() == 'w'){ // w for write
           Terminal t = terminal;
 					t.enterPrivateMode();
@@ -112,6 +121,7 @@ public class MenuDemo {
           t.applyBackgroundColor(Terminal.Color.YELLOW);
           t.applyForegroundColor(Terminal.Color.BLACK);
         }
+				*/
       }
 			
 			/*
@@ -120,10 +130,14 @@ public class MenuDemo {
 			*/
 			
       //DO GAME STUFF HERE
-      putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
-      putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
-      highlight(file.getUserR(),file.getUserC(),terminal,file);
+      while (timer % 500 == 0) { // should update terminal and screen after every 1/2 second
+				putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
+				putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
+				highlight(file.getUserR(),file.getUserC(),terminal,file);
+				screen.refresh();
+			}
       
+			timer++;
     }
 
     
