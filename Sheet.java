@@ -303,7 +303,8 @@ public class Sheet {
 	public int getUserR() {
 		return cursor.getURow();
 	}
-	 public int getUserC() {
+	
+	public int getUserC() {
 		 return cursor.getUCol();
 	 }
 	/// navigation commands ^^^ end
@@ -318,13 +319,13 @@ public class Sheet {
 		public user(int x, int y) {
 			uCol = 0;
 			uRow = 0;
-			colLim = x; 
-			rowLim = y;
+			colLim = x - 1; 
+			rowLim = y - 1;
 		}
 		
 		// general update command
 		public void jumpTo(int y, int x) {
-			if (!(x < 0 || x > (colLim - 1) || y < 0 || y > (rowLim -1 ))){
+			if (!(x < 0 || x > (colLim) || y < 0 || y > (rowLim))){
 				uCol = x;
 				uRow = y;
 			}
