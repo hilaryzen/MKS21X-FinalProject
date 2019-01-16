@@ -69,13 +69,13 @@ public class MenuDemo {
 		
     Terminal terminal = TerminalFacade.createTextTerminal();
 		//terminal.enterPrivateMode();
-    TerminalSize size = terminal.getTerminalSize();
+    //TerminalSize size = terminal.getTerminalSize();
     terminal.setCursorVisible(false);
 		
     boolean running = true;
 		long timer = 0; 
 		
-    Screen screen = new Screen(terminal); // initialize screen
+    Screen screen = new Screen(terminal, 1024, 576); // initialize screen
 		screen.startScreen(); // puts terminal in private; updates screen
     
 		// catches no CSV provided 
@@ -90,7 +90,6 @@ public class MenuDemo {
     Sheet file = new Sheet(filename);
     int row = 0;
     int col = 0;
-		
 		
     while(running){
       Key key = terminal.readInput();
@@ -135,6 +134,7 @@ public class MenuDemo {
 				putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
 				putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
 				highlight(file.getUserR(),file.getUserC(),terminal,file);
+        //noting ^^^ refreshes screen rather than be suppressed
 				screen.refresh();
 			}
       
