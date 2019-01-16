@@ -103,7 +103,16 @@ public class MenuDemo {
       if (key != null)
       {
         //YOU CAN PUT DIFFERENT SETS OF BUTTONS FOR DIFFERENT MODES!!!
-
+        /*
+        if (key.isAltPressed()) {
+          if (key.getKind() == Key.Kind.ArrowDown) {
+            row += 1;
+            writing = 0;
+            file.select(row,col);
+          }
+        }
+        */
+        
         if (key.getKind() == Key.Kind.Escape) {
           //Saves data to the same file before closing the terminal
           file.save();
