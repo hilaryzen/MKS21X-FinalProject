@@ -75,6 +75,9 @@ public class MenuDemo {
     boolean running = true;
 		long timer = 0; 
 		
+    Screen screen = new Screen(terminal); // initialize screen
+		screen.startScreen(); // puts terminal in private; updates screen
+    
 		// catches no CSV provided 
 		if (args.length < 1) {
 			System.out.println("Incorrect format. Use: java -cp lanterna.jar:. MenuDemo <file.csv>");
@@ -88,8 +91,6 @@ public class MenuDemo {
     int row = 0;
     int col = 0;
 		
-		Screen screen = new Screen(terminal); // initialize screen
-		screen.startScreen(); // puts terminal in private; updates screen
 		
     while(running){
       Key key = terminal.readInput();
@@ -117,7 +118,7 @@ public class MenuDemo {
 				else if (key.getCharacter() == 'w'){ // w for write
           Terminal t = terminal;
 					t.enterPrivateMode();
-					t.clearScreen();
+          t.clearScreen();
           t.applyBackgroundColor(Terminal.Color.YELLOW);
           t.applyForegroundColor(Terminal.Color.BLACK);
         }
@@ -130,7 +131,7 @@ public class MenuDemo {
 			*/
 			
       //DO GAME STUFF HERE
-      while (timer % 500 == 0) { // should update terminal and screen after every 1/2 second
+      if (timer % 500 == 0) { // should update terminal and screen after every 1/2 second
 				putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
 				putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
 				highlight(file.getUserR(),file.getUserC(),terminal,file);
