@@ -50,58 +50,66 @@ public class MenuDemo {
     String data = sheet.getString(row,col);
     int spaceLength = sheet.longestInCol(col) + 3;
     String entry = String.format("%-" + spaceLength + "." + spaceLength + "s", data);
-    
+
 		for (int i = 0; i < col; i++) {
       c += sheet.longestInCol(i) + 3;
     }
     t.moveCursor(c,r);
-		
+
     t.applyBackgroundColor(Terminal.Color.YELLOW);
     t.applyForegroundColor(Terminal.Color.BLACK);
-    
+
 		for (int j = 0; j < spaceLength; j++) {
       t.putCharacter(entry.charAt(j));
     }
-		
+
   }
 
   public static void main(String[] args) {
-		
+
     Terminal terminal = TerminalFacade.createTextTerminal();
 		terminal.enterPrivateMode();
     TerminalSize size = terminal.getTerminalSize();
     terminal.setCursorVisible(false);
-		
+
     boolean running = true;
-		
+    long timer = 0;
+
 		if (args.length < 1) {
 			System.out.println("Incorrec format. Use: java -cp lanterna.jar:. MenuDemo <file.csv>");
-			System.exit(0);
-		}	
-		
+			System.exit(1);
+      running = false;
+		}
+
     String filename = args[0];
     Sheet file = new Sheet(filename);
     int row = 0;
     int col = 0;
-		
+
+    Screen screen = new Screen(terminal); //creates new screen
+
+
     while(running){
+      screen.refresh();
       Key key = terminal.readInput();
       if (key != null)
       {
         //YOU CAN PUT DIFFERENT SETS OF BUTTONS FOR DIFFERENT MODES!!!
         if (key.getKind() == Key.Kind.Escape) {
           terminal.exitPrivateMode();
+          screen.stopScreen();
           running = false;
-        } 
+          terminal.applySGR(Terminal.SGR.RESET_ALL);
+        }
 				else if (key.getKind() == Key.Kind.ArrowDown) {
           file.down();
-        } 
+        }
 				else if (key.getKind() == Key.Kind.ArrowUp) {
           file.up();
-				} 
+				}
 				else if (key.getKind() == Key.Kind.ArrowLeft) {
           file.left();
-				} 
+				}
 				else if (key.getKind() == Key.Kind.ArrowRight) {
           file.right();
         }
@@ -109,23 +117,26 @@ public class MenuDemo {
           Terminal t = terminal;
 					t.enterPrivateMode();
 					t.clearScreen();
-          t.applyBackgroundColor(Terminal.Color.YELLOW);
-          t.applyForegroundColor(Terminal.Color.BLACK);
+          //t.applyBackgroundColor(Terminal.Color.YELLOW);
+          //t.applyForegroundColor(Terminal.Color.BLACK);
         }
       }
-			
+
 			/*
       terminal.applySGR(Terminal.SGR.RESET_ALL);
       terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 			*/
-			
+
       //DO GAME STUFF HERE
-      putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
-      putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
-      highlight(file.getUserR(),file.getUserC(),terminal,file);
-      
+      if (timer % 500 == 0) {  
+        putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
+        putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
+        highlight(file.getUserR(),file.getUserC(),terminal,file);
+      }
+      timer++;
+
     }
 
-    
+
   }
 }
