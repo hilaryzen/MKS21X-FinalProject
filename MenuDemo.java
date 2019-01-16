@@ -145,6 +145,7 @@ public class MenuDemo {
         } else if (key.getKind() == Key.Kind.Delete) {
           writing = 0;
           file.removeRow(row);
+          terminal.clearScreen();
         } else {
           //Takes char that user enters
           Terminal t = terminal;
