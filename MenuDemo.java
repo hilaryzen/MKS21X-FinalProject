@@ -139,7 +139,12 @@ public class MenuDemo {
           file.jumpTo(row,col);
         } else if (key.getKind() == Key.Kind.Insert) {
           writing = 0;
-          file.addRow(row + 1);
+          row = row + 1;
+          file.addRow(row);
+          file.jumpTo(row,col);
+        } else if (key.getKind() == Key.Kind.Delete) {
+          writing = 0;
+          file.removeRow(row);
         } else {
           //Takes char that user enters
           Terminal t = terminal;
