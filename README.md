@@ -51,3 +51,11 @@ Hilary: Wrote addRow, addCol, removeRow, and removeCol methods
 1/13/19:
 
 Hilary: Wrote save methods, created MenuDemo.java and worked on displaying sheet and highlighting cells
+
+1/14/19:
+
+Hilary: Fixed bugs in the terminal display, wrote cols and highlightAll methods
+
+1/15/19:
+
+David: Working on using Screens instead of terminal itself; yet to figure out refreshing only once

@@ -134,6 +134,7 @@ public class MenuDemo {
 				putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
 				putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
 				highlight(file.getUserR(),file.getUserC(),terminal,file);
+        //noting ^^^ refreshes screen rather than be suppressed
 				screen.refresh();
 			}
 
