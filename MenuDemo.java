@@ -44,15 +44,18 @@ public class MenuDemo {
     t.applyForegroundColor(Terminal.Color.DEFAULT);
   }
 
+  //Adds yellow background behind given cell
   public static void highlight(int row, int col, Terminal t, Sheet sheet) {
     int r = findR(row);
     int c = findC(col, sheet);
+    //Formatting the text
     String data = sheet.getString(row,col);
     int spaceLength = sheet.longestInCol(col) + 3;
     String entry = String.format("%-" + spaceLength + "." + spaceLength + "s", data);
     t.moveCursor(c,r);
     t.applyBackgroundColor(Terminal.Color.YELLOW);
     t.applyForegroundColor(Terminal.Color.BLACK);
+    //Rewrites cell with yellow background
     for (int j = 0; j < spaceLength; j++) {
       t.putCharacter(entry.charAt(j));
     }
@@ -60,16 +63,19 @@ public class MenuDemo {
     t.applyForegroundColor(Terminal.Color.DEFAULT);
   }
 
+  //Highlights all selected cells
   public static void highlightAll(ArrayList<Integer> rows, ArrayList<Integer> cols, Terminal t, Sheet sheet) {
     for (int i = 0; i < rows.size(); i++) {
       highlight(rows.get(i), cols.get(i), t, sheet);
     }
   }
 
+  //Converts cell row in the data array to cursor location in the terminal
   public static int findR(int row) {
     return row + 2;
   }
 
+  //Converts cell col in data array to cursor location in the terminal
   public static int findC(int col, Sheet sheet) {
     int c = 0;
     for (int i = 0; i < col; i++) {
@@ -107,18 +113,22 @@ public class MenuDemo {
         if (key.isAltPressed()) {
 
           if (key.getCharacter() == 's') {
+            //Adds cell below to selected array
             row += 1;
             writing = 0;
             file.select(row,col);
           } else if (key.getCharacter() == 'a') {
+            //Adds cell to the left to selected array
             col -= 1;
             writing = 0;
             file.select(row,col);
           } else if (key.getCharacter() == 'w') {
+            //Adds cell above to selected array
             row -= 1;
             writing = 0;
             file.select(row,col);
           } else if (key.getCharacter() == 'd') {
+            //Adds cell to the right to selected array
             col += 1;
             writing = 0;
             file.select(row,col);
@@ -164,6 +174,7 @@ public class MenuDemo {
             file.removeRow(row);
             terminal.clearScreen();
           } else if (key.getKind() == Key.Kind.Backspace) {
+            //Deletes last character if user is writing and entire entry if user is not
             String data = file.getString(row,col);
             if (writing > 0) {
               writing--;
@@ -184,7 +195,6 @@ public class MenuDemo {
       }
 
       terminal.applySGR(Terminal.SGR.ENTER_BOLD);
-      //putString(1,1,terminal, "This is mode "+mode,Terminal.Color.WHITE,Terminal.Color.RED);
       terminal.applySGR(Terminal.SGR.RESET_ALL);
 
       //DO GAME STUFF HERE
