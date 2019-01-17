@@ -110,6 +110,18 @@ public class MenuDemo {
             row += 1;
             writing = 0;
             file.select(row,col);
+          } else if (key.getCharacter() == 'a') {
+            col -= 1;
+            writing = 0;
+            file.select(row,col);
+          } else if (key.getCharacter() == 'w') {
+            row -= 1;
+            writing = 0;
+            file.select(row,col);
+          } else if (key.getCharacter() == 'd') {
+            col += 1;
+            writing = 0;
+            file.select(row,col);
           }
 
         } else {
