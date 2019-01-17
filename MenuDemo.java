@@ -132,6 +132,12 @@ public class MenuDemo {
             col += 1;
             writing = 0;
             file.select(row,col);
+          } else if (key.getKind() == Key.Kind.Insert) {
+            //Adds new column to the right
+            writing = 0;
+            col += 1;
+            file.addCol(col);
+            file.jumpTo(row,col);
           }
 
         } else {
@@ -163,7 +169,7 @@ public class MenuDemo {
             writing = 0;
             file.jumpTo(row,col);
           } else if (key.getKind() == Key.Kind.Insert) {
-            //Adds new empty row
+            //Adds new empty row below
             writing = 0;
             row = row + 1;
             file.addRow(row);

@@ -208,7 +208,7 @@ public class Sheet {
   public void addRow(int index) {
     data.add(index, new ArrayList<Cell>());
     for (int i = 0; i < cols(); i++) {
-      data.get(index).add(new Cell<String>(" "));
+      data.get(index).add(new Cell<String>(""));
     }
   }
 
@@ -241,8 +241,10 @@ public class Sheet {
   }
 
   //Adds empty col
-  public void addCol() {
-
+  public void addCol(int index) {
+    for (int i = 0; i < rows(); i++) {
+      data.get(i).add(index, new Cell<String>(""));
+    }
   }
 
   //Adds array of values as a new column at the very right
