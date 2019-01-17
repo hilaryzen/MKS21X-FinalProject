@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 import com.googlecode.lanterna.terminal.Terminal.SGR;
 //API : http://mabe02.github.io/lanterna/apidocs/2.1/
 import com.googlecode.lanterna.TerminalFacade;
@@ -65,31 +67,44 @@ public class MenuDemo {
 
   }
 
+  //execute after user action
+  public static void update(Sheet sh, String f, Terminal t,  Screen sc) {
+    putString(0,0,t, "Spreadsheet: " + f,Terminal.Color.WHITE,Terminal.Color.RED);
+    putString(0,2,t,sh.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
+    highlight(sh.getUserR(),sh.getUserC(),t,sh);
+    //noting ^^^ refreshes screen rather than be suppressed
+    sc.refresh();
+  }
+
   public static void main(String[] args) {
-    Terminal terminal = TerminalFacade.createTextTerminal();
-		//terminal.enterPrivateMode();
-    //TerminalSize size = terminal.getTerminalSize();
-    terminal.setCursorVisible(false);
+    boolean running = false;
+    if (args.length > 0) {
+      Terminal terminal = TerminalFacade.createTextTerminal();
+		    //terminal.enterPrivateMode();
+        //TerminalSize size = terminal.getTerminalSize();
+      terminal.setCursorVisible(false);
 
-    boolean running = true;
-		long timer = 0;
+      running = true;
 
-    Screen screen = new Screen(terminal, 500, 50); // initialize screen
-		screen.startScreen(); // puts terminal in private; updates screen
+      Screen screen = new Screen(terminal, 500, 50); // initialize screen
+		  screen.startScreen(); // puts terminal in private; updates screen
+    }
 
 		// catches no CSV provided
-		if (args.length < 1) {
-			running = false; //stops it from running
-      screen.stopScreen();
-      System.out.println("Incorrect format. Use: java -cp lanterna.jar:. MenuDemo <file.csv>");
-      System.exit(0);
+		if (args.length < 1 ) {
+			System.out.println("Incorrect format. Use: java -cp lanterna.jar:. MenuDemo <file.csv>");
+      System.exit(1);
 		}
 
 		//imports file when given
+
     String filename = args[0];
     Sheet file = new Sheet(filename);
     int row = 0;
     int col = 0;
+
+    //prints the Screen once at the beginning
+    if (running) update(file, filename, terminal, screen);
 
     while(running){
       Key key = terminal.readInput();
@@ -103,15 +118,19 @@ public class MenuDemo {
         }
 				else if (key.getKind() == Key.Kind.ArrowDown) {
           file.down();
+          update(file, filename, terminal, screen);
         }
 				else if (key.getKind() == Key.Kind.ArrowUp) {
           file.up();
+          update(file, filename, terminal, screen);
 				}
 				else if (key.getKind() == Key.Kind.ArrowLeft) {
           file.left();
+          update(file, filename, terminal, screen);
 				}
 				else if (key.getKind() == Key.Kind.ArrowRight) {
           file.right();
+          update(file, filename, terminal, screen);
         }
 				/*
 				else if (key.getCharacter() == 'w'){ // w for write
@@ -123,24 +142,6 @@ public class MenuDemo {
         }
 				*/
       }
-
-			/*
-      terminal.applySGR(Terminal.SGR.RESET_ALL);
-      terminal.applySGR(Terminal.SGR.ENTER_BOLD);
-			*/
-
-      //DO GAME STUFF HERE
-      if (timer % 10000 == 0) { // should update terminal and screen after every 1/2 second
-				putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
-				putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
-				highlight(file.getUserR(),file.getUserC(),terminal,file);
-        //noting ^^^ refreshes screen rather than be suppressed
-				screen.refresh();
-			}
-
-			timer++;
     }
-
-
   }
 }
