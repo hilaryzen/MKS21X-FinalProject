@@ -169,8 +169,7 @@ public class MenuDemo {
             char newChar = key.getCharacter();
             //Changes text of cell
             String data = file.getString(row,col);
-            //file.getCell(row,col).setValue(data.substring(0,writing) + newChar + data.substring(writing + 1, data.length()));
-            file.getCell(row,col).setValue(data.substring(0,writing) + newChar);
+            file.set(data.substring(0,writing) + newChar);
             writing++;
           }
         }
