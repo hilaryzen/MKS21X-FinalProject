@@ -103,67 +103,64 @@ public class MenuDemo {
       if (key != null)
       {
         //YOU CAN PUT DIFFERENT SETS OF BUTTONS FOR DIFFERENT MODES!!!
-        /*
+
         if (key.isAltPressed()) {
-          if (key.getKind() == Key.Kind.ArrowDown) {
+
+          if (key.getCharacter() == 's') {
             row += 1;
             writing = 0;
             file.select(row,col);
           }
-        }
-        */
-        
-        if (key.getKind() == Key.Kind.Escape) {
-          //Saves data to the same file before closing the terminal
-          file.save();
-          terminal.exitPrivateMode();
-          running = false;
-        } else if (key.getKind() == Key.Kind.ArrowDown) {
-          if (key.isAltPressed()) {
-            writing = 0;
-            row += 1;
-            //file.addRow(row);
-            file.select(row,col);
-          } else {
+
+        } else {
+
+          if (key.getKind() == Key.Kind.Escape) {
+            //Saves data to the same file before closing the terminal
+            file.save();
+            terminal.exitPrivateMode();
+            running = false;
+          } else if (key.getKind() == Key.Kind.ArrowDown) {
             row = (row + 1) % file.rows();
             writing = 0;
             file.jumpTo(row,col);
+          } else if (key.getKind() == Key.Kind.ArrowUp) {
+            row = (row - 1) % file.rows();
+            writing = 0;
+            file.jumpTo(row,col);
+          } else if (key.getKind() == Key.Kind.ArrowLeft) {
+            col = (col - 1) % file.cols();
+            writing = 0;
+            file.jumpTo(row,col);
+          } else if (key.getKind() == Key.Kind.ArrowRight) {
+            col = (col + 1) % file.cols();
+            writing = 0;
+            file.jumpTo(row,col);
+          } else if (key.getKind() == Key.Kind.Enter) {
+            //Moves down one row and ends writing mode
+            row = (row + 1) % file.rows();
+            writing = 0;
+            file.jumpTo(row,col);
+          } else if (key.getKind() == Key.Kind.Insert) {
+            //Adds new empty row
+            writing = 0;
+            row = row + 1;
+            file.addRow(row);
+            file.jumpTo(row,col);
+          } else if (key.getKind() == Key.Kind.Delete) {
+            //Deletes selected row
+            writing = 0;
+            file.removeRow(row);
+            terminal.clearScreen();
+          } else {
+            //Takes char that user enters
+            Terminal t = terminal;
+            char newChar = key.getCharacter();
+            //Changes text of cell
+            String data = file.getString(row,col);
+            //file.getCell(row,col).setValue(data.substring(0,writing) + newChar + data.substring(writing + 1, data.length()));
+            file.getCell(row,col).setValue(data.substring(0,writing) + newChar);
+            writing++;
           }
-        } else if (key.getKind() == Key.Kind.ArrowUp) {
-          row = (row - 1) % file.rows();
-          writing = 0;
-          file.jumpTo(row,col);
-        } else if (key.getKind() == Key.Kind.ArrowLeft) {
-          col = (col - 1) % file.cols();
-          writing = 0;
-          file.jumpTo(row,col);
-        } else if (key.getKind() == Key.Kind.ArrowRight) {
-          col = (col + 1) % file.cols();
-          writing = 0;
-          file.jumpTo(row,col);
-        } else if (key.getKind() == Key.Kind.Enter) {
-          //Moves down one row and ends writing mode
-          row = (row + 1) % file.rows();
-          writing = 0;
-          file.jumpTo(row,col);
-        } else if (key.getKind() == Key.Kind.Insert) {
-          writing = 0;
-          row = row + 1;
-          file.addRow(row);
-          file.jumpTo(row,col);
-        } else if (key.getKind() == Key.Kind.Delete) {
-          writing = 0;
-          file.removeRow(row);
-          terminal.clearScreen();
-        } else {
-          //Takes char that user enters
-          Terminal t = terminal;
-          char newChar = key.getCharacter();
-          //Changes text of cell
-          String data = file.getString(row,col);
-          //file.getCell(row,col).setValue(data.substring(0,writing) + newChar + data.substring(writing + 1, data.length()));
-          file.getCell(row,col).setValue(data.substring(0,writing) + newChar);
-          writing++;
         }
       }
 
