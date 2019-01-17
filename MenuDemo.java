@@ -163,6 +163,14 @@ public class MenuDemo {
             writing = 0;
             file.removeRow(row);
             terminal.clearScreen();
+          } else if (key.getKind() == Key.Kind.Backspace) {
+            String data = file.getString(row,col);
+            if (writing > 0) {
+              writing--;
+              file.set(data.substring(0,writing));
+            } else {
+              file.set("");
+            }
           } else {
             //Takes char that user enters
             Terminal t = terminal;
