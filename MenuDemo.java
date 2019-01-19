@@ -119,37 +119,7 @@ public class MenuDemo {
       {
         //YOU CAN PUT DIFFERENT SETS OF BUTTONS FOR DIFFERENT MODES!!!
 
-        if (key.isAltPressed()) {
-
-          if (key.getCharacter() == 's') {
-            //Adds cell below to selected array
-            row += 1;
-            writing = 0;
-            file.select(row,col);
-          } else if (key.getCharacter() == 'a') {
-            //Adds cell to the left to selected array
-            col -= 1;
-            writing = 0;
-            file.select(row,col);
-          } else if (key.getCharacter() == 'w') {
-            //Adds cell above to selected array
-            row -= 1;
-            writing = 0;
-            file.select(row,col);
-          } else if (key.getCharacter() == 'd') {
-            //Adds cell to the right to selected array
-            col += 1;
-            writing = 0;
-            file.select(row,col);
-          } else if (key.getKind() == Key.Kind.Insert) {
-            //Adds new column to the right
-            writing = 0;
-            col += 1;
-            file.addCol(col);
-            file.jumpTo(row,col);
-          }
-
-        } else if (key.isCtrlPressed()) {
+        if (key.isCtrlPressed()) {
           if (key.getCharacter() == 's') {
             selecting = ! selecting;
           }
@@ -179,7 +149,11 @@ public class MenuDemo {
                 file.select(row,col);
               }
             } else {
-              row = (row - 1) % file.rows();
+              if (row == 0) {
+                row = file.rows() - 1;
+              } else {
+                row--;
+              }
               file.jumpTo(row,col);
             }
           } else if (key.getKind() == Key.Kind.ArrowLeft) {
@@ -190,7 +164,11 @@ public class MenuDemo {
                 file.select(row,col);
               }
             } else {
-              col = (col - 1) % file.cols();
+              if (col == 0) {
+                col = file.cols() - 1;
+              } else {
+                col--;
+              }
               file.jumpTo(row,col);
             }
           } else if (key.getKind() == Key.Kind.ArrowRight) {
