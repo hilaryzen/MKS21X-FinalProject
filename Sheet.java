@@ -111,7 +111,7 @@ public class Sheet {
     for (int i = 0; i < data.get(index).size(); i++) {
       String entry = getString(index, i);
       int spaceLength = longestInCol(i) + 3;
-      ans = ans + String.format("%-" + spaceLength + "." + spaceLength + "s", entry);
+      ans += String.format("%-" + spaceLength + "." + spaceLength + "s", entry);
     }
     return ans;
   }
@@ -121,7 +121,7 @@ public class Sheet {
   public String getCol(int index) {
     String ans = "";
     for (int i = 0; i < data.size(); i++) {
-      ans += getString(i, index) + ", " ;
+      ans += getString(i, index) + ", ";
     }
     return ans;
   }
