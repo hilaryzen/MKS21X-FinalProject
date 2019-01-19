@@ -65,17 +65,22 @@ public class Sheet {
   }
 
   //Returns first selected row
-  public int selectedRow() {
-    return rows.get(0);
+  public ArrayList<Integer> selectedRow() {
+    return rows;
   }
 
   //Returns first selected col
-  public int selectedCol() {
-    return cols.get(0);
+  public ArrayList<Integer> selectedCol() {
+    return cols;
   }
 
   //Returns the cell at the row and col given
   public Cell getCell(int row, int col) {
+    /*
+    if (data.get(row).get(col) == null) {
+      return new Cell<String>(" ");
+    }
+    */
     return data.get(row).get(col);
   }
 
@@ -200,8 +205,11 @@ public class Sheet {
   }
 
   //Adds empty row
-  public void addRow() {
-    data.add(new ArrayList<Cell>());
+  public void addRow(int index) {
+    data.add(index, new ArrayList<Cell>());
+    for (int i = 0; i < cols(); i++) {
+      data.get(index).add(new Cell<String>(""));
+    }
   }
 
   //Takes array of values and creates new row at the bottom of the sheet
@@ -233,8 +241,10 @@ public class Sheet {
   }
 
   //Adds empty col
-  public void addCol() {
-
+  public void addCol(int index) {
+    for (int i = 0; i < rows(); i++) {
+      data.get(i).add(index, new Cell<String>(""));
+    }
   }
 
   //Adds array of values as a new column at the very right
