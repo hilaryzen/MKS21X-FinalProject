@@ -54,7 +54,18 @@ public class Sheet {
   public int rows() {
     return data.size();
   }
-
+  
+  //Returns the max number in cols in a row
+  public int cols() {
+    int max = data.get(0).size();
+    for (int i = 1; i < rows(); i++) {
+      if (data.get(i).size() > max) {
+        max = data.get(i).size();
+      }
+    }
+    return max;
+  }
+  
   public int selectedRow() {
     return rows.get(0);
   }
@@ -283,91 +294,5 @@ public class Sheet {
     }
   }
 
-	/// navigation commands vvv start 
-	public void up() {
-		cursor.jumpTo(cursor.getURow() - 1, cursor.getUCol());
-	}
-		
-	public void down() {
-		cursor.jumpTo(cursor.getURow() + 1, cursor.getUCol());
-	}
-		
-	public void left() {
-		cursor.jumpTo(cursor.getURow(), cursor.getUCol() - 1);
-	}
-		
-	public void right() {
-		cursor.jumpTo(cursor.getURow(), cursor.getUCol() + 1);
-	}
-	
-	public int getUserR() {
-		return cursor.getURow();
-	}
-	
-	public int getUserC() {
-		 return cursor.getUCol();
-	 }
-	/// navigation commands ^^^ end
-	
-	// used to track movement of the selection
-	private class user{
-		private int uCol; // column
-		private int uRow; // row
-		private int colLim; // column edge; data.size()
-		private int rowLim; // row edge; data.get(x).size()
-		
-		public user(int x, int y) {
-			uCol = 0;
-			uRow = 0;
-			colLim = x - 1; 
-			rowLim = y - 1;
-		}
-		
-		// general update command
-		public void jumpTo(int y, int x) {
-			if (!(x < 0 || x > (colLim) || y < 0 || y > (rowLim))){
-				uCol = x;
-				uRow = y;
-			}
-		}
-		
-		/// update commands vvv start
-		// set right edge
-		// returns old edge
-		// use when addColl or removeCol is used
-		public int setColLim(int x) {
-			int old = colLim;
-			colLim = x;
-			return old;
-		}
-		
-		//set bottom edge
-		//returns old bottom
-		//use when addRow or removeRow is used
-		public int setRowLim(int y) {
-			int old = rowLim;
-			rowLim = y;
-			return old;
-		}
-		/// update commands ^^^ end
-		
-		/// location commands vvv
-		public int getUCol() {
-			return uCol;
-		}
-		
-		public int getURow() {
-			return uRow;
-		}
-		
-		public int getColLim() {
-			return colLim;
-		}
-		
-		public int getRowLim() {
-			return rowLim;
-		}
-		/// location comands ^^^
-	}
-	
+  
 }
