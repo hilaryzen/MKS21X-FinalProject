@@ -90,7 +90,7 @@ public class MenuDemo {
   public static void update(Sheet sh, String f, Terminal t,  Screen sc) {
     putString(0,0,t, "Spreadsheet: " + f,Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,2,t,sh.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
-    highlight(sh.getUserR(),sh.getUserC(),t,sh);
+    highlight(findR,findC,t,sh);
     //noting ^^^ refreshes screen rather than be suppressed
     sc.refresh();
   }
