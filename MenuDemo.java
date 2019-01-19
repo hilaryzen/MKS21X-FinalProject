@@ -161,11 +161,14 @@ public class MenuDemo {
             terminal.exitPrivateMode();
             running = false;
           } else if (key.getKind() == Key.Kind.ArrowDown) {
-            row = (row + 1) % file.rows();
             writing = 0;
             if (selecting) {
-              file.select(row,col);
+              if (row < file.rows() - 1) {
+                row++;
+                file.select(row,col);
+              }
             } else {
+              row = (row + 1) % file.rows();
               file.jumpTo(row,col);
             }
           } else if (key.getKind() == Key.Kind.ArrowUp) {
