@@ -72,7 +72,7 @@ public class MenuDemo {
 
   //Converts cell row in the data array to cursor location in the terminal
   public static int findR(int row) {
-    return row + 2;
+    return row + 4;
   }
 
   //Converts cell col in data array to cursor location in the terminal
@@ -82,6 +82,14 @@ public class MenuDemo {
       c = c + sheet.longestInCol(i) + 3;
     }
     return c;
+  }
+
+  public static String printBoolean(boolean value) {
+    if (value) {
+      return "Y";
+    } else {
+      return "N";
+    }
   }
 
   public static void main(String[] args) {
@@ -103,6 +111,7 @@ public class MenuDemo {
     int row = 0;
     int col = 0;
     int writing = 0;
+    boolean selecting = false;
 
     while(running){
       Key key = terminal.readInput();
@@ -140,6 +149,10 @@ public class MenuDemo {
             file.jumpTo(row,col);
           }
 
+        } else if (key.isCtrlPressed()) {
+          if (key.getCharacter() == 's') {
+            selecting = ! selecting;
+          }
         } else {
 
           if (key.getKind() == Key.Kind.Escape) {
@@ -205,7 +218,8 @@ public class MenuDemo {
 
       //DO GAME STUFF HERE
       putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
-      putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
+      putString(0,2,terminal, "Selecting?: " + printBoolean(selecting),Terminal.Color.WHITE,Terminal.Color.RED);
+      putString(0,4,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
       highlightAll(file.selectedRow(),file.selectedCol(),terminal,file);
 
     }
