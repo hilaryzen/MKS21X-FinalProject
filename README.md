@@ -70,4 +70,4 @@ Hilary: Merged selecting branch with master, made selecting multiple cells and i
 
 1/19/19:
 
-David: Removed redundant user class in Terminal Branch
+David: Removed redundant user class in Terminal Branch; merged master and selecting
