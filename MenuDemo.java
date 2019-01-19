@@ -204,15 +204,25 @@ public class MenuDemo {
             writing = 0;
             file.jumpTo(row,col);
           } else if (key.getKind() == Key.Kind.Insert) {
-            //Adds new empty row below
+            //Adds new empty row below or empty col to the right
             writing = 0;
-            row = row + 1;
+            if (editRows) {
+              row++;
+              file.addRow(row);
+            } else {
+              col++;
+              file.addCol(col);
+            }
             file.addRow(row);
             file.jumpTo(row,col);
           } else if (key.getKind() == Key.Kind.Delete) {
-            //Deletes selected row
+            //Deletes selected row or col
             writing = 0;
-            file.removeRow(row);
+            if (editRows) {
+              file.removeRow(row);
+            } else {
+              file.removeCol(col);
+            }
             terminal.clearScreen();
           } else if (key.getKind() == Key.Kind.Backspace) {
             //Deletes last character if user is writing and entire entry if user is not
