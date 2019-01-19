@@ -66,4 +66,8 @@ Hilary: Added ability to select cells directly next to current cell, edit all se
 
 1/18/19:
 
-Hilary: Merged selecting branch with master
+Hilary: Merged selecting branch with master, made selecting multiple cells and inserting/deleting more user-friendly with booleans to track modes
+
+1/19/19:
+
+David: Removed redundant user class in Terminal Branch
