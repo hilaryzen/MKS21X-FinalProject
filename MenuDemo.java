@@ -163,7 +163,11 @@ public class MenuDemo {
           } else if (key.getKind() == Key.Kind.ArrowDown) {
             row = (row + 1) % file.rows();
             writing = 0;
-            file.jumpTo(row,col);
+            if (selecting) {
+              file.select(row,col);
+            } else {
+              file.jumpTo(row,col);
+            }
           } else if (key.getKind() == Key.Kind.ArrowUp) {
             row = (row - 1) % file.rows();
             writing = 0;
