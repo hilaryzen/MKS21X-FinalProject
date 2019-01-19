@@ -53,16 +53,34 @@ public class Sheet {
     return data.size();
   }
 
-  public int selectedRow() {
-    return rows.get(0);
+  //Returns the max number in cols in a row
+  public int cols() {
+    int max = data.get(0).size();
+    for (int i = 1; i < rows(); i++) {
+      if (data.get(i).size() > max) {
+        max = data.get(i).size();
+      }
+    }
+    return max;
   }
 
-  public int selectedCol() {
-    return cols.get(0);
+  //Returns first selected row
+  public ArrayList<Integer> selectedRow() {
+    return rows;
+  }
+
+  //Returns first selected col
+  public ArrayList<Integer> selectedCol() {
+    return cols;
   }
 
   //Returns the cell at the row and col given
   public Cell getCell(int row, int col) {
+    /*
+    if (data.get(row).get(col) == null) {
+      return new Cell<String>(" ");
+    }
+    */
     return data.get(row).get(col);
   }
 
@@ -89,7 +107,7 @@ public class Sheet {
   // adds the internal value of cells
   // throws error if vales are Strings
   public int findSum(int row1, int col1, int row2, int col2) {
-      return getInt(row1, col1) + getInt(row2,col2);
+    return getInt(row1, col1) + getInt(row2,col2);
   }
 
   //Returns String contains the contents of the row at the index given
@@ -186,6 +204,14 @@ public class Sheet {
     }
   }
 
+  //Adds empty row
+  public void addRow(int index) {
+    data.add(index, new ArrayList<Cell>());
+    for (int i = 0; i < cols(); i++) {
+      data.get(index).add(new Cell<String>(""));
+    }
+  }
+
   //Takes array of values and creates new row at the bottom of the sheet
   public void addRow(String[] values) {
     //Initializing new row
@@ -211,6 +237,13 @@ public class Sheet {
       catch(NumberFormatException e) {
         data.get(index).add(new Cell<String>(values[i]));
       }
+    }
+  }
+
+  //Adds empty col
+  public void addCol(int index) {
+    for (int i = 0; i < rows(); i++) {
+      data.get(i).add(index, new Cell<String>(""));
     }
   }
 
