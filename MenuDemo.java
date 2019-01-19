@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.io.FileNotFoundException;
 
 import com.googlecode.lanterna.terminal.Terminal.SGR;
@@ -63,7 +64,7 @@ public class MenuDemo {
     }
     t.applyBackgroundColor(Terminal.Color.DEFAULT);
     t.applyForegroundColor(Terminal.Color.DEFAULT);
-}
+  }
 
   //Highlights all selected cells
   public static void highlightAll(ArrayList<Integer> rows, ArrayList<Integer> cols, Terminal t, Sheet sheet) {
@@ -87,12 +88,10 @@ public class MenuDemo {
 }
 
   //execute after user action
-  public static void update(Sheet sh, String f, Terminal t,  Screen sc) {
-    putString(0,0,t, "Spreadsheet: " + f,Terminal.Color.WHITE,Terminal.Color.RED);
-    putString(0,2,t,sh.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
-    highlight(findR,findC,t,sh);
-    //noting ^^^ refreshes screen rather than be suppressed
-    sc.refresh();
+  public static void update(Sheet file, String filename, Terminal terminal,  Screen sc) {
+    putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
+    putString(0,2,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
+    highlightAll(file.selectedRow(),file.selectedCol(),terminal, file);
   }
 
   public static void main(String[] args) {

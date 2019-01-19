@@ -14,7 +14,6 @@ public class Sheet {
   private ArrayList<Integer> cols = new ArrayList<Integer>();
   //Stores filename for saving
   private String originalFile = "";
-	private user cursor;
 	
   public Sheet(String filename) {
     try {
@@ -47,7 +46,6 @@ public class Sheet {
     rows.add(0);
     cols.add(0);
 		
-		cursor = new user(data.size(), data.get(0).size());
   }
 
   //Returns the number of rows in the sheet
@@ -66,13 +64,15 @@ public class Sheet {
     return max;
   }
   
-  public int selectedRow() {
-    return rows.get(0);
-  }
+  //Returns first selected row
+  public ArrayList<Integer> selectedRow() {
+    return rows;
+}
 
-  public int selectedCol() {
-    return cols.get(0);
-  }
+  //Returns first selected col
+  public ArrayList<Integer> selectedCol() {
+    return cols;
+}
 
   //Returns the cell at the row and col given
   public Cell getCell(int row, int col) {
@@ -148,7 +148,15 @@ public class Sheet {
     return ans;
   }
 
- 
+  //Deselects all current cells and selects only the given cell
+  public boolean jumpTo(int row, int col) {
+    rows.clear();
+    rows.add(row);
+    cols.clear();
+    cols.add(col);
+    return true;
+  }
+
   //Adds given cell to list of selected cells
   public boolean select(int row, int col) {
     rows.add(row);
