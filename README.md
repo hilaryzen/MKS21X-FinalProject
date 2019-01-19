@@ -60,4 +60,8 @@ Hilary: Created selecting branch to work on selecting multiple cells
 
 1/17/19:
 
-Hilary: Added ability to select cells directly next to current cell and edit all selected cells
+Hilary: Added ability to select cells directly next to current cell, edit all selected cells, and insert and delete rows
+
+1/18/19:
+
+Hilary: Merged selecting branch with master
