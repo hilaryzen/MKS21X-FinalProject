@@ -72,7 +72,7 @@ public class MenuDemo {
 
   //Converts cell row in the data array to cursor location in the terminal
   public static int findR(int row) {
-    return row + 4;
+    return row + 6;
   }
 
   //Converts cell col in data array to cursor location in the terminal
@@ -84,11 +84,11 @@ public class MenuDemo {
     return c;
   }
 
-  public static String printBoolean(boolean value) {
+  public static String printBoolean(boolean value, String t, String f) {
     if (value) {
-      return "Y";
+      return t;
     } else {
-      return "N";
+      return f;
     }
   }
 
@@ -108,10 +108,16 @@ public class MenuDemo {
 
     String filename = args[0];
     Sheet file = new Sheet(filename);
+    //Tracks cell user is on
     int row = 0;
     int col = 0;
+    //Tracks how many chars a user has edited in a cell
     int writing = 0;
+    //Tracks if user is selecting multiple cells or not
     boolean selecting = false;
+    //Tracks if user is inserting or deleting rows
+    //If false, user is inserting/deleting cols
+    boolean editRows = true;
 
     while(running){
       Key key = terminal.readInput();
@@ -122,6 +128,8 @@ public class MenuDemo {
         if (key.isCtrlPressed()) {
           if (key.getCharacter() == 's') {
             selecting = ! selecting;
+          } else if (key.getCharacter() == 'a') {
+            editRows = ! editRows;
           }
         } else {
 
@@ -131,6 +139,8 @@ public class MenuDemo {
             terminal.exitPrivateMode();
             running = false;
           } else if (key.getKind() == Key.Kind.ArrowDown) {
+            //If user is in selecting mode, the cell below will be highlighted as well
+            //If not, user simply jumps to cell below
             writing = 0;
             if (selecting) {
               if (row < file.rows() - 1) {
@@ -142,6 +152,8 @@ public class MenuDemo {
               file.jumpTo(row,col);
             }
           } else if (key.getKind() == Key.Kind.ArrowUp) {
+            //If user is in selecting mode, the cell above will be highlighted as well
+            //If not, user simply jumps to cell above
             writing = 0;
             if (selecting) {
               if (row > 0) {
@@ -157,6 +169,8 @@ public class MenuDemo {
               file.jumpTo(row,col);
             }
           } else if (key.getKind() == Key.Kind.ArrowLeft) {
+            //If user is in selecting mode, the cell left will be highlighted as well
+            //If not, user simply jumps to cell left
             writing = 0;
             if (selecting) {
               if (col > 0) {
@@ -172,6 +186,8 @@ public class MenuDemo {
               file.jumpTo(row,col);
             }
           } else if (key.getKind() == Key.Kind.ArrowRight) {
+            //If user is in selecting mode, the cell right will be highlighted as well
+            //If not, user simply jumps to cell right
             writing = 0;
             if (selecting) {
               if (col < file.cols() - 1) {
@@ -224,8 +240,9 @@ public class MenuDemo {
 
       //DO GAME STUFF HERE
       putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
-      putString(0,2,terminal, "Selecting?: " + printBoolean(selecting),Terminal.Color.WHITE,Terminal.Color.RED);
-      putString(0,4,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
+      putString(0,2,terminal, "Selecting? (press Ctrl + S to switch): " + printBoolean(selecting, "Y", "N"),Terminal.Color.WHITE,Terminal.Color.RED);
+      putString(0,3,terminal, "Adding/deleting rows or columns? (press Ctrl + A to switch): " + printBoolean(editRows, "Rows", "Cols"),Terminal.Color.WHITE,Terminal.Color.RED);
+      putString(0,6,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
       highlightAll(file.selectedRow(),file.selectedCol(),terminal,file);
 
     }
