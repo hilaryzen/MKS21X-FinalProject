@@ -77,18 +77,14 @@ public class MenuDemo {
   }
 
   public static void main(String[] args) {
-    boolean running = false;
-    if (args.length > 0) {
-      Terminal terminal = TerminalFacade.createTextTerminal();
-		    //terminal.enterPrivateMode();
-        //TerminalSize size = terminal.getTerminalSize();
-      terminal.setCursorVisible(false);
+    Terminal terminal = TerminalFacade.createTextTerminal();
+		terminal.setCursorVisible(false);
 
-      running = true;
+    boolean running = true;
 
-      Screen screen = new Screen(terminal, 500, 50); // initialize screen
-		  screen.startScreen(); // puts terminal in private; updates screen
-    }
+    Screen screen = new Screen(terminal, 500, 500); // initialize screen
+		screen.startScreen(); // puts terminal in private; updates screen
+    
 
 		// catches no CSV provided
 		if (args.length < 1 ) {
@@ -97,14 +93,13 @@ public class MenuDemo {
 		}
 
 		//imports file when given
-
     String filename = args[0];
     Sheet file = new Sheet(filename);
     int row = 0;
     int col = 0;
 
     //prints the Screen once at the beginning
-    if (running) update(file, filename, terminal, screen);
+    update(file, filename, terminal, screen);
 
     while(running){
       Key key = terminal.readInput();
