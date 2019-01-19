@@ -94,15 +94,15 @@ public class Sheet {
 	}
 
 	//extracts usable Integer from a cell
-	private Integer getInt(int row, int col) {
-		return Integer.parseInt(getString(row, col));
+  //returns zero if not an Integer
+	public Integer getInt(int row, int col) {
+		try{
+      return Integer.parseInt(getString(row, col));
+    }
+    catch (NumberFormatException e){
+      return 0;
+    }
 	}
-
-  // adds the internal value of cells
-  // throws error if vales are Strings
-  public int findSum(int row1, int col1, int row2, int col2) {
-    return getInt(row1, col1) + getInt(row2,col2);
-  }
 
   //Returns String contains the contents of the row at the index given
   public String getRow(int index) {
