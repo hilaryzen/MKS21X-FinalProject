@@ -60,6 +60,8 @@ Hilary: Fixed bugs in the terminal display, wrote cols and highlightAll methods
 
 Hilary: Created selecting branch to work on selecting multiple cells
 
+David: Working on using Screens instead of terminal itself; yet to figure out refreshing only once
+
 1/17/19:
 
 Hilary: Added ability to select cells directly next to current cell, edit all selected cells, and insert and delete rows
@@ -70,4 +72,6 @@ Hilary: Merged selecting branch with master, made selecting multiple cells and i
 
 1/19/19:
 
-David: Removed redundant user class in Terminal Branch; merged master and selecting
+David: Removed redundant user class in Terminal Branch; merged master and selecting; merged master and Terminal
+
+

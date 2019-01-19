@@ -1,5 +1,8 @@
-//API : http://mabe02.github.io/lanterna/apidocs/2.1/
+import java.util.ArrayList;
+import java.io.FileNotFoundException;
+
 import com.googlecode.lanterna.terminal.Terminal.SGR;
+//API : http://mabe02.github.io/lanterna/apidocs/2.1/
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.Key.Kind;
@@ -12,7 +15,7 @@ import com.googlecode.lanterna.input.InputDecoder;
 import com.googlecode.lanterna.input.InputProvider;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
-import java.util.ArrayList;
+import com.googlecode.lanterna.screen.Screen;
 
 //For Windows
 //javac -cp "lanterna.jar;." MenuDemo.java
@@ -32,7 +35,7 @@ public class MenuDemo {
   }
 
   public static void putString(int r, int c,Terminal t,
-        String s, Terminal.Color forg, Terminal.Color back ){
+    String s, Terminal.Color forg, Terminal.Color back ){
     t.moveCursor(r,c);
     t.applyBackgroundColor(forg);
     t.applyForegroundColor(Terminal.Color.BLACK);
@@ -91,21 +94,32 @@ public class MenuDemo {
       return f;
     }
   }
+ 
+  //execute after user action; refreshes the screen
+  public static void update(Sheet file, String filename, Terminal terminal, boolean selecting, boolean editRows) {
+    putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
+    putString(0,2,terminal, "Selecting? (press Ctrl + S to switch): " + printBoolean(selecting, "Y", "N"),Terminal.Color.WHITE,Terminal.Color.RED);
+    putString(0,3,terminal, "Adding/deleting rows or columns? (press Ctrl + A to switch): " + printBoolean(editRows, "Rows", "Cols"),Terminal.Color.WHITE,Terminal.Color.RED);
+    putString(0,6,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
+    highlightAll(file.selectedRow(),file.selectedCol(),terminal,file);
+  }
 
   public static void main(String[] args) {
-
     Terminal terminal = TerminalFacade.createTextTerminal();
-    terminal.enterPrivateMode();
-
-    TerminalSize size = terminal.getTerminalSize();
-    terminal.setCursorVisible(false);
+		terminal.setCursorVisible(false);
 
     boolean running = true;
-    int mode = 0;
-    //long lastTime =  System.currentTimeMillis();
-    //long currentTime = lastTime;
-    //long timer = 0;
 
+    Screen screen = new Screen(terminal, 500, 500); // initialize screen
+		screen.startScreen(); // puts terminal in private; updates screen
+    
+		// catches no CSV provided
+		if (args.length < 1 ) {
+			System.out.println("Incorrect format. Use: java -cp lanterna.jar:. MenuDemo <file.csv>");
+      System.exit(1);
+		}
+
+		//imports file when given
     String filename = args[0];
     Sheet file = new Sheet(filename);
     //Tracks cell user is on
@@ -118,27 +132,32 @@ public class MenuDemo {
     //Tracks if user is inserting or deleting rows
     //If false, user is inserting/deleting cols
     boolean editRows = true;
+    //prints the Screen once at the beginning
+    update(file, filename, terminal, selecting, editRows);
 
     while(running){
       Key key = terminal.readInput();
       if (key != null)
       {
         //YOU CAN PUT DIFFERENT SETS OF BUTTONS FOR DIFFERENT MODES!!!
-
         if (key.isCtrlPressed()) {
           if (key.getCharacter() == 's') {
             selecting = ! selecting;
-          } else if (key.getCharacter() == 'a') {
+            update(file, filename, terminal, selecting, editRows);
+          } 
+          else if (key.getCharacter() == 'a') {
             editRows = ! editRows;
+            update(file, filename, terminal, selecting, editRows);
           }
-        } else {
-
+        } 
+        else { /// normal navigation vvvvv  
           if (key.getKind() == Key.Kind.Escape) {
             //Saves data to the same file before closing the terminal
             file.save();
-            terminal.exitPrivateMode();
+            screen.stopScreen();
             running = false;
-          } else if (key.getKind() == Key.Kind.ArrowDown) {
+          } 
+          else if (key.getKind() == Key.Kind.ArrowDown) {
             //If user is in selecting mode, the cell below will be highlighted as well
             //If not, user simply jumps to cell below
             writing = 0;
@@ -147,11 +166,14 @@ public class MenuDemo {
                 row++;
                 file.select(row,col);
               }
-            } else {
+            } 
+            else {
               row = (row + 1) % file.rows();
               file.jumpTo(row,col);
             }
-          } else if (key.getKind() == Key.Kind.ArrowUp) {
+            update(file, filename, terminal, selecting, editRows);
+          } 
+          else if (key.getKind() == Key.Kind.ArrowUp) {
             //If user is in selecting mode, the cell above will be highlighted as well
             //If not, user simply jumps to cell above
             writing = 0;
@@ -160,15 +182,19 @@ public class MenuDemo {
                 row--;
                 file.select(row,col);
               }
-            } else {
+            } 
+            else {
               if (row == 0) {
                 row = file.rows() - 1;
-              } else {
+              } 
+              else {
                 row--;
               }
               file.jumpTo(row,col);
             }
-          } else if (key.getKind() == Key.Kind.ArrowLeft) {
+            update(file, filename, terminal, selecting, editRows);
+          } 
+          else if (key.getKind() == Key.Kind.ArrowLeft) {
             //If user is in selecting mode, the cell left will be highlighted as well
             //If not, user simply jumps to cell left
             writing = 0;
@@ -177,15 +203,19 @@ public class MenuDemo {
                 col--;
                 file.select(row,col);
               }
-            } else {
+            } 
+            else {
               if (col == 0) {
                 col = file.cols() - 1;
-              } else {
+              } 
+              else {
                 col--;
               }
               file.jumpTo(row,col);
             }
-          } else if (key.getKind() == Key.Kind.ArrowRight) {
+            update(file, filename, terminal, selecting, editRows);  
+          } 
+          else if (key.getKind() == Key.Kind.ArrowRight) {
             //If user is in selecting mode, the cell right will be highlighted as well
             //If not, user simply jumps to cell right
             writing = 0;
@@ -194,46 +224,61 @@ public class MenuDemo {
                 col++;
                 file.select(row,col);
               }
-            } else {
+            } 
+            else {
               col = (col + 1) % file.cols();
               file.jumpTo(row,col);
             }
-          } else if (key.getKind() == Key.Kind.Enter) {
+            update(file, filename, terminal, selecting, editRows);  
+          }
+          // normal navigation ^^^
+          else if (key.getKind() == Key.Kind.Enter) {
             //Moves down one row and ends writing mode
             row = (row + 1) % file.rows();
             writing = 0;
             file.jumpTo(row,col);
-          } else if (key.getKind() == Key.Kind.Insert) {
+            update(file, filename, terminal, selecting, editRows);
+          } 
+          else if (key.getKind() == Key.Kind.Insert) {
             //Adds new empty row below or empty col to the right
             writing = 0;
             if (editRows) {
               row++;
               file.addRow(row);
-            } else {
+            } 
+            else {
               col++;
               file.addCol(col);
             }
             file.addRow(row);
             file.jumpTo(row,col);
-          } else if (key.getKind() == Key.Kind.Delete) {
+            update(file, filename, terminal, selecting, editRows);
+          } 
+          else if (key.getKind() == Key.Kind.Delete) {
             //Deletes selected row or col
             writing = 0;
             if (editRows) {
               file.removeRow(row);
-            } else {
+            } 
+            else {
               file.removeCol(col);
             }
             terminal.clearScreen();
-          } else if (key.getKind() == Key.Kind.Backspace) {
+            update(file, filename, terminal, selecting, editRows);
+          } 
+          else if (key.getKind() == Key.Kind.Backspace) {
             //Deletes last character if user is writing and entire entry if user is not
             String data = file.getString(row,col);
             if (writing > 0) {
               writing--;
               file.set(data.substring(0,writing));
-            } else {
+            } 
+            else {
               file.set("");
             }
-          } else {
+            update(file, filename, terminal, selecting, editRows);
+          } 
+          else {
             //Takes char that user enters
             Terminal t = terminal;
             char newChar = key.getCharacter();
@@ -241,22 +286,11 @@ public class MenuDemo {
             String data = file.getString(row,col);
             file.set(data.substring(0,writing) + newChar);
             writing++;
+            update(file, filename, terminal, selecting, editRows);
           }
         }
       }
-
-      terminal.applySGR(Terminal.SGR.ENTER_BOLD);
-      terminal.applySGR(Terminal.SGR.RESET_ALL);
-
-      //DO GAME STUFF HERE
-      putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
-      putString(0,2,terminal, "Selecting? (press Ctrl + S to switch): " + printBoolean(selecting, "Y", "N"),Terminal.Color.WHITE,Terminal.Color.RED);
-      putString(0,3,terminal, "Adding/deleting rows or columns? (press Ctrl + A to switch): " + printBoolean(editRows, "Rows", "Cols"),Terminal.Color.WHITE,Terminal.Color.RED);
-      putString(0,6,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
-      highlightAll(file.selectedRow(),file.selectedCol(),terminal,file);
-
     }
-
 
   }
 }

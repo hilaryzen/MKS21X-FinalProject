@@ -14,7 +14,7 @@ public class Sheet {
   private ArrayList<Integer> cols = new ArrayList<Integer>();
   //Stores filename for saving
   private String originalFile = "";
-
+	
   public Sheet(String filename) {
     try {
       originalFile = filename;
@@ -41,11 +41,9 @@ public class Sheet {
       e.printStackTrace();
       System.exit(1);
     }
-
     //Automatically selects the first cell
     rows.add(0);
-    cols.add(0);
-
+    cols.add(0);		
   }
 
   //Returns the number of rows in the sheet
@@ -68,19 +66,15 @@ public class Sheet {
   public ArrayList<Integer> selectedRow() {
     return rows;
   }
-
+  
   //Returns first selected col
   public ArrayList<Integer> selectedCol() {
     return cols;
   }
 
+
   //Returns the cell at the row and col given
   public Cell getCell(int row, int col) {
-    /*
-    if (data.get(row).get(col) == null) {
-      return new Cell<String>(" ");
-    }
-    */
     return data.get(row).get(col);
   }
 
@@ -116,7 +110,7 @@ public class Sheet {
     for (int i = 0; i < data.get(index).size(); i++) {
       String entry = getString(index, i);
       int spaceLength = longestInCol(i) + 3;
-      ans = ans + String.format("%-" + spaceLength + "." + spaceLength + "s", entry);
+      ans += String.format("%-" + spaceLength + "." + spaceLength + "s", entry);
     }
     return ans;
   }
@@ -126,7 +120,7 @@ public class Sheet {
   public String getCol(int index) {
     String ans = "";
     for (int i = 0; i < data.size(); i++) {
-      ans += getString(i, index) + ", " ;
+      ans += getString(i, index) + ", ";
     }
     return ans;
   }
@@ -321,4 +315,6 @@ public class Sheet {
       System.exit(1);
     }
   }
+
+  
 }
