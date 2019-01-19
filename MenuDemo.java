@@ -172,17 +172,38 @@ public class MenuDemo {
               file.jumpTo(row,col);
             }
           } else if (key.getKind() == Key.Kind.ArrowUp) {
-            row = (row - 1) % file.rows();
             writing = 0;
-            file.jumpTo(row,col);
+            if (selecting) {
+              if (row > 0) {
+                row--;
+                file.select(row,col);
+              }
+            } else {
+              row = (row - 1) % file.rows();
+              file.jumpTo(row,col);
+            }
           } else if (key.getKind() == Key.Kind.ArrowLeft) {
-            col = (col - 1) % file.cols();
             writing = 0;
-            file.jumpTo(row,col);
+            if (selecting) {
+              if (col > 0) {
+                col--;
+                file.select(row,col);
+              }
+            } else {
+              col = (col - 1) % file.cols();
+              file.jumpTo(row,col);
+            }
           } else if (key.getKind() == Key.Kind.ArrowRight) {
-            col = (col + 1) % file.cols();
             writing = 0;
-            file.jumpTo(row,col);
+            if (selecting) {
+              if (col < file.cols() - 1) {
+                col++;
+                file.select(row,col);
+              }
+            } else {
+              col = (col + 1) % file.cols();
+              file.jumpTo(row,col);
+            }
           } else if (key.getKind() == Key.Kind.Enter) {
             //Moves down one row and ends writing mode
             row = (row + 1) % file.rows();
