@@ -349,10 +349,12 @@ public class Sheet {
   public void sortRow(int col) {
     for (int x = 2; x < rows(); x++) { //ignore first row
       String value = getString(x, col);
-      for (int y = x; y > 1; y--) {// move back down stop before first row
-        if (value.compareTo(getString(y - 1,col)) == -1) { //compare row above
-          data.add(y - 1, data.get(x)); //bumps up the size 1
-          data.remove(x + 1); 
+      if (value.compareTo(getString(x - 1,col)) == -1) {
+        for (int y = x; y > 1; y--) {// move back down, stop before first row
+          if (value.compareTo(getString(y - 1,col)) == 1 || y == 2) { // see if above row is bigger
+            data.add(y - 1, data.get(x)); //bumps up the size 1
+            data.remove(x + 1); 
+          }
         }
       }
     }
