@@ -300,7 +300,7 @@ public class MenuDemo {
           }
           // tab to sort
           else if (key.getKind() == Key.Kind.Tab) {
-            file.sortRow(col);
+            file.sortRows(col);
             update(file, filename, terminal, selecting, editRows, sum, avg);
           }
           else {

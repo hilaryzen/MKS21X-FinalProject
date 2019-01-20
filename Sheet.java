@@ -346,18 +346,34 @@ public class Sheet {
 
   // takes a column and sorts entire chart by rows
   //uses insertion sort
-  public void sortRow(int col) {
-    for (int x = 2; x < rows(); x++) { //ignore first row
-      String value = getString(x, col);
-      if (value.compareTo(getString(x - 1,col)) == -1) {
-        for (int y = x; y > 1; y--) {// move back down, stop before first row
-          if (value.compareTo(getString(y - 1,col)) == 1) { // see if above row is bigger
-            data.add(y - 1, data.get(x)); //bumps up the size 1
-            data.remove(x + 1); 
+  public void sortRows(int col) {
+    if (findColSum(col) == 0) { //is this a String col?
+      for (int x = 2; x < rows(); x++) { //ignore first row
+        String value = getString(x, col);
+        if (value.compareTo(getString(x - 1,col)) < 0) { //check if row above is bigger
+          for (int y = x; y > 1; y--) {// move back down, stop before first row
+            if (value.compareTo(getString(y - 1, col)) < 0) {
+              data.add(y - 1, data.get(y));
+              data.remove(y + 1);
+            }
           }
         }
       }
     }
+    else{
+      for (int x = 2; x < rows(); x++) { //ignore first row
+        Integer value = getInt(x, col);
+        if (getInt(x, col) < getInt(x - 1, col)) { //check if row above is bigger
+          for (int y = x; y > 1; y--) {// move back down, stop before first row
+            if (getInt(y, col) < getInt(y - 1, col)) {
+              data.add(y - 1, data.get(y));
+              data.remove(y + 1);
+            }
+          }
+        }
+      }
+    }
+    
   }
   
 }
