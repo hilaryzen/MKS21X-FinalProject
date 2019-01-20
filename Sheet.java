@@ -339,4 +339,8 @@ public class Sheet {
     }
     return output;
   }
+
+  public int avg() {
+    return sum() / rows.size();
+  }
 }
