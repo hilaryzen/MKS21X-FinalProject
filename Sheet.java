@@ -359,6 +359,17 @@ public class Sheet {
     return output;
   }
 
+  //Finds the min of selected cells
+  public int min() {
+    int output = 0;
+    for (int i = 0; i < rows.size(); i++) {
+      if (getInt(rows.get(i), cols.get(i)) < output) {
+        output = getInt(rows.get(i), cols.get(i));
+      }
+    }
+    return output;
+  }
+
   // takes a column and sorts entire chart by rows
   //uses insertion sort
   public void sortRows(int col) {
