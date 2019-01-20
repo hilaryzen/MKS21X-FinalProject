@@ -319,7 +319,7 @@ public class Sheet {
   public int sum() {
     int output = 0;
     for (int i = 0; i < rows.size(); i++) {
-      output += getInt(rows[i], cols[i]);
+      output += getInt(rows.get(i), cols.get(i));
     }
     return output;
   }
@@ -327,7 +327,7 @@ public class Sheet {
   public int findColSum(int col) {
     int output = 0;
     for (int x = 0; x < rows(); x++) {
-      output+= sheet.getInt(x, col);
+      output+= getInt(x, col);
     }
     return output;
   }
@@ -335,7 +335,7 @@ public class Sheet {
   public int findRowSum(int row) {
     int output = 0;
     for (int x = 0; x < cols(); x++) {
-      output += sheet.getInt(row, x);
+      output += getInt(row, x);
     }
     return output;
   }
