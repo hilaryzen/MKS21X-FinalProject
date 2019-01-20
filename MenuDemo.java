@@ -165,6 +165,10 @@ public class MenuDemo {
             avg = file.avg();
             terminal.clearScreen();
             update(file, filename, terminal, selecting, editRows, sum, avg, max);
+          } else if (key.getCharacter() == 'x') {
+            max = file.max();
+            terminal.clearScreen();
+            update(file, filename, terminal, selecting, editRows, sum, avg, max);
           }
         }
         else { /// normal navigation vvvvv
