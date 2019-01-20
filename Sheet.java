@@ -316,5 +316,46 @@ public class Sheet {
     }
   }
 
+  public int sum() {
+    int output = 0;
+    for (int i = 0; i < rows.size(); i++) {
+      output += getInt(rows.get(i), cols.get(i));
+    }
+    return output;
+  }
+
+  public int findColSum(int col) {
+    int output = 0;
+    for (int x = 0; x < rows(); x++) {
+      output+= getInt(x, col);
+    }
+    return output;
+  }
+
+  public int findRowSum(int row) {
+    int output = 0;
+    for (int x = 0; x < cols(); x++) {
+      output += getInt(row, x);
+    }
+    return output;
+  }
+
+  public int avg() {
+    return sum() / rows.size();
+  }
+
+  // takes a column and sorts entire chart by rows
+  //uses insertion sort
+  public void sortRow(int col) {
+    for (int x = 2; x < rows(); x++) { //ignore first row
+      String value = getString(x, col);
+      for (int y = x; y > 1; y++) {// move back down stop before first row
+        if (value.compareTo(getString(y - 1,col)) == -1) { //compare row above
+          data.add(y - 1, data.get(x)); //bumps up the size 1
+          data.remove(x + 1); 
+        }
+      }
+    }
+  }
   
 }
