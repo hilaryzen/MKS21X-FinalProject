@@ -298,6 +298,11 @@ public class MenuDemo {
             }
             update(file, filename, terminal, selecting, editRows, sum, avg);
           }
+          // tab to sort
+          else if (key.getKind() == Key.Kind.Tab) {
+            file.sortRows(col);
+            update(file, filename, terminal, selecting, editRows, sum, avg);
+          }
           else {
             //Takes char that user enters
             Terminal t = terminal;
