@@ -99,7 +99,7 @@ public class MenuDemo {
   public static void update(Sheet file, String filename, Terminal terminal, boolean selecting, boolean editRows, int sum, int avg) {
     putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,2,terminal, "Selecting? (press Ctrl + S to switch): " + printBoolean(selecting, "Y", "N"),Terminal.Color.WHITE,Terminal.Color.RED);
-    putString(0,3,terminal, "Inserting/deleting rows or columns? (press Ctrl + I to switch): " + printBoolean(editRows, "Rows", "Cols"),Terminal.Color.WHITE,Terminal.Color.RED);
+    putString(0,3,terminal, "Inserting/deleting rows or columns? (press Ctrl + R to switch): " + printBoolean(editRows, "Rows", "Cols"),Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,4,terminal, "Sum of selected cells (press Ctrl + U to update): " + sum,Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,5,terminal, "Average of selected cells (press Ctrl + A to update): " + avg,Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,7,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
@@ -151,7 +151,7 @@ public class MenuDemo {
             selecting = ! selecting;
             update(file, filename, terminal, selecting, editRows, sum, avg);
           }
-          else if (key.getCharacter() == 'i') {
+          else if (key.getCharacter() == 'r') {
             editRows = ! editRows;
             update(file, filename, terminal, selecting, editRows, sum, avg);
           } else if (key.getCharacter() == 'u') {
@@ -272,10 +272,17 @@ public class MenuDemo {
             writing = 0;
             if (editRows) {
               file.removeRow(row);
+              if (row == file.rows()) {
+                row--;
+              }
             }
             else {
               file.removeCol(col);
+              if (col == file.cols()) {
+                col--;
+              }
             }
+            file.jumpTo(row,col);
             terminal.clearScreen();
             update(file, filename, terminal, selecting, editRows, sum, avg);
           }
