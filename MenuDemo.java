@@ -94,7 +94,7 @@ public class MenuDemo {
       return f;
     }
   }
- 
+
   //execute after user action; refreshes the screen
   public static void update(Sheet file, String filename, Terminal terminal, boolean selecting, boolean editRows) {
     putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
@@ -107,11 +107,11 @@ public class MenuDemo {
   public int findColSum(int col, Sheet sheet) {
     int output = 0;
     for (int x = 0; x < sheet.rows(); x++) {
-      output+= sheet.getInt(x, col); 
+      output+= sheet.getInt(x, col);
     }
     return output;
   }
-  
+
   public int findRowSum(int row, Sheet sheet) {
     int output = 0;
     for (int x = 0; x < sheet.cols(); x++) {
@@ -119,7 +119,7 @@ public class MenuDemo {
     }
     return output;
   }
-  
+
   public static void main(String[] args) {
     Terminal terminal = TerminalFacade.createTextTerminal();
 		terminal.setCursorVisible(false);
@@ -128,7 +128,7 @@ public class MenuDemo {
 
     Screen screen = new Screen(terminal, 500, 500); // initialize screen
 		screen.startScreen(); // puts terminal in private; updates screen
-    
+
 		// catches no CSV provided
 		if (args.length < 1 ) {
 			System.out.println("Incorrect format. Use: java -cp lanterna.jar:. MenuDemo <file.csv>");
@@ -160,19 +160,19 @@ public class MenuDemo {
           if (key.getCharacter() == 's') {
             selecting = ! selecting;
             update(file, filename, terminal, selecting, editRows);
-          } 
+          }
           else if (key.getCharacter() == 'a') {
             editRows = ! editRows;
             update(file, filename, terminal, selecting, editRows);
           }
-        } 
-        else { /// normal navigation vvvvv  
+        }
+        else { /// normal navigation vvvvv
           if (key.getKind() == Key.Kind.Escape) {
             //Saves data to the same file before closing the terminal
             file.save();
             screen.stopScreen();
             running = false;
-          } 
+          }
           else if (key.getKind() == Key.Kind.ArrowDown) {
             //If user is in selecting mode, the cell below will be highlighted as well
             //If not, user simply jumps to cell below
@@ -182,13 +182,13 @@ public class MenuDemo {
                 row++;
                 file.select(row,col);
               }
-            } 
+            }
             else {
               row = (row + 1) % file.rows();
               file.jumpTo(row,col);
             }
             update(file, filename, terminal, selecting, editRows);
-          } 
+          }
           else if (key.getKind() == Key.Kind.ArrowUp) {
             //If user is in selecting mode, the cell above will be highlighted as well
             //If not, user simply jumps to cell above
@@ -198,18 +198,18 @@ public class MenuDemo {
                 row--;
                 file.select(row,col);
               }
-            } 
+            }
             else {
               if (row == 0) {
                 row = file.rows() - 1;
-              } 
+              }
               else {
                 row--;
               }
               file.jumpTo(row,col);
             }
             update(file, filename, terminal, selecting, editRows);
-          } 
+          }
           else if (key.getKind() == Key.Kind.ArrowLeft) {
             //If user is in selecting mode, the cell left will be highlighted as well
             //If not, user simply jumps to cell left
@@ -219,18 +219,18 @@ public class MenuDemo {
                 col--;
                 file.select(row,col);
               }
-            } 
+            }
             else {
               if (col == 0) {
                 col = file.cols() - 1;
-              } 
+              }
               else {
                 col--;
               }
               file.jumpTo(row,col);
             }
-            update(file, filename, terminal, selecting, editRows);  
-          } 
+            update(file, filename, terminal, selecting, editRows);
+          }
           else if (key.getKind() == Key.Kind.ArrowRight) {
             //If user is in selecting mode, the cell right will be highlighted as well
             //If not, user simply jumps to cell right
@@ -240,12 +240,12 @@ public class MenuDemo {
                 col++;
                 file.select(row,col);
               }
-            } 
+            }
             else {
               col = (col + 1) % file.cols();
               file.jumpTo(row,col);
             }
-            update(file, filename, terminal, selecting, editRows);  
+            update(file, filename, terminal, selecting, editRows);
           }
           // normal navigation ^^^
           else if (key.getKind() == Key.Kind.Enter) {
@@ -254,46 +254,45 @@ public class MenuDemo {
             writing = 0;
             file.jumpTo(row,col);
             update(file, filename, terminal, selecting, editRows);
-          } 
+          }
           else if (key.getKind() == Key.Kind.Insert) {
             //Adds new empty row below or empty col to the right
             writing = 0;
             if (editRows) {
               row++;
               file.addRow(row);
-            } 
+            }
             else {
               col++;
               file.addCol(col);
             }
-            file.addRow(row);
             file.jumpTo(row,col);
             update(file, filename, terminal, selecting, editRows);
-          } 
+          }
           else if (key.getKind() == Key.Kind.Delete) {
             //Deletes selected row or col
             writing = 0;
             if (editRows) {
               file.removeRow(row);
-            } 
+            }
             else {
               file.removeCol(col);
             }
             terminal.clearScreen();
             update(file, filename, terminal, selecting, editRows);
-          } 
+          }
           else if (key.getKind() == Key.Kind.Backspace) {
             //Deletes last character if user is writing and entire entry if user is not
             String data = file.getString(row,col);
             if (writing > 0) {
               writing--;
               file.set(data.substring(0,writing));
-            } 
+            }
             else {
               file.set("");
             }
             update(file, filename, terminal, selecting, editRows);
-          } 
+          }
           else {
             //Takes char that user enters
             Terminal t = terminal;

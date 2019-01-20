@@ -14,7 +14,7 @@ public class Sheet {
   private ArrayList<Integer> cols = new ArrayList<Integer>();
   //Stores filename for saving
   private String originalFile = "";
-	
+
   public Sheet(String filename) {
     try {
       originalFile = filename;
@@ -43,7 +43,7 @@ public class Sheet {
     }
     //Automatically selects the first cell
     rows.add(0);
-    cols.add(0);		
+    cols.add(0);
   }
 
   //Returns the number of rows in the sheet
@@ -66,7 +66,7 @@ public class Sheet {
   public ArrayList<Integer> selectedRow() {
     return rows;
   }
-  
+
   //Returns first selected col
   public ArrayList<Integer> selectedCol() {
     return cols;
@@ -202,7 +202,7 @@ public class Sheet {
   public void addRow(int index) {
     data.add(index, new ArrayList<Cell>());
     for (int i = 0; i < cols(); i++) {
-      data.get(index).add(new Cell<String>(""));
+      data.get(index).add(new Cell<String>(" "));
     }
   }
 
@@ -237,7 +237,7 @@ public class Sheet {
   //Adds empty col
   public void addCol(int index) {
     for (int i = 0; i < rows(); i++) {
-      data.get(i).add(index, new Cell<String>(""));
+      data.get(i).add(index, new Cell<String>(" "));
     }
   }
 
@@ -316,5 +316,5 @@ public class Sheet {
     }
   }
 
-  
+
 }
