@@ -104,22 +104,6 @@ public class MenuDemo {
     highlightAll(file.selectedRow(),file.selectedCol(),terminal,file);
   }
 
-  public int findColSum(int col, Sheet sheet) {
-    int output = 0;
-    for (int x = 0; x < sheet.rows(); x++) {
-      output+= sheet.getInt(x, col);
-    }
-    return output;
-  }
-
-  public int findRowSum(int row, Sheet sheet) {
-    int output = 0;
-    for (int x = 0; x < sheet.cols(); x++) {
-      output += sheet.getInt(row, x);
-    }
-    return output;
-  }
-
   public static void main(String[] args) {
     Terminal terminal = TerminalFacade.createTextTerminal();
 		terminal.setCursorVisible(false);

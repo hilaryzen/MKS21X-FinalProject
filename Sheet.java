@@ -316,5 +316,27 @@ public class Sheet {
     }
   }
 
+  public int sum() {
+    int output = 0;
+    for (int i = 0; i < rows.size(); i++) {
+      output += getInt(rows[i], cols[i]);
+    }
+    return output;
+  }
 
+  public int findColSum(int col) {
+    int output = 0;
+    for (int x = 0; x < rows(); x++) {
+      output+= sheet.getInt(x, col);
+    }
+    return output;
+  }
+
+  public int findRowSum(int row) {
+    int output = 0;
+    for (int x = 0; x < cols(); x++) {
+      output += sheet.getInt(row, x);
+    }
+    return output;
+  }
 }
