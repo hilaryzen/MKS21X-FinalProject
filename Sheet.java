@@ -316,6 +316,7 @@ public class Sheet {
     }
   }
 
+  //Finds the sum of all selected cells
   public int sum() {
     int output = 0;
     for (int i = 0; i < rows.size(); i++) {
@@ -324,6 +325,7 @@ public class Sheet {
     return output;
   }
 
+  //Finds the sum of cells in a given column
   public int findColSum(int col) {
     int output = 0;
     for (int x = 0; x < rows(); x++) {
@@ -332,6 +334,7 @@ public class Sheet {
     return output;
   }
 
+  //Finds the sum of cells in a given row
   public int findRowSum(int row) {
     int output = 0;
     for (int x = 0; x < cols(); x++) {
@@ -340,8 +343,20 @@ public class Sheet {
     return output;
   }
 
+  //Finds the average of all selected cells
   public int avg() {
     return sum() / rows.size();
+  }
+
+  //Finds the max of all selected cells
+  public int max() {
+    int output = 0;
+    for (int i = 0; i < rows.size(); i++) {
+      if (getInt(rows.get(i), cols.get(i)) > output) {
+        output = getInt(rows.get(i), cols.get(i));
+      }
+    }
+    return output;
   }
 
   // takes a column and sorts entire chart by rows
@@ -373,8 +388,7 @@ public class Sheet {
         }
       }
     }
-    
-  }
-  
-}
 
+  }
+
+}
