@@ -97,7 +97,6 @@ public class MenuDemo {
 
   //execute after user action; refreshes the screen
   public static void update(Sheet file, String filename, Terminal terminal, boolean selecting, boolean editRows, int sum) {
-    terminal.clearScreen();
     putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,2,terminal, "Selecting? (press Ctrl + S to switch): " + printBoolean(selecting, "Y", "N"),Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,3,terminal, "Inserting/deleting rows or columns? (press Ctrl + I to switch): " + printBoolean(editRows, "Rows", "Cols"),Terminal.Color.WHITE,Terminal.Color.RED);
@@ -154,6 +153,7 @@ public class MenuDemo {
             update(file, filename, terminal, selecting, editRows, sum);
           } else if (key.getCharacter() == 'u') {
             sum = file.sum();
+            terminal.clearScreen();
             update(file, filename, terminal, selecting, editRows, sum);
           }
         }
@@ -269,6 +269,7 @@ public class MenuDemo {
             else {
               file.removeCol(col);
             }
+            terminal.clearScreen();
             update(file, filename, terminal, selecting, editRows, sum);
           }
           else if (key.getKind() == Key.Kind.Backspace) {
