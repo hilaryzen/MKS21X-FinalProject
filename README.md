@@ -72,6 +72,10 @@ Hilary: Merged selecting branch with master, made selecting multiple cells and i
 
 1/19/19:
 
+Hilary: Wrote sum and average functions for selected cells and added it to the terminal program, fixed bugs with clearScreen and in inserting/deleting rows and columns
+
 David: Removed redundant user class in Terminal Branch; merged master and selecting; merged master and Terminal
 
+1/20/19:
 
+Hilary: Wrote max function and added to terminal

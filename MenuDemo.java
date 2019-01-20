@@ -151,21 +151,25 @@ public class MenuDemo {
         //YOU CAN PUT DIFFERENT SETS OF BUTTONS FOR DIFFERENT MODES!!!
         if (key.isCtrlPressed()) {
           if (key.getCharacter() == 's') {
+            //Changes to selecting mode
             selecting = ! selecting;
             update(file, filename, terminal, selecting, editRows, sum, avg, max);
-          }
-          else if (key.getCharacter() == 'r') {
+          } else if (key.getCharacter() == 'r') {
+            //Changes between rows and cols (used for inserting and deleting)
             editRows = ! editRows;
             update(file, filename, terminal, selecting, editRows, sum, avg, max);
           } else if (key.getCharacter() == 'u') {
+            //Sums selected cells
             sum = file.sum();
             terminal.clearScreen();
             update(file, filename, terminal, selecting, editRows, sum, avg, max);
           } else if (key.getCharacter() == 'a') {
+            //Averages selected cells
             avg = file.avg();
             terminal.clearScreen();
             update(file, filename, terminal, selecting, editRows, sum, avg, max);
           } else if (key.getCharacter() == 'x') {
+            //Finds max of selected cells
             max = file.max();
             terminal.clearScreen();
             update(file, filename, terminal, selecting, editRows, sum, avg, max);
