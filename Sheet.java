@@ -361,8 +361,8 @@ public class Sheet {
 
   //Finds the min of selected cells
   public int min() {
-    int output = 0;
-    for (int i = 0; i < rows.size(); i++) {
+    int output = getInt(rows.get(0), cols.get(0));
+    for (int i = 1; i < rows.size(); i++) {
       if (getInt(rows.get(i), cols.get(i)) < output) {
         output = getInt(rows.get(i), cols.get(i));
       }

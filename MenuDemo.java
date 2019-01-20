@@ -75,7 +75,7 @@ public class MenuDemo {
 
   //Converts cell row in the data array to cursor location in the terminal
   public static int findR(int row) {
-    return row + 7;
+    return row + 9;
   }
 
   //Converts cell col in data array to cursor location in the terminal
@@ -96,14 +96,15 @@ public class MenuDemo {
   }
 
   //execute after user action; refreshes the screen
-  public static void update(Sheet file, String filename, Terminal terminal, boolean selecting, boolean editRows, int sum, int avg, int max) {
+  public static void update(Sheet file, String filename, Terminal terminal, boolean selecting, boolean editRows, int sum, int avg, int max, int min) {
     putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,2,terminal, "Selecting? (press Ctrl + S to switch): " + printBoolean(selecting, "Y", "N"),Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,3,terminal, "Inserting/deleting rows or columns? (press Ctrl + R to switch): " + printBoolean(editRows, "Rows", "Cols"),Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,4,terminal, "Sum of selected cells (press Ctrl + U to update): " + sum,Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,5,terminal, "Average of selected cells (press Ctrl + A to update): " + avg,Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,6,terminal, "Maximum of selected cells (press Ctrl + X to update): " + max, Terminal.Color.WHITE,Terminal.Color.RED);
-    putString(0,7,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
+    putString(0,7,terminal, "Minimum of selected cells (press Ctrl + M to update): " + min, Terminal.Color.WHITE,Terminal.Color.RED);
+    putString(0,9,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
     highlightAll(file.selectedRow(),file.selectedCol(),terminal,file);
   }
 
@@ -141,8 +142,10 @@ public class MenuDemo {
     int avg = 0;
     //Tracks max of selected Cells
     int max = 0;
+    //Tracks min of selected Cells
+    int min = 0;
     //prints the Screen once at the beginning
-    update(file, filename, terminal, selecting, editRows, sum, avg, max);
+    update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
 
     while(running){
       Key key = terminal.readInput();
@@ -153,26 +156,31 @@ public class MenuDemo {
           if (key.getCharacter() == 's') {
             //Changes to selecting mode
             selecting = ! selecting;
-            update(file, filename, terminal, selecting, editRows, sum, avg, max);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           } else if (key.getCharacter() == 'r') {
             //Changes between rows and cols (used for inserting and deleting)
             editRows = ! editRows;
-            update(file, filename, terminal, selecting, editRows, sum, avg, max);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           } else if (key.getCharacter() == 'u') {
             //Sums selected cells
             sum = file.sum();
             terminal.clearScreen();
-            update(file, filename, terminal, selecting, editRows, sum, avg, max);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           } else if (key.getCharacter() == 'a') {
             //Averages selected cells
             avg = file.avg();
             terminal.clearScreen();
-            update(file, filename, terminal, selecting, editRows, sum, avg, max);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           } else if (key.getCharacter() == 'x') {
             //Finds max of selected cells
             max = file.max();
             terminal.clearScreen();
-            update(file, filename, terminal, selecting, editRows, sum, avg, max);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+          } else if (key.getCharacter() == 'n') {
+            //Finds min of selected Cells
+            min = file.min();
+            terminal.clearScreen();
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           }
         }
         else { /// normal navigation vvvvv
@@ -196,7 +204,7 @@ public class MenuDemo {
               row = (row + 1) % file.rows();
               file.jumpTo(row,col);
             }
-            update(file, filename, terminal, selecting, editRows, sum, avg, max);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           }
           else if (key.getKind() == Key.Kind.ArrowUp) {
             //If user is in selecting mode, the cell above will be highlighted as well
@@ -217,7 +225,7 @@ public class MenuDemo {
               }
               file.jumpTo(row,col);
             }
-            update(file, filename, terminal, selecting, editRows, sum, avg, max);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           }
           else if (key.getKind() == Key.Kind.ArrowLeft) {
             //If user is in selecting mode, the cell left will be highlighted as well
@@ -238,7 +246,7 @@ public class MenuDemo {
               }
               file.jumpTo(row,col);
             }
-            update(file, filename, terminal, selecting, editRows, sum, avg, max);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           }
           else if (key.getKind() == Key.Kind.ArrowRight) {
             //If user is in selecting mode, the cell right will be highlighted as well
@@ -254,7 +262,7 @@ public class MenuDemo {
               col = (col + 1) % file.cols();
               file.jumpTo(row,col);
             }
-            update(file, filename, terminal, selecting, editRows, sum, avg, max);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           }
           // normal navigation ^^^
           else if (key.getKind() == Key.Kind.Enter) {
@@ -262,7 +270,7 @@ public class MenuDemo {
             row = (row + 1) % file.rows();
             writing = 0;
             file.jumpTo(row,col);
-            update(file, filename, terminal, selecting, editRows, sum, avg, max);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           }
           else if (key.getKind() == Key.Kind.Insert) {
             //Adds new empty row below or empty col to the right
@@ -276,7 +284,7 @@ public class MenuDemo {
               file.addCol(col);
             }
             file.jumpTo(row,col);
-            update(file, filename, terminal, selecting, editRows, sum, avg, max);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           }
           else if (key.getKind() == Key.Kind.Delete) {
             //Deletes selected row or col
@@ -295,7 +303,7 @@ public class MenuDemo {
             }
             file.jumpTo(row,col);
             terminal.clearScreen();
-            update(file, filename, terminal, selecting, editRows, sum, avg, max);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           }
           else if (key.getKind() == Key.Kind.Backspace) {
             //Deletes last character if user is writing and entire entry if user is not
@@ -307,12 +315,12 @@ public class MenuDemo {
             else {
               file.set("");
             }
-            update(file, filename, terminal, selecting, editRows, sum, avg, max);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           }
           // tab to sort
           else if (key.getKind() == Key.Kind.Tab) {
             file.sortRows(col);
-            update(file, filename, terminal, selecting, editRows, sum, avg, max);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           }
           else {
             //Takes char that user enters
@@ -322,7 +330,7 @@ public class MenuDemo {
             String data = file.getString(row,col);
             file.set(data.substring(0,writing) + newChar);
             writing++;
-            update(file, filename, terminal, selecting, editRows, sum, avg, max);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           }
         }
       }
