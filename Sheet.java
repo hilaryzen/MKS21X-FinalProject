@@ -329,8 +329,17 @@ public class Sheet {
 
   //Finds the sum of cells in a given column
   public Integer findColSum(int col) {
-    int output = 0;
-    for (int x = 0; x < rows(); x++) {
+    int i = 0;
+    //Finds the first integer value
+    while (i < rows() && getInt(i, col) == null) {
+      i++;
+    }
+    //if all cells are strings return 0
+    if (i == rows()) {
+      return null;
+    }
+    Integer output = getInt(i, col);
+    for (int x = i + 1; x < rows(); x++) {
       if (getInt(x, col) != null) {
         output += getInt(x, col);
       }

@@ -19,7 +19,7 @@ public class Driver {
     System.out.println(cell2 + " " + cell3);
     */
 
-    String filename = "NewTestCSV.csv";
+    String filename = "TestCSV.csv";
     Sheet sheet1 = new Sheet(filename);
 
 		/*
@@ -90,12 +90,8 @@ public class Driver {
     System.out.println(sheet1.getTable());
     */
 
-    String[] newRow = new String[] {"Maria", "White", "987654", "50", "8", "69", "150", "2"};
-    sheet1.addRow(3, newRow);
-    System.out.println(sheet1.cols()); //should return 8
-    sheet1.save();
-
-    sheet1.removeRow(0);
-    sheet1.save();
+    System.out.println(sheet1.findColSum(0));
+    System.out.println(sheet1.findColSum(1));
+    System.out.println(sheet1.findColSum(2));
   }
 }
