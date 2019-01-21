@@ -48,7 +48,7 @@ public class MenuDemo {
   }
 
   //Clears a given number of spaces
-  public static void clearSpace(int r, int c, int spaces) {
+  public static void clearSpace(Terminal t, int spaces) {
     t.applyBackgroundColor(Terminal.Color.DEFAULT);
     t.applyForegroundColor(Terminal.Color.DEFAULT);
     for (int i = 0; i < spaces; i++) {
@@ -115,18 +115,25 @@ public class MenuDemo {
 
   //execute after user action; refreshes the screen
   public static void update(Sheet file, String filename, Terminal terminal, boolean selecting, boolean editRows, int sum, int avg, int max, int min) {
-    sum = file.sum();
-    avg = file.avg();
-    min = file.min();
-    max = file.max();
-    //terminal.clearScreen();
     putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,2,terminal, "Selecting? (press Ctrl + S to switch): " + printBoolean(selecting, "Y", "N"),Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,3,terminal, "Inserting/deleting rows or columns? (press Ctrl + R to switch): " + printBoolean(editRows, "Rows", "Cols"),Terminal.Color.WHITE,Terminal.Color.RED);
-    putString(0,4,terminal, "Sum of selected cells (press Ctrl + U to update): " + sum,Terminal.Color.WHITE,Terminal.Color.RED);
-    putString(0,5,terminal, "Average of selected cells (press Ctrl + A to update): " + avg,Terminal.Color.WHITE,Terminal.Color.RED);
-    putString(0,6,terminal, "Maximum of selected cells (press Ctrl + X to update): " + max, Terminal.Color.WHITE,Terminal.Color.RED);
-    putString(0,7,terminal, "Minimum of selected cells (press Ctrl + N to update): " + min, Terminal.Color.WHITE,Terminal.Color.RED);
+    putString(0,4,terminal, "Sum: " + sum,Terminal.Color.WHITE,Terminal.Color.RED);
+    clearSpace(terminal,10);
+    sum = file.sum();
+    putString(5,4,terminal, sum + "", Terminal.Color.WHITE,Terminal.Color.RED);
+    putString(0,5,terminal, "Average: " + avg,Terminal.Color.WHITE,Terminal.Color.RED);
+    clearSpace(terminal, 10);
+    avg = file.avg();
+    putString(9,5,terminal, avg + "", Terminal.Color.WHITE,Terminal.Color.RED);
+    putString(0,6,terminal, "Maximum: " + max, Terminal.Color.WHITE,Terminal.Color.RED);
+    clearSpace(terminal, 10);
+    max = file.max();
+    putString(9,6,terminal, max + "", Terminal.Color.WHITE,Terminal.Color.RED);
+    putString(0,7,terminal, "Minimum: " + min, Terminal.Color.WHITE,Terminal.Color.RED);
+    clearSpace(terminal, 10);
+    min = file.min();
+    putString(9,7,terminal, min + "", Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,9,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
     highlightAll(file.selectedRow(),file.selectedCol(),terminal,file);
   }
