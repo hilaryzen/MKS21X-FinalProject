@@ -163,6 +163,14 @@ public class Sheet {
     return true;
   }
 
+  //Selects whole row
+  public void selectRow(int row) {
+    for (int i = 0; i < data.get(i).size(); i++) {
+      rows.add(row);
+      cols.add(i);
+    }
+  }
+
   //Changes value of the cell at the coordinates given, returns old value
   public String set(int row, int col, String newValue) {
     String old = getString(row, col);

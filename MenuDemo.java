@@ -174,6 +174,8 @@ public class MenuDemo {
     int max = 0;
     //Tracks min of selected Cells
     int min = 0;
+    //Tracks if user has selected entire row or col
+    boolean line = false;
     //prints the Screen once at the beginning
     update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
 
@@ -191,26 +193,12 @@ public class MenuDemo {
             //Changes between rows and cols (used for inserting and deleting)
             editRows = ! editRows;
             update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
-          } else if (key.getCharacter() == 'u') {
-            //Sums selected cells
-            sum = file.sum();
-            terminal.clearScreen();
-            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
-          } else if (key.getCharacter() == 'a') {
-            //Averages selected cells
-            avg = file.avg();
-            terminal.clearScreen();
-            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
-          } else if (key.getCharacter() == 'x') {
-            //Finds max of selected cells
-            max = file.max();
-            terminal.clearScreen();
-            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
-          } else if (key.getCharacter() == 'n') {
-            //Finds min of selected Cells
-            min = file.min();
-            terminal.clearScreen();
-            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+          } else if (key.getCharacter() == 'l') {
+            //Selects entire row or col that user is on
+            line = true;
+            if (editRows) {
+              
+            }
           }
         }
         else { /// normal navigation vvvvv
