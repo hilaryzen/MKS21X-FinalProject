@@ -356,10 +356,14 @@ public class Sheet {
 
   //Finds the max of all selected cells
   public int max() {
-    int output = 0;
-    for (int i = 0; i < rows.size(); i++) {
-      if (getInt(rows.get(i), cols.get(i)) != null && getInt(rows.get(i), cols.get(i)) > output) {
-        output = getInt(rows.get(i), cols.get(i));
+    int i = 0;
+    while (getInt(rows.get(i), cols.get(i)) == null) {
+      i++;
+    }
+    int output = getInt(rows.get(i), cols.get(i));
+    for (int j = i + 1; j < rows.size(); j++) {
+      if (getInt(rows.get(j), cols.get(j)) != null && getInt(rows.get(j), cols.get(j)) > output) {
+        output = getInt(rows.get(j), cols.get(j));
       }
     }
     return output;
