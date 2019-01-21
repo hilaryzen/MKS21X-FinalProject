@@ -165,7 +165,7 @@ public class Sheet {
 
   //Selects whole row
   public void selectRow(int row) {
-    for (int i = 0; i < data.get(i).size(); i++) {
+    for (int i = 0; i < data.get(row).size(); i++) {
       rows.add(row);
       cols.add(i);
     }

@@ -197,7 +197,8 @@ public class MenuDemo {
             //Selects entire row or col that user is on
             line = true;
             if (editRows) {
-              
+              file.selectRow(row);
+              update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
             }
           }
         }
