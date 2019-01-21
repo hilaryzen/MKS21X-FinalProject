@@ -351,16 +351,25 @@ public class Sheet {
 
   //Finds the average of all selected cells
   public int avg() {
-    return sum() / rows.size();
+    //Counts how many integer cells there are
+    int size = 0;
+    for (int i = 0; i < rows.size(); i++) {
+      if (getInt(rows.get(i), cols.get(i)) != null) {
+        size++;
+      }
+    }
+    return sum() / size;
   }
 
   //Finds the max of all selected cells
   public int max() {
     int i = 0;
+    //Finds the first integer value
     while (getInt(rows.get(i), cols.get(i)) == null) {
       i++;
     }
-    int output = getInt(rows.get(i), cols.get(i));
+    int output = getInt(rows.get(i), cols.get(i)); //output is set to the first integer value
+    //Checks rest of values to see if they are larger
     for (int j = i + 1; j < rows.size(); j++) {
       if (getInt(rows.get(j), cols.get(j)) != null && getInt(rows.get(j), cols.get(j)) > output) {
         output = getInt(rows.get(j), cols.get(j));
@@ -372,10 +381,12 @@ public class Sheet {
   //Finds the min of selected cells
   public int min() {
     int i = 0;
+    //Finds the first integer value
     while (getInt(rows.get(i), cols.get(i)) == null) {
       i++;
     }
-    int output = getInt(rows.get(i), cols.get(i));
+    int output = getInt(rows.get(i), cols.get(i)); //set to the first integer value
+    //Checks rest of values to see if they are larger
     for (int j = i + 1; j < rows.size(); j++) {
       if (getInt(rows.get(j), cols.get(j)) != null && getInt(rows.get(j), cols.get(j)) < output) {
         output = getInt(rows.get(j), cols.get(j));
