@@ -100,7 +100,7 @@ public class Sheet {
       return Integer.parseInt(getString(row, col));
     }
     catch (NumberFormatException e){
-      return 0;
+      return null;
     }
 	}
 
@@ -320,7 +320,9 @@ public class Sheet {
   public int sum() {
     int output = 0;
     for (int i = 0; i < rows.size(); i++) {
-      output += getInt(rows.get(i), cols.get(i));
+      if (getInt(rows.get(i), cols.get(i)) != null) {
+        output += getInt(rows.get(i), cols.get(i));
+      }
     }
     return output;
   }
@@ -329,7 +331,9 @@ public class Sheet {
   public int findColSum(int col) {
     int output = 0;
     for (int x = 0; x < rows(); x++) {
-      output+= getInt(x, col);
+      if (getInt(x, col) != null) {
+        output += getInt(x, col);
+      }
     }
     return output;
   }
@@ -338,7 +342,9 @@ public class Sheet {
   public int findRowSum(int row) {
     int output = 0;
     for (int x = 0; x < cols(); x++) {
-      output += getInt(row, x);
+      if (getInt(row, x) != null) {
+        output += getInt(row, x);
+      }
     }
     return output;
   }
@@ -352,7 +358,7 @@ public class Sheet {
   public int max() {
     int output = 0;
     for (int i = 0; i < rows.size(); i++) {
-      if (getInt(rows.get(i), cols.get(i)) > output) {
+      if (getInt(rows.get(i), cols.get(i)) != null && getInt(rows.get(i), cols.get(i)) > output) {
         output = getInt(rows.get(i), cols.get(i));
       }
     }
@@ -361,10 +367,14 @@ public class Sheet {
 
   //Finds the min of selected cells
   public int min() {
-    int output = getInt(rows.get(0), cols.get(0));
-    for (int i = 1; i < rows.size(); i++) {
-      if (getInt(rows.get(i), cols.get(i)) < output) {
-        output = getInt(rows.get(i), cols.get(i));
+    int i = 0;
+    while (getInt(rows.get(i), cols.get(i)) == null) {
+      i++;
+    }
+    int output = getInt(rows.get(i), cols.get(i));
+    for (int j = i + 1; j < rows.size(); j++) {
+      if (getInt(rows.get(j), cols.get(j)) != null && getInt(rows.get(j), cols.get(j)) < output) {
+        output = getInt(rows.get(j), cols.get(j));
       }
     }
     return output;
