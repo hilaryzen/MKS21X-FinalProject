@@ -367,6 +367,9 @@ public class Sheet {
         size++;
       }
     }
+    if (size == 0) {
+      return 0;
+    }
     return sum() / size;
   }
 
