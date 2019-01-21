@@ -103,7 +103,7 @@ public class MenuDemo {
     putString(0,4,terminal, "Sum of selected cells (press Ctrl + U to update): " + sum,Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,5,terminal, "Average of selected cells (press Ctrl + A to update): " + avg,Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,6,terminal, "Maximum of selected cells (press Ctrl + X to update): " + max, Terminal.Color.WHITE,Terminal.Color.RED);
-    putString(0,7,terminal, "Minimum of selected cells (press Ctrl + M to update): " + min, Terminal.Color.WHITE,Terminal.Color.RED);
+    putString(0,7,terminal, "Minimum of selected cells (press Ctrl + N to update): " + min, Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,9,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
     highlightAll(file.selectedRow(),file.selectedCol(),terminal,file);
   }
