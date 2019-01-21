@@ -47,6 +47,15 @@ public class MenuDemo {
     t.applyForegroundColor(Terminal.Color.DEFAULT);
   }
 
+  //Clears a given number of spaces
+  public static void clearSpace(int r, int c, int spaces) {
+    t.applyBackgroundColor(Terminal.Color.DEFAULT);
+    t.applyForegroundColor(Terminal.Color.DEFAULT);
+    for (int i = 0; i < spaces; i++) {
+      t.putCharacter(' ');
+    }
+  }
+
   //Adds yellow background behind given cell
   public static void highlight(int row, int col, Terminal t, Sheet sheet) {
     int r = findR(row);
