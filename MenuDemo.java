@@ -199,6 +199,9 @@ public class MenuDemo {
             if (editRows) {
               file.selectRow(row);
               update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+            } else {
+              file.selectCol(col);
+              update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
             }
           }
         }

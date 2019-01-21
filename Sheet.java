@@ -171,6 +171,14 @@ public class Sheet {
     }
   }
 
+  //Selects whole column
+  public void selectCol(int col) {
+    for (int i = 0; i < data.size(); i++) {
+      rows.add(i);
+      cols.add(col);
+    }
+  }
+
   //Changes value of the cell at the coordinates given, returns old value
   public String set(int row, int col, String newValue) {
     String old = getString(row, col);

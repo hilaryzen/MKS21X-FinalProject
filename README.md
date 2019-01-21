@@ -78,4 +78,8 @@ David: Removed redundant user class in Terminal Branch; merged master and select
 
 1/20/19:
 
-Hilary: Wrote max function and added to terminal
+Hilary: Wrote max and min functions and added them to terminal
+
+1/21/19:
+
+Hilary: Changed getInt to return null if Cell was a string and fixed math functions; made updating the terminal with the sum, avg, max, and min automatic
