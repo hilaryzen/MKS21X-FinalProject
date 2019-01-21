@@ -328,7 +328,7 @@ public class Sheet {
   }
 
   //Finds the sum of cells in a given column
-  public int findColSum(int col) {
+  public Integer findColSum(int col) {
     int output = 0;
     for (int x = 0; x < rows(); x++) {
       if (getInt(x, col) != null) {
@@ -365,8 +365,12 @@ public class Sheet {
   public int max() {
     int i = 0;
     //Finds the first integer value
-    while (getInt(rows.get(i), cols.get(i)) == null) {
+    while (i < rows.size() && getInt(rows.get(i), cols.get(i)) == null) {
       i++;
+    }
+    //if all cells are strings return 0
+    if (i == rows.size()) {
+      return 0;
     }
     int output = getInt(rows.get(i), cols.get(i)); //output is set to the first integer value
     //Checks rest of values to see if they are larger
@@ -382,8 +386,12 @@ public class Sheet {
   public int min() {
     int i = 0;
     //Finds the first integer value
-    while (getInt(rows.get(i), cols.get(i)) == null) {
+    while (i < rows.size() && getInt(rows.get(i), cols.get(i)) == null) {
       i++;
+    }
+    //If all cells are strings return 0
+    if (i == rows.size()) {
+      return 0;
     }
     int output = getInt(rows.get(i), cols.get(i)); //set to the first integer value
     //Checks rest of values to see if they are larger
@@ -398,7 +406,7 @@ public class Sheet {
   // takes a column and sorts entire chart by rows
   //uses insertion sort
   public void sortRows(int col) {
-    if (findColSum(col) == 0) { //is this a String col?
+    if (findColSum(col) == null) { //is this a String col?
       for (int x = 2; x < rows(); x++) { //ignore first row
         String value = getString(x, col);
         if (value.compareTo(getString(x - 1,col)) < 0) { //check if row above is bigger
