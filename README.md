@@ -3,8 +3,15 @@ CSV Bucks
 
 # Instructions
 
-Our CSV editor can be run using bash runTest.sh, which automatically opens TestCSV.csv.
-You can edit the second command in the file to open a different CSV.
+Our CSV editor can either open an existing file for editing, if the user gives the filename, or allow the user to create a new sheet, if the program does not receive an argument.
+
+It can be run using bash runTest.sh, which automatically opens TestCSV.csv. You can edit the second command in the file to open a different CSV.
+
+Use the arrow keys to move around the table. If you turn on selecting mode by pressing Ctrl + S, you can use the arrows to highlight multiple cells and edit them at the same time.
+
+You can switch between working with rows or columns with Ctrl + R. The Insert key either creates an empty row below or an empty column to the right, and the Delete key removes the row or column that you are currently on. You can highlight an entire row or column with Ctrl + L, and then use the Enter and Backspace keys to shift it around.
+
+Pressing the Tab key will sort the rows into increasing order based on the column that you are currently on. Once you're done editing, press Escape to save your changes and exit the program.
 
 # Daily Development Log
 
@@ -85,4 +92,4 @@ Hilary: Wrote max and min functions and added them to terminal
 
 1/21/19:
 
-Hilary: Changed getInt to return null if Cell was a string and fixed math functions; made updating the terminal with the sum, avg, max, and min automatic; added shifting rows up or down and cols left or right
+Hilary: Changed getInt to return null if Cell was a string and fixed math functions; made updating the terminal with the sum, avg, max, and min automatic; added shifting rows up or down and cols left or right; added ability to create a new file by not giving an argument
