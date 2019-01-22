@@ -413,6 +413,8 @@ public class MenuDemo {
               }
               else {
                 file.set("");
+                if (file.checkColEmpty(col)) file.removeCol(col);
+                else if (file.checkRowEmpty(row)) file.removeRow(row);
               }
             }
             update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
