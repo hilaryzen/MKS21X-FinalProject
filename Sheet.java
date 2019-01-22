@@ -462,19 +462,4 @@ public class Sheet {
 
   }
   
-  // takes column checks if col is filled with ""
-  public boolean checkColEmpty(int col) {
-    for (int x = 0; x < rows(); x++) {
-      if (!(data.get(x).get(col).equals(""))) return false;
-    }
-    return true;
-  }
-  
-  // takes column checks if col is filled with ""
-  public boolean checkRowEmpty(int row) {
-    for (int y = 0; y < data.get(row).size(); y++) {
-      if (!(data.get(row).get(y).equals(""))) return false;
-    }
-    return true;
-  }
 }
