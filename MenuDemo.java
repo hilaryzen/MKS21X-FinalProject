@@ -1,5 +1,8 @@
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import com.googlecode.lanterna.terminal.Terminal.SGR;
 //API : http://mabe02.github.io/lanterna/apidocs/2.1/
@@ -143,18 +146,44 @@ public class MenuDemo {
 		terminal.setCursorVisible(false);
 
     boolean running = true;
+    boolean start = false;
 
     Screen screen = new Screen(terminal, 500, 500); // initialize screen
 		screen.startScreen(); // puts terminal in private; updates screen
 
+    String filename = "";
+
 		// catches no CSV provided
 		if (args.length < 1 ) {
-			System.out.println("Incorrect format. Use: java -cp lanterna.jar:. MenuDemo <file.csv>");
-      System.exit(1);
-		}
+			putString(0,0,terminal, "Please enter a file name that ends with .csv: ", Terminal.Color.WHITE,Terminal.Color.RED);
+      while (! start) {
+        Key key = terminal.readInput();
+        if (key != null) {
+          if (key.getKind() == Key.Kind.Enter) {
+            try {
+              File data = new File(filename);
+              data.createNewFile();
+              FileWriter filewriter = new FileWriter(data);
+              filewriter.write(" , , \n , , \n , , ");
+              filewriter.close();
+              start = true;
+            } catch (IOException e) {
+              System.out.println("File could not be created");
+              e.printStackTrace();
+              System.exit(1);
+            }
+          } else {
+            filename += key.getCharacter();
+            putString(45,0,terminal, filename, Terminal.Color.WHITE,Terminal.Color.RED);
+          }
+        }
+      }
+		} else {
+      filename = args[0];
+      start = true;
+    }
 
-		//imports file when given
-    String filename = args[0];
+		//creates Sheet
     Sheet file = new Sheet(filename);
     //Tracks cell user is on
     int row = 0;

@@ -307,6 +307,7 @@ public class Sheet {
     }
   }
 
+/*
   //Adds a new column of values at the given index
   public void addCol(int index, String[] values) {
     for (int i = 0; i < rows(); i++) {
@@ -317,6 +318,7 @@ public class Sheet {
       }
     }
   }
+*/
 
   //Deletes the row at the given index
   public void removeRow(int index) {
