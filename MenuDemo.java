@@ -289,6 +289,7 @@ public class MenuDemo {
           // normal navigation ^^^
           else if (key.getKind() == Key.Kind.Enter) {
             if (line) {
+              //If user has selected row or col, enter moves the row down or col right
               if (editRows && row < file.rows() - 1) {
                 file.shiftRowDown(row);
                 file.clearSelect();
@@ -342,14 +343,28 @@ public class MenuDemo {
             update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           }
           else if (key.getKind() == Key.Kind.Backspace) {
-            //Deletes last character if user is writing and entire entry if user is not
-            String data = file.getString(row,col);
-            if (writing > 0) {
-              writing--;
-              file.set(data.substring(0,writing));
-            }
-            else {
-              file.set("");
+            if (line) {
+              if (editRows && row != 0) {
+                file.shiftRowUp(row);
+                file.clearSelect();
+                row--;
+                file.selectRow(row);
+              } else if (col != 0) {
+                file.shiftColLeft(col);
+                file.clearSelect();
+                col--;
+                file.selectCol(col);
+              }
+            } else {
+              //Deletes last character if user is writing and entire entry if user is not
+              String data = file.getString(row,col);
+              if (writing > 0) {
+                writing--;
+                file.set(data.substring(0,writing));
+              }
+              else {
+                file.set("");
+              }
             }
             update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           }
