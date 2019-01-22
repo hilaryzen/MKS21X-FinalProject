@@ -1,9 +1,12 @@
 # MKS21X-FinalProject
 CSV Bucks
 
-Instructions
+# Instructions
 
-Daily Development Log
+Our CSV editor can be run using bash runTest.sh, which automatically opens TestCSV.csv.
+You can edit the second command in the file to open a different CSV.
+
+# Daily Development Log
 
 1/3/19:
 
@@ -82,4 +85,4 @@ Hilary: Wrote max and min functions and added them to terminal
 
 1/21/19:
 
-Hilary: Changed getInt to return null if Cell was a string and fixed math functions; made updating the terminal with the sum, avg, max, and min automatic
+Hilary: Changed getInt to return null if Cell was a string and fixed math functions; made updating the terminal with the sum, avg, max, and min automatic; added shifting rows up or down and cols left or right
