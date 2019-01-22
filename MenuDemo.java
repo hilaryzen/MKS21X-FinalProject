@@ -377,16 +377,20 @@ public class MenuDemo {
           }
           else if (key.getKind() == Key.Kind.Backspace) {
             if (line) {
-              if (editRows && row != 0) {
-                file.shiftRowUp(row);
-                file.clearSelect();
-                row--;
-                file.selectRow(row);
-              } else if (editRows && col != 0) {
-                file.shiftColLeft(col);
-                file.clearSelect();
-                col--;
-                file.selectCol(col);
+              if (editRows) {
+                if (row != 0) {
+                  file.shiftRowUp(row);
+                  file.clearSelect();
+                  row--;
+                  file.selectRow(row);
+                }
+              } else {
+                if (col != 0) {
+                  file.shiftColLeft(col);
+                  file.clearSelect();
+                  col--;
+                  file.selectCol(col);
+                }
               }
             } else {
               //Deletes last character if user is writing and entire entry if user is not
