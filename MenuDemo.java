@@ -413,7 +413,7 @@ public class MenuDemo {
               }
               else {
                 file.set("");
-                clearSpace(terminal, 500)
+                clearSpace(terminal, 500);
               }
             }
             update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
