@@ -270,6 +270,14 @@ public class Sheet {
     }
   }
 
+  public void shiftColRight(int index) {
+    for (int i = 0; i < rows(); i++) {
+      Cell value = getCell(i, index);
+      data.get(i).remove(index);
+      data.get(i).add(index + 1, value);
+    }
+  }
+
   //Adds array of values as a new column at the very right
   public void addCol(String[] values) {
     //Loops through rows to add a new cell to each one

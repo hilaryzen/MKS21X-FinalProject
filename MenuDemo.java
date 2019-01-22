@@ -288,19 +288,25 @@ public class MenuDemo {
           }
           // normal navigation ^^^
           else if (key.getKind() == Key.Kind.Enter) {
-            if (line && row < file.rows() - 1) {
-              file.shiftRowDown(row);
-              file.clearSelect();
-              row++;
-              file.selectRow(row);
-              update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+            if (line) {
+              if (editRows && row < file.rows() - 1) {
+                file.shiftRowDown(row);
+                file.clearSelect();
+                row++;
+                file.selectRow(row);
+              } else if (col < file.cols() - 1) {
+                file.shiftColRight(col);
+                file.clearSelect();
+                col++;
+                file.selectCol(col);
+              }
             } else {
               //Moves down one row and ends writing mode
               row = (row + 1) % file.rows();
               writing = 0;
               file.jumpTo(row,col);
-              update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
             }
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
           }
           else if (key.getKind() == Key.Kind.Insert) {
             //Adds new empty row below or empty col to the right
