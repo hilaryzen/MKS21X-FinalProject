@@ -158,6 +158,9 @@ public class Sheet {
 
   //Adds given cell to list of selected cells
   public boolean select(int row, int col) {
+    for (int x = 0; x < rows.size(); x++) {
+      if (rows.get(x) == row && cols.get(x) == col) return false;
+    }
     rows.add(row);
     cols.add(col);
     return true;
