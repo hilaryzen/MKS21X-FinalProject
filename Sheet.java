@@ -242,36 +242,6 @@ public class Sheet {
     data.add(index - 1, row);
   }
 
-/*
-  //Takes array of values and creates new row at the bottom of the sheet
-  public void addRow(String[] values) {
-    //Initializing new row
-    data.add(new ArrayList<Cell>());
-    //Looping through values to add them to cells
-    for (int i = 0; i < values.length; i++) {
-      try {
-        data.get(rows() - 1).add(new Cell<Integer>(Integer.parseInt(values[i])));
-      }
-      catch(NumberFormatException e) {
-        data.get(rows() - 1).add(new Cell<String>(values[i]));
-      }
-    }
-  }
-
-  //Inserts row of values at given index
-  public void addRow(int index, String[] values) {
-    data.add(index, new ArrayList<Cell>());
-    for (int i = 0; i < values.length; i++) {
-      try {
-        data.get(index).add(new Cell<Integer>(Integer.parseInt(values[i])));
-      }
-      catch(NumberFormatException e) {
-        data.get(index).add(new Cell<String>(values[i]));
-      }
-    }
-  }
-*/
-
   //Adds empty col
   public void addCol(int index) {
     for (int i = 0; i < rows(); i++) {
@@ -306,19 +276,6 @@ public class Sheet {
       }
     }
   }
-
-/*
-  //Adds a new column of values at the given index
-  public void addCol(int index, String[] values) {
-    for (int i = 0; i < rows(); i++) {
-      try {
-        data.get(i).add(index, new Cell<Integer>(Integer.parseInt(values[i])));
-      } catch (NumberFormatException e) {
-        data.get(i).add(index, new Cell<String>(values[i]));
-      }
-    }
-  }
-*/
 
   //Deletes the row at the given index
   public void removeRow(int index) {
