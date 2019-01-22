@@ -235,6 +235,14 @@ public class Sheet {
     data.add(index + 1, row);
   }
 
+  //Deletes row and inserts it one index up
+  public void shiftRowUp(int index) {
+    ArrayList<Cell> row = data.get(index);
+    data.remove(index);
+    data.add(index - 1, row);
+  }
+
+/*
   //Takes array of values and creates new row at the bottom of the sheet
   public void addRow(String[] values) {
     //Initializing new row
@@ -262,6 +270,7 @@ public class Sheet {
       }
     }
   }
+*/
 
   //Adds empty col
   public void addCol(int index) {
@@ -275,6 +284,14 @@ public class Sheet {
       Cell value = getCell(i, index);
       data.get(i).remove(index);
       data.get(i).add(index + 1, value);
+    }
+  }
+
+  public void shiftColLeft(int index) {
+    for (int i = 0; i < rows(); i++) {
+      Cell value = getCell(i, index);
+      data.get(i).remove(index);
+      data.get(i).add(index - 1, value);
     }
   }
 
