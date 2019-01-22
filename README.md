@@ -93,3 +93,5 @@ Hilary: Wrote max and min functions and added them to terminal
 1/21/19:
 
 Hilary: Changed getInt to return null if Cell was a string and fixed math functions; made updating the terminal with the sum, avg, max, and min automatic; added shifting rows up or down and cols left or right; added ability to create a new file by not giving an argument
+
+David Xiedeng: Fixed selection overlap, fixed visual bug: col would remain the highlighted length of a deleted word after backspace
