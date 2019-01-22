@@ -319,16 +319,20 @@ public class MenuDemo {
           else if (key.getKind() == Key.Kind.Enter) {
             if (line) {
               //If user has selected row or col, enter moves the row down or col right
-              if (editRows && row < file.rows() - 1) {
-                file.shiftRowDown(row);
-                file.clearSelect();
-                row++;
-                file.selectRow(row);
-              } else if (col < file.cols() - 1) {
-                file.shiftColRight(col);
-                file.clearSelect();
-                col++;
-                file.selectCol(col);
+              if (editRows) {
+                if (row < file.rows() - 1) {
+                  file.shiftRowDown(row);
+                  file.clearSelect();
+                  row++;
+                  file.selectRow(row);
+                }
+              } else {
+                if (col < file.cols() - 1) {
+                  file.shiftColRight(col);
+                  file.clearSelect();
+                  col++;
+                  file.selectCol(col);
+                }
               }
             } else {
               //Moves down one row and ends writing mode
@@ -378,7 +382,7 @@ public class MenuDemo {
                 file.clearSelect();
                 row--;
                 file.selectRow(row);
-              } else if (col != 0) {
+              } else if (editRows && col != 0) {
                 file.shiftColLeft(col);
                 file.clearSelect();
                 col--;
