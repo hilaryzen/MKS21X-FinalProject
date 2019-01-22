@@ -179,7 +179,9 @@ public class MenuDemo {
           } else if (key.getKind() == Key.Kind.Backspace) {
             terminal.moveCursor(46,0);
             clearSpace(terminal, filename.length());
-            filename = filename.substring(0, filename.length() - 1);
+            if (filename.length() > 0) {
+              filename = filename.substring(0, filename.length() - 1);
+            }
             putString(46,0,terminal, filename, Terminal.Color.WHITE,Terminal.Color.RED);
           } else {
             filename += key.getCharacter();
@@ -215,6 +217,7 @@ public class MenuDemo {
     //Tracks if user has selected entire row or col
     boolean line = false;
     //prints the Screen once at the beginning
+    terminal.clearScreen();
     update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
 
     while(running){

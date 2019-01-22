@@ -94,7 +94,9 @@ public class Driver {
     System.out.println(sheet1.findColSum(1));
     System.out.println(sheet1.findColSum(2));
 
-    System.out.println(MenuDemo.numLength(135548));
-    System.out.println(MenuDemo.numLength(100000));
+    //System.out.println(MenuDemo.numLength(135548));
+    //System.out.println(MenuDemo.numLength(100000));
+
+    System.out.println(" ,,".split(",").length);
   }
 }
