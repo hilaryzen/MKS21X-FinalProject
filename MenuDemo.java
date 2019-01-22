@@ -173,9 +173,17 @@ public class MenuDemo {
               e.printStackTrace();
               System.exit(1);
             }
+          } else if (key.getKind() == Key.Kind.Escape) {
+            screen.stopScreen();
+            running = false;
+          } else if (key.getKind() == Key.Kind.Backspace) {
+            terminal.moveCursor(46,0);
+            clearSpace(terminal, filename.length());
+            filename = filename.substring(0, filename.length() - 1);
+            putString(46,0,terminal, filename, Terminal.Color.WHITE,Terminal.Color.RED);
           } else {
             filename += key.getCharacter();
-            putString(45,0,terminal, filename, Terminal.Color.WHITE,Terminal.Color.RED);
+            putString(46,0,terminal, filename, Terminal.Color.WHITE,Terminal.Color.RED);
           }
         }
       }
