@@ -139,6 +139,7 @@ public class MenuDemo {
     putString(9,7,terminal, min + "", Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,9,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
     highlightAll(file.selectedRow(),file.selectedCol(),terminal,file);
+    terminal.setCursorVisible(false); //hides cursor
   }
 
   public static void main(String[] args) {
