@@ -117,7 +117,7 @@ public class MenuDemo {
   }
 
   //execute after user action; refreshes the screen
-  public static void update(Sheet file, String filename, Terminal terminal, boolean selecting, boolean editRows, int sum, int avg, int max, int min) {
+  public static void update(Sheet file, String filename, Terminal terminal, boolean selecting, boolean editRows, int sum, int avg, int max, int min, Screen screen) {
     putString(0,0,terminal, "Spreadsheet: " + filename,Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,2,terminal, "Selecting? (press Ctrl + S to switch): " + printBoolean(selecting, "Y", "N"),Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,3,terminal, "Inserting/deleting rows or columns? (press Ctrl + R to switch): " + printBoolean(editRows, "Rows", "Cols"),Terminal.Color.WHITE,Terminal.Color.RED);
@@ -139,6 +139,7 @@ public class MenuDemo {
     putString(9,7,terminal, min + "", Terminal.Color.WHITE,Terminal.Color.RED);
     putString(0,9,terminal,file.toString(),Terminal.Color.WHITE,Terminal.Color.RED);
     highlightAll(file.selectedRow(),file.selectedCol(),terminal,file);
+    screen.setCursorPosition(null); //hides cursor
   }
 
   public static void main(String[] args) {
@@ -206,7 +207,7 @@ public class MenuDemo {
     //Tracks if user has selected entire row or col
     boolean line = false;
     //prints the Screen once at the beginning
-    update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+    update(file, filename, terminal, selecting, editRows, sum, avg, max, min, screen);
 
     while(running){
       Key key = terminal.readInput();
@@ -217,20 +218,20 @@ public class MenuDemo {
           if (key.getCharacter() == 's') {
             //Changes to selecting mode
             selecting = ! selecting;
-            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min, screen);;
           } else if (key.getCharacter() == 'r') {
             //Changes between rows and cols (used for inserting and deleting)
             editRows = ! editRows;
-            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min, screen);;
           } else if (key.getCharacter() == 'l') {
             //Selects entire row or col that user is on
             line = true;
             if (editRows) {
               file.selectRow(row);
-              update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+              update(file, filename, terminal, selecting, editRows, sum, avg, max, min, screen);;
             } else {
               file.selectCol(col);
-              update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+              update(file, filename, terminal, selecting, editRows, sum, avg, max, min, screen);;
             }
           }
         }
@@ -255,7 +256,7 @@ public class MenuDemo {
               row = (row + 1) % file.rows();
               file.jumpTo(row,col);
             }
-            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min, screen);;
           }
           else if (key.getKind() == Key.Kind.ArrowUp) {
             //If user is in selecting mode, the cell above will be highlighted as well
@@ -276,7 +277,7 @@ public class MenuDemo {
               }
               file.jumpTo(row,col);
             }
-            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min, screen);;
           }
           else if (key.getKind() == Key.Kind.ArrowLeft) {
             //If user is in selecting mode, the cell left will be highlighted as well
@@ -297,7 +298,7 @@ public class MenuDemo {
               }
               file.jumpTo(row,col);
             }
-            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min, screen);;
           }
           else if (key.getKind() == Key.Kind.ArrowRight) {
             //If user is in selecting mode, the cell right will be highlighted as well
@@ -313,7 +314,7 @@ public class MenuDemo {
               col = (col + 1) % file.cols();
               file.jumpTo(row,col);
             }
-            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min, screen);;
           }
           // normal navigation ^^^
           else if (key.getKind() == Key.Kind.Enter) {
@@ -336,7 +337,7 @@ public class MenuDemo {
               writing = 0;
               file.jumpTo(row,col);
             }
-            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min, screen);;
           }
           else if (key.getKind() == Key.Kind.Insert) {
             //Adds new empty row below or empty col to the right
@@ -350,7 +351,7 @@ public class MenuDemo {
               file.addCol(col);
             }
             file.jumpTo(row,col);
-            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min, screen);;
           }
           else if (key.getKind() == Key.Kind.Delete) {
             //Deletes selected row or col
@@ -369,7 +370,7 @@ public class MenuDemo {
             }
             file.jumpTo(row,col);
             terminal.clearScreen();
-            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min, screen);;
           }
           else if (key.getKind() == Key.Kind.Backspace) {
             if (line) {
@@ -395,12 +396,12 @@ public class MenuDemo {
                 file.set("");
               }
             }
-            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min, screen);;
           }
           // tab to sort
           else if (key.getKind() == Key.Kind.Tab) {
             file.sortRows(col);
-            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min, screen);;
           }
           else {
             //Takes char that user enters
@@ -410,7 +411,7 @@ public class MenuDemo {
             String data = file.getString(row,col);
             file.set(data.substring(0,writing) + newChar);
             writing++;
-            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+            update(file, filename, terminal, selecting, editRows, sum, avg, max, min, screen);;
           }
         }
       }
