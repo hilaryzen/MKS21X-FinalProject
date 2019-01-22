@@ -288,8 +288,12 @@ public class MenuDemo {
           }
           // normal navigation ^^^
           else if (key.getKind() == Key.Kind.Enter) {
-            if (line) {
+            if (line && row < file.rows() - 1) {
               file.shiftRowDown(row);
+              file.clearSelect();
+              row++;
+              file.selectRow(row);
+              update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
             } else {
               //Moves down one row and ends writing mode
               row = (row + 1) % file.rows();

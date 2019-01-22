@@ -179,6 +179,12 @@ public class Sheet {
     }
   }
 
+  //Clears selected cells
+  public void clearSelect() {
+    rows.clear();
+    cols.clear();
+  }
+
   //Changes value of the cell at the coordinates given, returns old value
   public String set(int row, int col, String newValue) {
     String old = getString(row, col);
@@ -222,6 +228,7 @@ public class Sheet {
     }
   }
 
+  //Deletes row and inserts it one index down
   public void shiftRowDown(int index) {
     ArrayList<Cell> row = data.get(index);
     data.remove(index);
