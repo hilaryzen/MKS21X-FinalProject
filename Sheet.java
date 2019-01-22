@@ -222,6 +222,12 @@ public class Sheet {
     }
   }
 
+  public void shiftRowDown(int index) {
+    ArrayList<Cell> row = data.get(index);
+    data.remove(index);
+    data.add(index + 1, row);
+  }
+
   //Takes array of values and creates new row at the bottom of the sheet
   public void addRow(String[] values) {
     //Initializing new row

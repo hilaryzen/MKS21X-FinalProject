@@ -288,11 +288,15 @@ public class MenuDemo {
           }
           // normal navigation ^^^
           else if (key.getKind() == Key.Kind.Enter) {
-            //Moves down one row and ends writing mode
-            row = (row + 1) % file.rows();
-            writing = 0;
-            file.jumpTo(row,col);
-            update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+            if (line) {
+              file.shiftRowDown(row);
+            } else {
+              //Moves down one row and ends writing mode
+              row = (row + 1) % file.rows();
+              writing = 0;
+              file.jumpTo(row,col);
+              update(file, filename, terminal, selecting, editRows, sum, avg, max, min);
+            }
           }
           else if (key.getKind() == Key.Kind.Insert) {
             //Adds new empty row below or empty col to the right
