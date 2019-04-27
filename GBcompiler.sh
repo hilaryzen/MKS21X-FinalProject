@@ -1,0 +1,1 @@
+javac -cp "lanterna.jar;." MenuDemo.java
